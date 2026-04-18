@@ -16,7 +16,7 @@ def test_world_returns_levels():
     assert r.status_code == 200
     body = r.json()
     assert body["theme"] == "greek"
-    assert len(body["levels"]) == 15
+    assert len(body["levels"]) == 16  # 14 lectures + midterm + final
 
 
 def test_start_battle_returns_question():

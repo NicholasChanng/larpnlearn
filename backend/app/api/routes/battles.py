@@ -29,7 +29,7 @@ router = APIRouter(prefix="/battles", tags=["battles"])
 @router.post("/start", response_model=StartBattleResponse)
 async def start_battle(body: StartBattleRequest) -> StartBattleResponse:
     # TODO (Track-5): invoke LangGraph battle agent to generate question batch.
-    return demo_start_battle()
+    return demo_start_battle(level_id=body.level_id)
 
 
 @router.post("/{battle_id}/answer", response_model=AnswerResponse)

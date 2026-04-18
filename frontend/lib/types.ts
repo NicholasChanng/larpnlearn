@@ -126,23 +126,50 @@ export interface MonsterConfig {
 export interface ThemeSegment {
   id: string;
   range: [number, number];
+  display_name?: string;
   bg_image: string;
+  bg_gradient?: string;
   music: string;
+  music_tone?: string;
+}
+
+export type HpTier = "low" | "medium" | "boss";
+
+export interface ThemeMonster {
+  id: string;
+  name: string;
+  emoji?: string;
+  segment: string;
+  hp_tier: HpTier;
+  sprite_path: string;
+  attack_animation: string;
+  attack_sound: string | null;
+  damage_effect: string;
+  voice_tone: string;
 }
 
 export interface ThemeAvatar {
   id: string;
+  name?: string;
+  emoji?: string;
   sprite: string;
   attack_anim: string;
+  attack_sound?: string;
+  grunt?: string;
 }
 
 export interface ThemeManifest {
   theme_id: Theme;
   display_name: string;
+  narrative?: string;
   segments: ThemeSegment[];
-  monsters: MonsterConfig[];
+  monsters: ThemeMonster[];
   avatars: ThemeAvatar[];
   voice_tone_prompt: string;
+  victory_sfx?: string;
+  defeat_sfx?: string;
+  correct_sfx?: string;
+  wrong_sfx?: string;
 }
 
 // ---------- Level ----------

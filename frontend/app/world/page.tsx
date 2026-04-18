@@ -1,25 +1,28 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Volume2, VolumeX } from "lucide-react";
 
 import { TopBar } from "@/components/layout/TopBar";
+import { WorldMap } from "@/components/world/WorldMap";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
-import type { Level, WorldResponse } from "@/lib/types";
+import { AVAILABLE_THEMES } from "@/lib/theme";
+import type { Theme, WorldResponse } from "@/lib/types";
+import { useThemeManifest } from "@/lib/useTheme";
+import { useAudioStore } from "@/store/useAudioStore";
+import { useThemeStore } from "@/store/useThemeStore";
 import { useUserStore } from "@/store/useUserStore";
 
-/**
- * World View (SRS 4.1.1, FR-WLD-01..06).
- *
- * Owner: Track-1 (Frontend-World). This is a working stub hitting real API;
- * replace the flat list with a themed winding-path map + avatar sprite.
- */
 const DEMO_COURSE_ID = "cs188-sp2024";
 
 export default function WorldPage() {
   const [world, setWorld] = useState<WorldResponse | null>(null);
   const { setUser } = useUserStore();
+  const setTheme = useThemeStore((s) => s.setTheme);
+  const currentTheme = useThemeStore((s) => s.theme);
+  const manifest = useThemeManifest();
 
   useEffect(() => {
     let cancelled = false;
@@ -27,68 +30,80 @@ export default function WorldPage() {
       const [w, u] = await Promise.all([api.world.get(DEMO_COURSE_ID), api.auth.me()]);
       if (cancelled) return;
       setWorld(w);
+      setTheme(w.theme);
       setUser(u);
     })();
     return () => {
       cancelled = true;
     };
-  }, [setUser]);
+  }, [setUser, setTheme]);
+
+  const loading = !world || !manifest;
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-      <TopBar worldName={world ? `${world.theme} · ${world.course_id}` : undefined} />
-      <section className="mx-auto max-w-5xl px-6 py-10">
-        <h1 className="mb-6 text-3xl font-bold">World Map</h1>
-        {!world && <p className="text-muted-foreground">Loading…</p>}
-        {world && (
-          <ol className="space-y-3">
-            {world.levels.map((l) => (
-              <LevelRow key={l.id} level={l} />
-            ))}
-          </ol>
-        )}
-        <div className="mt-8 flex gap-3">
-          <Link href="/skills">
-            <Button variant="outline">Skills Graph</Button>
-          </Link>
-          <Link href="/avatar">
-            <Button variant="outline">Avatar</Button>
-          </Link>
+    <main className="min-h-screen bg-black">
+      <TopBar worldName={manifest?.display_name} />
+      <ToolRow currentTheme={currentTheme} setTheme={setTheme} />
+      {loading && (
+        <div className="flex h-[calc(100vh-120px)] items-center justify-center text-slate-400">
+          Summoning your world…
         </div>
-      </section>
+      )}
+      {!loading && world && manifest && (
+        <WorldMap
+          levels={world.levels}
+          manifest={manifest}
+          currentLevelId={world.current_level_id}
+        />
+      )}
+      {manifest?.narrative && (
+        <div className="pointer-events-none absolute left-6 top-32 max-w-sm rounded-md border border-yellow-500/30 bg-black/70 p-3 text-xs italic text-yellow-100 shadow-xl backdrop-blur">
+          {manifest.narrative}
+        </div>
+      )}
     </main>
   );
 }
 
-function LevelRow({ level }: { level: Level }) {
-  const label =
-    level.exam_type === "final"
-      ? "FINAL"
-      : level.exam_type === "midterm"
-        ? "MIDTERM"
-        : `Lecture ${level.order_index}`;
-  const disabled = level.state === "locked";
-  const href = disabled ? "#" : `/battle/${level.id}`;
-  const stateBadge = {
-    locked: "🔒 locked",
-    available: "⚔️ available",
-    completed: "🏁 completed",
-  }[level.state];
+function ToolRow({
+  currentTheme,
+  setTheme,
+}: {
+  currentTheme: Theme;
+  setTheme: (t: Theme) => void;
+}) {
+  const { muted, toggleMute } = useAudioStore();
   return (
-    <li
-      className={`flex items-center justify-between rounded-lg border border-border bg-background/60 px-4 py-3 ${disabled ? "opacity-50" : "hover:bg-accent"}`}
-    >
-      <div>
-        <div className="font-semibold">{label}</div>
-        <div className="text-xs text-muted-foreground">
-          segment: {level.theme_segment} · {stateBadge} · {level.monster.name}
-        </div>
+    <div className="flex items-center justify-between border-b border-border bg-black/60 px-6 py-2 backdrop-blur">
+      <div className="flex items-center gap-2 text-xs text-slate-400">
+        <span>Theme:</span>
+        {AVAILABLE_THEMES.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTheme(t)}
+            className={`rounded px-2 py-1 text-xs font-semibold ${
+              currentTheme === t ? "bg-yellow-500 text-black" : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+            }`}
+          >
+            {t}
+          </button>
+        ))}
       </div>
-      {!disabled && (
-        <Link href={href}>
-          <Button size="sm">Enter</Button>
+      <div className="flex items-center gap-2">
+        <Button size="sm" variant="ghost" onClick={toggleMute} aria-label="toggle audio">
+          {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+        </Button>
+        <Link href="/skills">
+          <Button size="sm" variant="outline">
+            Skills
+          </Button>
         </Link>
-      )}
-    </li>
+        <Link href="/avatar">
+          <Button size="sm" variant="outline">
+            Avatar
+          </Button>
+        </Link>
+      </div>
+    </div>
   );
 }
