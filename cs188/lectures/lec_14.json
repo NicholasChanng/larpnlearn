@@ -1,0 +1,263 @@
+{
+  "lecture_id": "lec_14",
+  "order_index": 14,
+  "week": 7,
+  "title": "Bayes Nets: Independence",
+  "topics": [
+    "Markov Blankets",
+    "Independence Testing",
+    "Explaining Away",
+    "Plate Notation"
+  ],
+  "scheduled_date": "2025-10-16",
+  "slide_deck": "slides/lec_14.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 28,
+    "total_tokens": 1689,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 55,
+        "char_count": 223
+      },
+      {
+        "page_number": 2,
+        "token_count": 8,
+        "char_count": 27
+      },
+      {
+        "page_number": 3,
+        "token_count": 36,
+        "char_count": 161
+      },
+      {
+        "page_number": 4,
+        "token_count": 81,
+        "char_count": 392
+      },
+      {
+        "page_number": 5,
+        "token_count": 26,
+        "char_count": 105
+      },
+      {
+        "page_number": 6,
+        "token_count": 87,
+        "char_count": 376
+      },
+      {
+        "page_number": 7,
+        "token_count": 22,
+        "char_count": 153
+      },
+      {
+        "page_number": 8,
+        "token_count": 99,
+        "char_count": 411
+      },
+      {
+        "page_number": 9,
+        "token_count": 5,
+        "char_count": 21
+      },
+      {
+        "page_number": 10,
+        "token_count": 34,
+        "char_count": 177
+      },
+      {
+        "page_number": 11,
+        "token_count": 127,
+        "char_count": 420
+      },
+      {
+        "page_number": 12,
+        "token_count": 46,
+        "char_count": 179
+      },
+      {
+        "page_number": 13,
+        "token_count": 121,
+        "char_count": 389
+      },
+      {
+        "page_number": 14,
+        "token_count": 46,
+        "char_count": 193
+      },
+      {
+        "page_number": 15,
+        "token_count": 107,
+        "char_count": 467
+      },
+      {
+        "page_number": 16,
+        "token_count": 3,
+        "char_count": 16
+      },
+      {
+        "page_number": 17,
+        "token_count": 40,
+        "char_count": 204
+      },
+      {
+        "page_number": 18,
+        "token_count": 83,
+        "char_count": 343
+      },
+      {
+        "page_number": 19,
+        "token_count": 175,
+        "char_count": 679
+      },
+      {
+        "page_number": 20,
+        "token_count": 111,
+        "char_count": 304
+      },
+      {
+        "page_number": 21,
+        "token_count": 7,
+        "char_count": 20
+      },
+      {
+        "page_number": 22,
+        "token_count": 11,
+        "char_count": 31
+      },
+      {
+        "page_number": 23,
+        "token_count": 32,
+        "char_count": 87
+      },
+      {
+        "page_number": 24,
+        "token_count": 68,
+        "char_count": 293
+      },
+      {
+        "page_number": 25,
+        "token_count": 9,
+        "char_count": 42
+      },
+      {
+        "page_number": 26,
+        "token_count": 118,
+        "char_count": 418
+      },
+      {
+        "page_number": 27,
+        "token_count": 69,
+        "char_count": 387
+      },
+      {
+        "page_number": 28,
+        "token_count": 63,
+        "char_count": 288
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_14_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 14: Bayes Nets: Independence] CS 188: Artificial IntelligenceBayes\u2019 Nets: Independence Fall 2025[These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Review: Bayes\u2019Net SemanticsProbability Recap\u00a7Conditional probability\u00a7Product rule\u00a7Chain rule \u00a7X, Y independent if and only if:\u00a7X and Y are conditionally independent given Z if and only if:Bayes\u2019Nets\u00a7So far: how a Bayes\u2019net encodes a joint distribution\u00a7Next: how to answer queries about that distribution\u00a7Last Time: \u00a7First assembled BNs using an intuitive notion of conditional independence as causality\u00a7Then saw that key property is conditional independence\u00a7Main goal: answer queries about conditional independence and influence \u00a7Today: how to answer numerical queries (inference)Bayes\u2019Nets\u00a7Representation\u00a7Conditional Independences\u00a7Probabilistic Inference\u00a7Learning Bayes\u2019Nets from DataBayes Nets: Assumptions\u00a7Assumptions we are required to make to define the Bayes net when given the graph: \u00a7Beyond above \u201cchain rule \u00e0Bayes net\u201dconditional independence assumptions \u00a7Often additional conditional independences\u00a7They can be read off the graph\u00a7Important for modeling: understand assumptions made when choosing a Bayes net graph P(xi|x1 \u00b7\u00b7\u00b7 xi\u00001)= P(xi|parents (Xi))Example \u00a7Conditional independence assumptions directly from simplifications in chain rule: \u00a7Additional implied conditional independence assumptions? XYZWIndependence in a BN\u00a7Important question about a BN:\u00a7Are two nodes independent given certain evidence?\u00a7If yes, can prove using algebra (tedious in general)\u00a7If no, can prove with a counter example\u00a7Example: \u00a7Question: are X and Z necessarily independent?\u00a7Answer: no. Example: low pressure causes rain, which causes traffic.\u00a7X can influence Z, Z can influence X (via Y)\u00a7Addendum: they could be independent: how? XYZD-separation: OutlineD-separation: Outline\u00a7Study independence properties for triples\u00a7Analyze complex cases in terms of member triples\u00a7D-separation: a condition / algorithm for answering such queriesCausal Chains\u00a7This configuration is a \u201ccausal chain\u201d X: Low pressure Y: Rain Z: Traffic \u00a7Guaranteed X independent of Z ? No!\u00a7One example set of CPTs for which X is not",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_14",
+        "chunk_index": 0,
+        "source_page": 8,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_14_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 14: Bayes Nets: Independence] answering such queriesCausal Chains\u00a7This configuration is a \u201ccausal chain\u201d X: Low pressure Y: Rain Z: Traffic \u00a7Guaranteed X independent of Z ? No!\u00a7One example set of CPTs for which X is not independent of Z is sufficient to show this independence is not guaranteed.\u00a7Example:\u00a7Low pressure causes rain causes traffic,high pressure causes no rain causes no traffic\u00a7In numbers:P( +y | +x ) = 1, P( -y | -x ) = 1,P( +z | +y ) = 1, P( -z | -y ) = 1Causal Chains\u00a7This configuration is a \u201ccausal chain\u201d \u00a7Guaranteed X independent of Z given Y? \u00a7Evidence along the chain \u201cblocks\u201dthe influence Yes!X: Low pressure Y: Rain Z: TrafficCommon Cause\u00a7This configuration is a \u201ccommon cause\u201d \u00a7Guaranteed X independent of Z ? No!\u00a7One example set of CPTs for which X is not independent of Z is sufficient to show this independence is not guaranteed.\u00a7Example:\u00a7Project due causes both forums busy and lab full \u00a7In numbers:P( +x | +y ) = 1, P( -x | -y ) = 1,P( +z | +y ) = 1, P( -z | -y ) = 1 Y: Project due X: Forums busy Z: Lab fullCommon Cause\u00a7This configuration is a \u201ccommon cause\u201d\u00a7Guaranteed X and Z independent given Y? \u00a7Observing the cause blocks influence between effects. Yes! Y: Project due X: Forums busy Z: Lab fullCommon Effect\u00a7Last configuration: two causes of one effect (v-structures) Z: Traffic \u00a7Are X and Y independent?\u00a7Yes: the ballgame and the rain cause traffic, but they are not correlated\u00a7Still need to prove they must be (try it!)\u00a7Are X and Y independent given Z?\u00a7No: seeing traffic puts the rain and the ballgame in competition as explanation.\u00a7This is backwards from the other cases\u00a7Observing an effect activates influence between possible causes. X: RainingY: BallgameThe General CaseThe General Case\u00a7General question: in a given BN, are two variables independent (given evidence)?\u00a7Solution: analyze the graph\u00a7Any complex example can be brokeninto repetitions of the three canonical casesReachability\u00a7Recipe: shade evidence",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_14",
+        "chunk_index": 1,
+        "source_page": 11,
+        "source_pages": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_14_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 14: Bayes Nets: Independence] The General CaseThe General Case\u00a7General question: in a given BN, are two variables independent (given evidence)?\u00a7Solution: analyze the graph\u00a7Any complex example can be brokeninto repetitions of the three canonical casesReachability\u00a7Recipe: shade evidence nodes, look for paths in the resulting graph\u00a7Attempt 1: if two nodes are connected by an undirected path not blocked by a shaded node, they are conditionally independent\u00a7Almost works, but not quite\u00a7Where does it break?\u00a7Answer: the v-structure at T doesn\u2019t count as a link in a path unless \u201cactive\u201d R T B D LActive / Inactive Paths\u00a7Question: Are X and Y conditionally independent given evidence variables {Z}?\u00a7Yes, if X and Y \u201cd-separated\u201dby Z\u00a7Consider all (undirected) paths from X to Y\u00a7No active paths = independence!\u00a7A path is active if each triple is active:\u00a7Causal chain A \u00aeB \u00aeC where B is unobserved (either direction)\u00a7Common cause A \u00acB \u00aeC where B is unobserved\u00a7Common effect (aka v-structure)A \u00aeB \u00acC where B or one of its descendentsis observed\u00a7All it takes to block a path is a single inactive segment\u00a7Note: These triples are all active (and similar for the other cases, i.e. the variables on either end of the triple can be observed or unobserved) Active TriplesInactive Triples\u00a7Query:\u00a7Check all (undirected!) paths between and \u00a7If one or more active, then independence not guaranteed \u00a7Otherwise (i.e. if all paths are inactive),then independence is guaranteed D-SeparationX i \u0000\u0000 X j |{ X k 1 ,. . . ,X k n } X i \u0000\u0000 X j |{ X k 1 ,. . . ,X k n } ? X i \u0000\u0000 X j |{ X k 1 ,. . . ,X k n }Example Yes R T B T\u2019Example R T B D L T\u2019 YesYes YesExample\u00a7Variables:\u00a7R: Raining\u00a7T: Traffic\u00a7D: Roof drips\u00a7S: I\u2019m sad\u00a7Questions:T S D R YesStructure Implications\u00a7Given a Bayes net structure, can run d-separation algorithm to build a complete list of conditional independences that are necessarily true of the form \u00a7This list determines the",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_14",
+        "chunk_index": 2,
+        "source_page": 19,
+        "source_pages": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_14_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 14: Bayes Nets: Independence] S: I\u2019m sad\u00a7Questions:T S D R YesStructure Implications\u00a7Given a Bayes net structure, can run d-separation algorithm to build a complete list of conditional independences that are necessarily true of the form \u00a7This list determines the set of probability distributions that can be represented X i \u0000\u0000 X j |{ X k 1 ,. . . ,X k n }Computing All Independences XYZ XYZXYZ XYZXYZ {X\u0000\u0000Y, X \u0000\u0000Z, Y \u0000\u0000Z, X\u0000\u0000Z|Y, X \u0000\u0000Y|Z, Y \u0000\u0000Z|X} Topology Limits Distributions\u00a7Given some graph topology G, only certain joint distributions can be encoded\u00a7The graph structure guarantees certain (conditional) independences\u00a7(There might be more independence)\u00a7Adding arcs increases the set of distributions, but has several costs\u00a7Full conditioning can encode any distribution XYZXYZ XYZ {X\u0000\u0000Z|Y} XYZXYZXYZ XYZXYZXYZ {}Bayes Nets Representation Summary\u00a7Bayes nets compactly encode joint distributions\u00a7Guaranteed independencies of distributions can be deduced from BN graph structure\u00a7D-separation gives precise conditional independence guarantees from graph alone\u00a7A Bayes\u2019net\u2019s joint distribution may have further (conditional) independence that is not detectable until you inspect its specific distributionBayes\u2019Nets\u00a7Representation\u00a7Conditional Independences\u00a7Probabilistic Inference\u00a7Enumeration (exact, exponential complexity)\u00a7Variable elimination (exact, worst-caseexponential complexity, often better)\u00a7Probabilistic inference is NP-complete\u00a7Sampling (approximate)\u00a7Learning Bayes\u2019Nets from Data",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_14",
+        "chunk_index": 3,
+        "source_page": 26,
+        "source_pages": [
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "chunk_type": "summary",
+        "token_count": 339
+      }
+    }
+  ]
+}

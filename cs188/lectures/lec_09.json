@@ -1,0 +1,490 @@
+{
+  "lecture_id": "lec_09",
+  "order_index": 9,
+  "week": 5,
+  "title": "Markov Decision Processes II",
+  "topics": [
+    "Value Iteration",
+    "Policy Iteration",
+    "Convergence Analysis",
+    "Optimal Policies"
+  ],
+  "scheduled_date": "2025-09-30",
+  "slide_deck": "slides/lec_09.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 57,
+    "total_tokens": 2757,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 67,
+        "char_count": 297
+      },
+      {
+        "page_number": 2,
+        "token_count": 144,
+        "char_count": 542
+      },
+      {
+        "page_number": 3,
+        "token_count": 124,
+        "char_count": 388
+      },
+      {
+        "page_number": 4,
+        "token_count": 138,
+        "char_count": 470
+      },
+      {
+        "page_number": 5,
+        "token_count": 22,
+        "char_count": 61
+      },
+      {
+        "page_number": 6,
+        "token_count": 5,
+        "char_count": 13
+      },
+      {
+        "page_number": 7,
+        "token_count": 25,
+        "char_count": 101
+      },
+      {
+        "page_number": 8,
+        "token_count": 63,
+        "char_count": 283
+      },
+      {
+        "page_number": 9,
+        "token_count": 63,
+        "char_count": 283
+      },
+      {
+        "page_number": 10,
+        "token_count": 78,
+        "char_count": 353
+      },
+      {
+        "page_number": 11,
+        "token_count": 78,
+        "char_count": 349
+      },
+      {
+        "page_number": 12,
+        "token_count": 63,
+        "char_count": 283
+      },
+      {
+        "page_number": 13,
+        "token_count": 61,
+        "char_count": 254
+      },
+      {
+        "page_number": 14,
+        "token_count": 11,
+        "char_count": 39
+      },
+      {
+        "page_number": 15,
+        "token_count": 12,
+        "char_count": 39
+      },
+      {
+        "page_number": 16,
+        "token_count": 11,
+        "char_count": 44
+      },
+      {
+        "page_number": 17,
+        "token_count": 161,
+        "char_count": 599
+      },
+      {
+        "page_number": 18,
+        "token_count": 2,
+        "char_count": 14
+      },
+      {
+        "page_number": 19,
+        "token_count": 2,
+        "char_count": 17
+      },
+      {
+        "page_number": 20,
+        "token_count": 92,
+        "char_count": 332
+      },
+      {
+        "page_number": 21,
+        "token_count": 92,
+        "char_count": 356
+      },
+      {
+        "page_number": 22,
+        "token_count": 10,
+        "char_count": 60
+      },
+      {
+        "page_number": 23,
+        "token_count": 10,
+        "char_count": 60
+      },
+      {
+        "page_number": 24,
+        "token_count": 92,
+        "char_count": 335
+      },
+      {
+        "page_number": 25,
+        "token_count": 2,
+        "char_count": 17
+      },
+      {
+        "page_number": 26,
+        "token_count": 65,
+        "char_count": 247
+      },
+      {
+        "page_number": 27,
+        "token_count": 49,
+        "char_count": 206
+      },
+      {
+        "page_number": 28,
+        "token_count": 3,
+        "char_count": 16
+      },
+      {
+        "page_number": 29,
+        "token_count": 7,
+        "char_count": 35
+      },
+      {
+        "page_number": 30,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 31,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 32,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 33,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 34,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 35,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 36,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 37,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 38,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 39,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 40,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 41,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 42,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 43,
+        "token_count": 20,
+        "char_count": 50
+      },
+      {
+        "page_number": 44,
+        "token_count": 85,
+        "char_count": 287
+      },
+      {
+        "page_number": 45,
+        "token_count": 93,
+        "char_count": 452
+      },
+      {
+        "page_number": 46,
+        "token_count": 59,
+        "char_count": 280
+      },
+      {
+        "page_number": 47,
+        "token_count": 139,
+        "char_count": 619
+      },
+      {
+        "page_number": 48,
+        "token_count": 103,
+        "char_count": 473
+      },
+      {
+        "page_number": 49,
+        "token_count": 25,
+        "char_count": 68
+      },
+      {
+        "page_number": 50,
+        "token_count": 70,
+        "char_count": 167
+      },
+      {
+        "page_number": 51,
+        "token_count": 101,
+        "char_count": 323
+      },
+      {
+        "page_number": 52,
+        "token_count": 24,
+        "char_count": 41
+      },
+      {
+        "page_number": 53,
+        "token_count": 23,
+        "char_count": 65
+      },
+      {
+        "page_number": 54,
+        "token_count": 40,
+        "char_count": 105
+      },
+      {
+        "page_number": 55,
+        "token_count": 24,
+        "char_count": 41
+      },
+      {
+        "page_number": 56,
+        "token_count": 132,
+        "char_count": 588
+      },
+      {
+        "page_number": 57,
+        "token_count": 7,
+        "char_count": 34
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] CS 188: Artificial Intelligence Markov Decision Processes II Instructors: Emma Pierson and Peyrin Kao--- University of California, Berkeley [These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Recap: Grid World \u25aa A maze-like problem \u25aa The agent lives in a grid \u25aa Walls block the agent\u2019s path \u25aa Noisy movement: actions do not always go as planned \u25aa 80% of the time, the action North takes the agent North \u25aa 10% of the time, North takes the agent West; 10% East \u25aa If there is a wall in the direction the agent would have been taken, the agent stays put \u25aa The agent receives rewards each time step \u25aa Small \u201cliving\u201d reward each step (can be negative) \u25aa Big rewards come at the end (good or bad) \u25aa Goal: maximize sum of (discounted) rewardsRecap: MDPs \u25aa Markov decision processes: \u25aa States S \u25aa Actions A \u25aa Transitions P(s\u2019|s,a) (or T(s,a,s\u2019)) \u25aa Rewards R(s,a,s\u2019) (and discount \u03b3) \u25aa Start state s0 \u25aa Quantities: \u25aa Policy = map of states to actions \u25aa Utility = sum of discounted rewards \u25aa Values = expected future utility from a state (max node) \u25aa Q-Values = expected future utility from a q-state (chance node) a s s, a s,a,s\u2019 \u2019sOptimal Quantities \u25aa Stars denote optimality throughout! \u25aa The value (utility) of a state s: V*(s) = expected utility starting in s and acting optimally \u25aa The value (utility) of a q-state (s,a): Q*(s,a) = expected utility starting out having taken action a from state s and (thereafter) acting optimally \u25aa The optimal policy: \u03c0*(s) = optimal action from state s a s \u2019s s, a (s,a,s\u2019) is a transition s,a,s\u2019 s is a state (s, a) is a q-state [Demo: gridworld values (L9D1)]Gridworld Values V* Discount: 0.9 Noise: 0.2 Living reward: 0Gridworld: Q*",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 0,
+        "source_page": 2,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] a state (s, a) is a q-state [Demo: gridworld values (L9D1)]Gridworld Values V* Discount: 0.9 Noise: 0.2 Living reward: 0Gridworld: Q*The Bellman Equations How to be optimal: Step 1: Take correct first action Step 2: Keep being optimalThe Bellman Equations \u25aa Definition of \u201coptimal utility\u201d via expectimax recurrence gives a simple one-step lookahead relationship amongst optimal utility values \u25aa These are the Bellman equations, and they characterize optimal values in a way we\u2019ll use over and over a s s, a s,a,s\u2019 \u2019sThe Bellman Equations \u25aa Definition of \u201coptimal utility\u201d via expectimax recurrence gives a simple one-step lookahead relationship amongst optimal utility values \u25aa These are the Bellman equations, and they characterize optimal values in a way we\u2019ll use over and over a s s, a s,a,s\u2019 \u2019sThe Bellman Equations \u25aa Definition of \u201coptimal utility\u201d via expectimax recurrence gives a simple one-step lookahead relationship amongst optimal utility values \u25aa These are the Bellman equations, and they characterize optimal values in a way we\u2019ll use over and over a s s, a s,a,s\u2019 \u2019s Probability of ending up in state s\u2019 after taking action a in state sThe Bellman Equations \u25aa Definition of \u201coptimal utility\u201d via expectimax recurrence gives a simple one-step lookahead relationship amongst optimal utility values \u25aa These are the Bellman equations, and they characterize optimal values in a way we\u2019ll use over and over a s s, a s,a,s\u2019 \u2019s Utility of ending up in state s\u2019 after taking action a in state sThe Bellman Equations \u25aa Definition of \u201coptimal utility\u201d via expectimax recurrence gives a simple one-step lookahead relationship amongst optimal utility values \u25aa These are the Bellman equations, and they characterize optimal values in a way we\u2019ll use over and over a s s, a s,a,s\u2019 \u2019sValue Iteration \u25aa Bellman equations characterize the optimal values: \u25aa Value iteration computes them: \u25aa Value iteration is just a fixed point solution method \u25aa \u2026 though the Vk vectors are also interpretable as time-limited values a V(s) s, a s,a,s\u2019 V(s\u2019)Time-limited values Groundhog Day, 1993Time-limited values Don\u2019t Look Up",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 1,
+        "source_page": 10,
+        "source_pages": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] method \u25aa \u2026 though the Vk vectors are also interpretable as time-limited values a V(s) s, a s,a,s\u2019 V(s\u2019)Time-limited values Groundhog Day, 1993Time-limited values Don\u2019t Look Up, 2021Time-limited values Maybe Happy Ending, 2016Convergence* \u25aa How do we know the Vk vectors are going to converge? \u25aa Case 1: If the tree has maximum depth M, then VM holds the actual untruncated values \u25aa Case 2: If the discount is less than 1 \u25aa Sketch: For any state Vk and Vk+1 can be viewed as depth k+1 expectimax results in nearly identical search trees \u25aa The difference is that on the bottom layer, Vk+1 has actual rewards while Vk has zeros \u25aa That last layer is at best all RMAX \u25aa It is at worst RMIN \u25aa But everything is discounted by \u03b3k that far out \u25aa So Vk and Vk+1 are at most \u03b3k max|R| different \u25aa So as k increases, the values convergePolicy MethodsPolicy EvaluationFixed Policies \u25aa Expectimax trees max over all actions to compute the optimal values \u25aa If we fixed some policy \u03c0(s), then the tree would be simpler \u2013 only one action per state \u25aa \u2026 though the tree\u2019s value would depend on which policy we fixed a s s, a s,a,s\u2019 \u2019s \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019s Do the optimal action Do what \u03c0 says to doUtilities for a Fixed Policy \u25aa Another basic operation: compute the utility of a state s under a fixed (generally non-optimal) policy \u25aa Define the utility of a state s, under a fixed policy \u03c0: V\u03c0(s) = expected total discounted rewards starting in s and following \u03c0 \u25aa Recursive relation (one-step look-ahead / Bellman equation): \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sExample: Policy Evaluation Always Go Right Always Go ForwardExample: Policy Evaluation Always Go Right Always Go ForwardPolicy Evaluation \u25aa How do we calculate the V\u2019s for a fixed policy \u03c0? \u25aa Idea 1: Turn recursive Bellman equations into updates (like value iteration) \u25aa Efficiency: O(S2) per iteration \u25aa Idea 2: Without the maxes, the Bellman equations are just a linear system \ufffd",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 2,
+        "source_page": 17,
+        "source_pages": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] ? \u25aa Idea 1: Turn recursive Bellman equations into updates (like value iteration) \u25aa Efficiency: O(S2) per iteration \u25aa Idea 2: Without the maxes, the Bellman equations are just a linear system \u25aa Solve with your favorite linear system solver \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sPolicy ExtractionComputing Actions from Values \u25aa Let\u2019s imagine we have the optimal values V*(s) \u25aa How should we act? \u25aa It\u2019s not obvious! \u25aa We need to do a mini-expectimax (one step) \u25aa This is called policy extraction, since it gets the policy implied by the valuesComputing Actions from Q-Values \u25aa Let\u2019s imagine we have the optimal q-values: \u25aa How should we act? \u25aa Completely trivial to decide! \u25aa Important lesson: actions are easier to select from q-values than values!Policy IterationProblems with Value iteration: demok=0 Noise = 0.2 Discount = 0.9 Living reward = 0k=1 Noise = 0.2 Discount = 0.9 Living reward = 0k=2 Noise = 0.2 Discount = 0.9 Living reward = 0k=3 Noise = 0.2 Discount = 0.9 Living reward = 0k=4 Noise = 0.2 Discount = 0.9 Living reward = 0k=5 Noise = 0.2 Discount = 0.9 Living reward = 0k=6 Noise = 0.2 Discount = 0.9 Living reward = 0k=7 Noise = 0.2 Discount = 0.9 Living reward = 0k=8 Noise = 0.2 Discount = 0.9 Living reward = 0k=9 Noise = 0.2 Discount = 0.9 Living reward = 0k=10 Noise = 0.2 Discount = 0.9 Living reward = 0k=11 Noise = 0.2 Discount = 0.9 Living reward = 0k=12 Noise = 0.2 Discount = 0.9 Living reward = 0k=100 Noise = 0.2 Discount = 0.9 Living reward = 0Problems with Value Iteration \u25aa Value iteration repeats the Bellman updates: \u25aa",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 3,
+        "source_page": 24,
+        "source_pages": [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] 2 Discount = 0.9 Living reward = 0k=100 Noise = 0.2 Discount = 0.9 Living reward = 0Problems with Value Iteration \u25aa Value iteration repeats the Bellman updates: \u25aa Problem 1: It\u2019s slow \u2013 O(S2A) per iteration \u25aa Problem 2: The \u201cmax\u201d at each state rarely changes \u25aa Problem 3: The policy often converges long before the values a s s, a s,a,s\u2019 \u2019s [Demo: value iteration (L9D2)]Policy Iteration \u25aa Alternative approach for optimal values: \u25aa Step 1: Policy evaluation: calculate utilities for some fixed policy (not optimal utilities!) until convergence \u25aa Step 2: Policy improvement: update policy using one-step look-ahead with resulting converged (but not optimal!) utilities as future values \u25aa Repeat steps until policy converges \u25aa This is policy iteration \u25aa It\u2019s still optimal! \u25aa Can converge (much) faster under some conditionsPolicy Iteration \u25aa Evaluation: For fixed current policy \u03c0, find values with policy evaluation: \u25aa Iterate until values converge (might run this for many iterations): \u25aa Improvement: For fixed values, get a better policy using policy extraction \u25aa One-step look-ahead (run only once):Comparison \u25aa Both value iteration and policy iteration compute the same thing (all optimal values) \u25aa In value iteration: \u25aa Every iteration updates both the values and (implicitly) the policy \u25aa We don\u2019t track the policy, but taking the max over actions implicitly recomputes it \u25aa In policy iteration: \u25aa We do several passes that update utilities with fixed policy (each pass is fast because we consider only one action, not all of them) \u25aa After the policy is evaluated, a new policy is chosen (slow like a value iteration pass) \u25aa The new policy will be better (or we\u2019re done) \u25aa Both are dynamic programs for solving MDPsSummary: MDP Algorithms \u25aa So you want to\u2026. \u25aa Compute optimal values: use value iteration or policy iteration \u25aa Compute values for a particular policy: use policy evaluation \u25aa Turn your values into a policy: use policy extraction (one-step lookahead) \u25aa These all look the same! \u25aa They basically are \u2013 they are all variations of Bellman updates \u25aa They all use one-step lookahead expectimax fragments \u25aa They differ only in",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 4,
+        "source_page": 47,
+        "source_pages": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_005",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] a policy: use policy extraction (one-step lookahead) \u25aa These all look the same! \u25aa They basically are \u2013 they are all variations of Bellman updates \u25aa They all use one-step lookahead expectimax fragments \u25aa They differ only in whether we plug in a fixed policy or max over actionsDouble Bandits $1 every time 75% of the time: $2 25% of the time: $0Double-Bandit MDP \u25aa Actions: Blue, Red \u25aa States: Win, Lose W L $1 1.0 $1 1.0 0.25 $0 0.75 $2 0.75 $2 0.25 $0 No discount 100 time steps Both states have the same valueOffline Planning \u25aa Solving MDPs is offline planning \u25aa You determine all quantities through computation \u25aa You need to know the details of the MDP \u25aa You do not actually play the game! Play Red Play Blue Value No discount 100 time steps Both states have the same value 150 100 W L $1 1.0 $1 1.0 0.25 $0 0.75 $2 0.75 $2 0.25 $0Let\u2019s Play! $2 $2 $0 $2 $2 $2 $2 $0 $0 $0Harder game $1 every time ??% of the time: $2 ??% of the time: $0Online Planning \u25aa Rules changed! Red\u2019s win chance is different. W L $1 1.0 $1 1.0 ?? $0 ?? $2 ?? $2 ?? $0Let\u2019s Play! $0 $0 $0 $2 $0 $2 $0 $0 $0 $0What Just Happened? \u25aa That wasn\u2019t planning, it was learning! \u25aa Specifically, reinforcement learning \u25aa There was an MDP , but you couldn\u2019t solve it with just computation \u25aa You needed to actually act to figure it out \u25aa Important ideas in reinforcement learning that came up \u25aa Exploration: you have to try unknown actions to get information \u25aa Exploitation: eventually, you have to use what you know \u25aa Regret: even if you learn intelligently, you make mistakes \u25aa Sampling: because of chance, you have to try things repeatedly \u25aa Difficulty: learning can be much harder than solving a known MDP",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 5,
+        "source_page": 56,
+        "source_pages": [
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_09_slide_chunk_006",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 9: Markov Decision Processes II] have to use what you know \u25aa Regret: even if you learn intelligently, you make mistakes \u25aa Sampling: because of chance, you have to try things repeatedly \u25aa Difficulty: learning can be much harder than solving a known MDPNext Time: Reinforcement Learning!",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_09",
+        "chunk_index": 6,
+        "source_page": 56,
+        "source_pages": [
+          56,
+          57
+        ],
+        "chunk_type": "summary",
+        "token_count": 57
+      }
+    }
+  ]
+}

@@ -1,0 +1,350 @@
+{
+  "semester": "Fall 2025",
+  "start_date": "2025-09-02",
+  "end_date": "2025-12-12",
+  "midterm_date": "2025-10-24",
+  "final_date": "2025-12-15",
+  "break_week": 9,
+  "lectures": [
+    {
+      "lecture_id": "01",
+      "week": 1,
+      "order_index": 1,
+      "title": "Introduction to AI",
+      "topics": [
+        "Overview of Artificial Intelligence",
+        "History and Scope of AI",
+        "Intelligent Agents",
+        "Problem Formulation"
+      ],
+      "scheduled_date": "2025-09-02",
+      "slide_deck": "slides/lec_01.pdf"
+    },
+    {
+      "lecture_id": "02",
+      "week": 1,
+      "order_index": 2,
+      "title": "Uninformed Search",
+      "topics": [
+        "Search Strategies",
+        "Breadth-First Search",
+        "Depth-First Search",
+        "Uniform Cost Search",
+        "Complexity Analysis"
+      ],
+      "scheduled_date": "2025-09-04",
+      "slide_deck": "slides/lec_02.pdf"
+    },
+    {
+      "lecture_id": "03",
+      "week": 2,
+      "order_index": 3,
+      "title": "A* Search and Heuristics",
+      "topics": [
+        "Informed Search",
+        "Heuristic Functions",
+        "Greedy Best-First Search",
+        "A* Algorithm",
+        "Admissibility and Optimality"
+      ],
+      "scheduled_date": "2025-09-09",
+      "slide_deck": "slides/lec_03.pdf"
+    },
+    {
+      "lecture_id": "04",
+      "week": 2,
+      "order_index": 4,
+      "title": "Constraint Satisfaction Problems I",
+      "topics": [
+        "CSP Formulation",
+        "Backtracking Search",
+        "Variable and Value Ordering",
+        "Constraint Propagation"
+      ],
+      "scheduled_date": "2025-09-11",
+      "slide_deck": "slides/lec_04.pdf"
+    },
+    {
+      "lecture_id": "05",
+      "week": 3,
+      "order_index": 5,
+      "title": "Constraint Satisfaction Problems II",
+      "topics": [
+        "Advanced CSP Techniques",
+        "Local Search for CSPs",
+        "Constraint Relaxation",
+        "Problem Structure"
+      ],
+      "scheduled_date": "2025-09-16",
+      "slide_deck": "slides/lec_05.pdf"
+    },
+    {
+      "lecture_id": "06",
+      "week": 3,
+      "order_index": 6,
+      "title": "Game Trees I",
+      "topics": [
+        "Game Theory Basics",
+        "Minimax Algorithm",
+        "Game Tree Search",
+        "Perfect Information Games"
+      ],
+      "scheduled_date": "2025-09-18",
+      "slide_deck": "slides/lec_06.pdf"
+    },
+    {
+      "lecture_id": "07",
+      "week": 4,
+      "order_index": 7,
+      "title": "Game Trees II",
+      "topics": [
+        "Alpha-Beta Pruning",
+        "Evaluation Functions",
+        "Move Ordering",
+        "Quiescence Search"
+      ],
+      "scheduled_date": "2025-09-23",
+      "slide_deck": "slides/lec_07.pdf"
+    },
+    {
+      "lecture_id": "08",
+      "week": 4,
+      "order_index": 8,
+      "title": "Markov Decision Processes I",
+      "topics": [
+        "Sequential Decision Making",
+        "MDP Formulation",
+        "Policies and Value Functions",
+        "Bellman Equation"
+      ],
+      "scheduled_date": "2025-09-25",
+      "slide_deck": "slides/lec_08.pdf"
+    },
+    {
+      "lecture_id": "09",
+      "week": 5,
+      "order_index": 9,
+      "title": "Markov Decision Processes II",
+      "topics": [
+        "Value Iteration",
+        "Policy Iteration",
+        "Convergence Analysis",
+        "Optimal Policies"
+      ],
+      "scheduled_date": "2025-09-30",
+      "slide_deck": "slides/lec_09.pdf"
+    },
+    {
+      "lecture_id": "10",
+      "week": 5,
+      "order_index": 10,
+      "title": "Reinforcement Learning I",
+      "topics": [
+        "Learning from Experience",
+        "Q-Learning",
+        "Temporal Difference Learning",
+        "Exploration vs. Exploitation"
+      ],
+      "scheduled_date": "2025-10-02",
+      "slide_deck": "slides/lec_10.pdf"
+    },
+    {
+      "lecture_id": "11",
+      "week": 6,
+      "order_index": 11,
+      "title": "Reinforcement Learning II",
+      "topics": [
+        "Function Approximation",
+        "Deep Reinforcement Learning",
+        "Policy Gradient Methods",
+        "Actor-Critic Methods"
+      ],
+      "scheduled_date": "2025-10-07",
+      "slide_deck": "slides/lec_11.pdf"
+    },
+    {
+      "lecture_id": "12",
+      "week": 6,
+      "order_index": 12,
+      "title": "Probability",
+      "topics": [
+        "Probability Basics",
+        "Joint and Conditional Probability",
+        "Bayes Theorem",
+        "Probabilistic Reasoning"
+      ],
+      "scheduled_date": "2025-10-09",
+      "slide_deck": "slides/lec_12.pdf"
+    },
+    {
+      "lecture_id": "13",
+      "week": 7,
+      "order_index": 13,
+      "title": "Bayes Nets: Representation",
+      "topics": [
+        "Bayesian Networks",
+        "Conditional Independence",
+        "D-Separation",
+        "Network Construction"
+      ],
+      "scheduled_date": "2025-10-14",
+      "slide_deck": "slides/lec_13.pdf"
+    },
+    {
+      "lecture_id": "14",
+      "week": 7,
+      "order_index": 14,
+      "title": "Bayes Nets: Independence",
+      "topics": [
+        "Markov Blankets",
+        "Independence Testing",
+        "Explaining Away",
+        "Plate Notation"
+      ],
+      "scheduled_date": "2025-10-16",
+      "slide_deck": "slides/lec_14.pdf"
+    },
+    {
+      "lecture_id": "15",
+      "week": 8,
+      "order_index": 15,
+      "title": "Bayes Nets: Inference",
+      "topics": [
+        "Exact Inference",
+        "Variable Elimination",
+        "Belief Propagation",
+        "Computational Complexity"
+      ],
+      "scheduled_date": "2025-10-21",
+      "slide_deck": "slides/lec_15.pdf",
+      "exam": "midterm"
+    },
+    {
+      "lecture_id": "16",
+      "week": 8,
+      "order_index": 16,
+      "title": "Bayes Nets: Sampling",
+      "topics": [
+        "Sampling Methods",
+        "Rejection Sampling",
+        "Likelihood Weighting",
+        "Gibbs Sampling"
+      ],
+      "scheduled_date": "2025-10-23",
+      "slide_deck": "slides/lec_16.pdf"
+    },
+    {
+      "lecture_id": "17",
+      "week": 10,
+      "order_index": 17,
+      "title": "Decision Networks and VPI",
+      "topics": [
+        "Decision Theory",
+        "Decision Networks",
+        "Value of Perfect Information",
+        "Sequential Decision Problems"
+      ],
+      "scheduled_date": "2025-11-04",
+      "slide_deck": "slides/lec_17.pdf"
+    },
+    {
+      "lecture_id": "18",
+      "week": 10,
+      "order_index": 18,
+      "title": "Hidden Markov Models",
+      "topics": [
+        "HMM Definition",
+        "Forward Algorithm",
+        "Viterbi Algorithm",
+        "HMM Applications"
+      ],
+      "scheduled_date": "2025-11-06",
+      "slide_deck": "slides/lec_18.pdf"
+    },
+    {
+      "lecture_id": "19",
+      "week": 11,
+      "order_index": 19,
+      "title": "Particle Filtering",
+      "topics": [
+        "Sequential Importance Sampling",
+        "Particle Filter Algorithm",
+        "Resampling",
+        "Particle Filtering Applications"
+      ],
+      "scheduled_date": "2025-11-11",
+      "slide_deck": "slides/lec_19.pdf"
+    },
+    {
+      "lecture_id": "20",
+      "week": 11,
+      "order_index": 20,
+      "title": "Machine Learning: Naive Bayes",
+      "topics": [
+        "Learning from Data",
+        "Naive Bayes Classifier",
+        "Maximum Likelihood Estimation",
+        "Text Classification"
+      ],
+      "scheduled_date": "2025-11-13",
+      "slide_deck": "slides/lec_20.pdf"
+    },
+    {
+      "lecture_id": "21",
+      "week": 12,
+      "order_index": 21,
+      "title": "Machine Learning: Perceptrons",
+      "topics": [
+        "Linear Classification",
+        "Perceptron Learning Algorithm",
+        "Adaline and Widrow-Hoff Rule",
+        "Gradient Descent"
+      ],
+      "scheduled_date": "2025-11-18",
+      "slide_deck": "slides/lec_21.pdf"
+    },
+    {
+      "lecture_id": "22",
+      "week": 12,
+      "order_index": 22,
+      "title": "Machine Learning: Neural Networks",
+      "topics": [
+        "Multi-layer Perceptrons",
+        "Backpropagation Algorithm",
+        "Activation Functions",
+        "Deep Learning Basics"
+      ],
+      "scheduled_date": "2025-11-20",
+      "slide_deck": "slides/lec_22.pdf"
+    },
+    {
+      "lecture_id": "23",
+      "week": 13,
+      "order_index": 23,
+      "title": "Machine Learning: Decision Trees",
+      "topics": [
+        "Decision Tree Learning",
+        "Information Gain and Entropy",
+        "ID3 Algorithm",
+        "Pruning Strategies"
+      ],
+      "scheduled_date": "2025-11-25",
+      "slide_deck": "slides/lec_23.pdf"
+    },
+    {
+      "lecture_id": "24",
+      "week": 13,
+      "order_index": 24,
+      "title": "Special Topics / Guest Lecture & Summary",
+      "topics": [
+        "Advanced AI Topics",
+        "Recent Developments in AI",
+        "Course Summary",
+        "Future Directions"
+      ],
+      "scheduled_date": "2025-12-02",
+      "slide_deck": "slides/lec_24.pdf",
+      "exam": "final"
+    }
+  ]
+}

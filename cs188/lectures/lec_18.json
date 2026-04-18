@@ -1,0 +1,386 @@
+{
+  "lecture_id": "lec_18",
+  "order_index": 18,
+  "week": 10,
+  "title": "Hidden Markov Models",
+  "topics": [
+    "HMM Definition",
+    "Forward Algorithm",
+    "Viterbi Algorithm",
+    "HMM Applications"
+  ],
+  "scheduled_date": "2025-11-06",
+  "slide_deck": "slides/lec_18.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 43,
+    "total_tokens": 2561,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 66,
+        "char_count": 290
+      },
+      {
+        "page_number": 2,
+        "token_count": 41,
+        "char_count": 170
+      },
+      {
+        "page_number": 3,
+        "token_count": 44,
+        "char_count": 203
+      },
+      {
+        "page_number": 4,
+        "token_count": 75,
+        "char_count": 338
+      },
+      {
+        "page_number": 5,
+        "token_count": 74,
+        "char_count": 339
+      },
+      {
+        "page_number": 6,
+        "token_count": 122,
+        "char_count": 275
+      },
+      {
+        "page_number": 7,
+        "token_count": 45,
+        "char_count": 141
+      },
+      {
+        "page_number": 8,
+        "token_count": 28,
+        "char_count": 91
+      },
+      {
+        "page_number": 9,
+        "token_count": 97,
+        "char_count": 246
+      },
+      {
+        "page_number": 10,
+        "token_count": 7,
+        "char_count": 41
+      },
+      {
+        "page_number": 11,
+        "token_count": 7,
+        "char_count": 44
+      },
+      {
+        "page_number": 12,
+        "token_count": 9,
+        "char_count": 45
+      },
+      {
+        "page_number": 13,
+        "token_count": 64,
+        "char_count": 315
+      },
+      {
+        "page_number": 14,
+        "token_count": 68,
+        "char_count": 167
+      },
+      {
+        "page_number": 15,
+        "token_count": 189,
+        "char_count": 822
+      },
+      {
+        "page_number": 16,
+        "token_count": 148,
+        "char_count": 497
+      },
+      {
+        "page_number": 17,
+        "token_count": 4,
+        "char_count": 20
+      },
+      {
+        "page_number": 18,
+        "token_count": 26,
+        "char_count": 62
+      },
+      {
+        "page_number": 19,
+        "token_count": 12,
+        "char_count": 41
+      },
+      {
+        "page_number": 20,
+        "token_count": 76,
+        "char_count": 258
+      },
+      {
+        "page_number": 21,
+        "token_count": 136,
+        "char_count": 266
+      },
+      {
+        "page_number": 22,
+        "token_count": 172,
+        "char_count": 390
+      },
+      {
+        "page_number": 23,
+        "token_count": 11,
+        "char_count": 53
+      },
+      {
+        "page_number": 24,
+        "token_count": 116,
+        "char_count": 517
+      },
+      {
+        "page_number": 25,
+        "token_count": 133,
+        "char_count": 579
+      },
+      {
+        "page_number": 26,
+        "token_count": 105,
+        "char_count": 426
+      },
+      {
+        "page_number": 27,
+        "token_count": 46,
+        "char_count": 208
+      },
+      {
+        "page_number": 28,
+        "token_count": 30,
+        "char_count": 124
+      },
+      {
+        "page_number": 29,
+        "token_count": 10,
+        "char_count": 38
+      },
+      {
+        "page_number": 30,
+        "token_count": 10,
+        "char_count": 38
+      },
+      {
+        "page_number": 31,
+        "token_count": 10,
+        "char_count": 38
+      },
+      {
+        "page_number": 32,
+        "token_count": 10,
+        "char_count": 38
+      },
+      {
+        "page_number": 33,
+        "token_count": 13,
+        "char_count": 32
+      },
+      {
+        "page_number": 34,
+        "token_count": 81,
+        "char_count": 308
+      },
+      {
+        "page_number": 35,
+        "token_count": 37,
+        "char_count": 134
+      },
+      {
+        "page_number": 36,
+        "token_count": 62,
+        "char_count": 235
+      },
+      {
+        "page_number": 37,
+        "token_count": 25,
+        "char_count": 131
+      },
+      {
+        "page_number": 38,
+        "token_count": 195,
+        "char_count": 308
+      },
+      {
+        "page_number": 39,
+        "token_count": 52,
+        "char_count": 209
+      },
+      {
+        "page_number": 40,
+        "token_count": 56,
+        "char_count": 203
+      },
+      {
+        "page_number": 41,
+        "token_count": 26,
+        "char_count": 62
+      },
+      {
+        "page_number": 42,
+        "token_count": 12,
+        "char_count": 43
+      },
+      {
+        "page_number": 43,
+        "token_count": 11,
+        "char_count": 54
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] CS 188: Artificial Intelligence Hidden Markov Models Instructors: Peyrin Kao and Emma Pierson --- University of California, Berkeley [These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Probability Recap \u25aa Conditional probability \u25aa Product rule \u25aa Chain rule \u25aa X, Y independent if and only if: \u25aa X and Y are conditionally independent given Z if and only if:Reasoning over Time or Space \u25aa Often, we want to reason about a sequence of observations \u25aa Speech recognition \u25aa Robot localization \u25aa Medical monitoring \u25aa Need to introduce time (or space) into our modelsMarkov Models \u25aa Value of X at a given time is called the state \u25aa Parameters: called transition probabilities or dynamics, specify how the state evolves over time (also, initial state probabilities) \u25aa Stationarity assumption: transition probabilities the same at all times \u25aa Same as MDP transition model, but no choice of action X2X1 X3 X4Conditional Independence \u25aa Basic conditional independence: \u25aa Past and future independent given the present \u25aa Each time step only depends on the previous \u25aa This is called the (first order) Markov property \u25aa Note that the chain is just a (growable) BN \u25aa We can always use generic BN reasoning on it if we truncate the chain at a fixed lengthExample Markov Chain: Weather \u25aa States: X = {rain, sun} rain sun 0.9 0.7 0.3 0.1 Two ways of representing the same CPT sun rain sun rain 0.1 0.9 0.7 0.3 Xt-1 Xt P(Xt|Xt-1) sun sun 0.9 sun rain 0.1 rain sun 0.3 rain rain 0.7 \u25aa Initial distribution: 1.0 sun \u25aa CPT P(Xt | Xt-1):Example Markov Chain: Weather \u25aa Initial distribution: 1.0 sun \u25aa What is the probability distribution after one step? rain sun 0.9 0.7 0.3 0.1Mini-Forward Algorithm \u25aa Question: What\u2019s P(X) on some day t? Forward simulation X2X1 X3 X4Example Run of Mini-",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 0,
+        "source_page": 6,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] sun 0.9 0.7 0.3 0.1Mini-Forward Algorithm \u25aa Question: What\u2019s P(X) on some day t? Forward simulation X2X1 X3 X4Example Run of Mini-Forward Algorithm \u25aa From initial observation of sun \u25aa From initial observation of rain \u25aa From yet another initial distribution P(X 1): P(X1) P(X2) P(X3) P(X\uf0a5) P(X4) P(X1) P(X2) P(X3) P(X\uf0a5) P(X4) P(X1) P(X\uf0a5) \u2026 [Demo: L13D1,2,3]Video of Demo Ghostbusters Basic DynamicsVideo of Demo Ghostbusters Circular DynamicsVideo of Demo Ghostbusters Whirlpool Dynamics\u25aa Stationary distribution: \u25aa The distribution we end up with is called the stationary distribution of the chain \u25aa It satisfies Stationary Distributions \u25aa For most chains: \u25aa Influence of the initial distribution gets less and less over time. \u25aa The distribution we end up in is independent of the initial distributionExample: Stationary Distributions \u25aa Question: What\u2019s P(X) at time t = infinity? X2X1 X3 X4 Xt-1 Xt P(Xt|Xt-1) sun sun 0.9 sun rain 0.1 rain sun 0.3 rain rain 0.7 Also:Application of Stationary Distribution: Web Link Analysis \u25aa PageRank over a web graph \u25aa Each web page is a state \u25aa Initial distribution: uniform over pages \u25aa Transitions: \u25aa With prob. c, uniform jump to a random page (dotted lines, not all shown) \u25aa With prob. 1-c, follow a random outlink (solid lines) \u25aa Stationary distribution \u25aa Will spend more time on highly reachable pages \u25aa E.g. many ways to get to the Acrobat Reader download page \u25aa Somewhat robust to link spam \u25aa Google 1.0 returned the set of pages containing all your keywords in decreasing rank, this on its own was way better than past methods \u25aa Then everyone started using it, and they also got clickstream data and did machine learning! \u25aa now all search engines use link analysis along with many other factors (rank actually getting less important over time)Application of Stationary Distributions: Gibbs Sampling* \u25aa Each joint",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 1,
+        "source_page": 15,
+        "source_pages": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] , and they also got clickstream data and did machine learning! \u25aa now all search engines use link analysis along with many other factors (rank actually getting less important over time)Application of Stationary Distributions: Gibbs Sampling* \u25aa Each joint instantiation over all hidden and query variables is a state: {X1, \u2026, Xn} = H U Q \u25aa Transitions: \u25aa With probability 1/n resample variable Xj according to P(Xj | x1, x2, \u2026, xj-1, xj+1, \u2026, xn, e1, \u2026, em) \u25aa Stationary distribution: \u25aa Conditional distribution P(X1, X2 , \u2026 , Xn|e1, \u2026, em) \u25aa Means that when running Gibbs sampling long enough we get a sample from the desired distribution \u25aa Requires some proof to show this is true!Hidden Markov ModelsPacman \u2013 Sonar (P4) [Demo: Pacman \u2013 Sonar \u2013 No Beliefs(L14D1)]Video of Demo Pacman \u2013 Sonar (no beliefs)Hidden Markov Models \u25aa Markov chains not so useful for most agents \u25aa Need observations to update your beliefs \u25aa Hidden Markov models (HMMs) \u25aa Underlying Markov chain over states X \u25aa You observe outputs (effects) at each time step X5X2 E1 X1 X3 X4 E2 E3 E4 E5Example: Weather HMM Rt-1 Rt P(Rt|Rt-1) +r +r 0.7 +r -r 0.3 -r +r 0.3 -r -r 0.7 Umbrellat-1 Rt Ut P(Ut|Rt) +r +u 0.9 +r -u 0.1 -r +u 0.2 -r -u 0.8 Umbrellat Umbrellat+1 Raint-1 Raint Raint+1 \u25aa An HMM is defined by: \u25aa Initial distribution: \u25aa Transitions: \u25aa Emissions:Example: Ghostbusters HMM \u25aa P(X1) = uniform \u25aa P(X|X\u2019) = usually move clockwise, but sometimes move in a random direction or stay in place \u25aa P(Rij|X) = same sensor model as before: red means close, green means far away.",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 2,
+        "source_page": 16,
+        "source_pages": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] = uniform \u25aa P(X|X\u2019) = usually move clockwise, but sometimes move in a random direction or stay in place \u25aa P(Rij|X) = same sensor model as before: red means close, green means far away. 1/9 1/9 1/9 1/9 1/9 1/9 1/9 1/9 1/9 P(X1) P(X|X\u2019=<1,2>) 1/6 1/6 0 1/6 1/2 0 0 0 0 X5 X2 Ri,j X1 X3 X4 Ri,j Ri,j Ri,j [Demo: Ghostbusters \u2013 Circular Dynamics \u2013 HMM (L14D2)]Video of Demo Ghostbusters \u2013 Circular Dynamics -- HMMConditional Independence \u25aa HMMs have two important independence properties: \u25aa Markov hidden process: future depends on past via the present \u25aa Current observation independent of all else given current state \u25aa Quiz: does this mean that evidence variables are guaranteed to be independent? \u25aa [No, they tend are correlated by the hidden state. If you see someone carrying an umbrella today, he\u2019s more likely to be carrying one tomorrow because it was probably raining today and thus tomorrow] X5X2 E1 X1 X3 X4 E2 E3 E4 E5Real HMM Examples \u25aa Speech recognition HMMs: \u25aa Observations are acoustic signals (continuous valued) \u25aa States are specific positions in specific words (so, tens of thousands) \u25aa Machine translation HMMs: \u25aa Observations are words (tens of thousands) \u25aa States are translation options \u25aa Robot tracking: \u25aa Observations are range readings (continuous) \u25aa States are positions on a map (continuous) \u25aa Health: \u25aa Observations are symptoms, vital signs, or other clinical measurements \u25aa States are some measure of underlying health state (e.g., disease stage, point in menstrual cycle, etc)Filtering / Monitoring \u25aa Filtering, or monitoring, is the task of tracking the distribution Bt(X) = Pt(Xt | e1, \u2026, et) (the belief state) over time \u25aa We start with B1(X) in an initial setting, usually uniform \u25aa As time passes, or we get observations, we update B(X) \u25aa The Kalman filter (",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 3,
+        "source_page": 22,
+        "source_pages": [
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] \u2026, et) (the belief state) over time \u25aa We start with B1(X) in an initial setting, usually uniform \u25aa As time passes, or we get observations, we update B(X) \u25aa The Kalman filter (which uses continuous variables) was invented in the 60\u2019s and first implemented as a method of trajectory estimation for the Apollo programExample: Robot Localization t=0 Sensor model: can read in which directions there is a wall, never more than 1 mistake Motion model: may not execute action with small prob. 10Prob Example from Michael PfeifferExample: Robot Localization t=1 Lighter grey: was possible to get the reading, but less likely b/c required 1 mistake 10ProbExample: Robot Localization t=2 10ProbExample: Robot Localization t=3 10ProbExample: Robot Localization t=4 10ProbExample: Robot Localization t=5 10ProbInference: Base Cases E1 X1 X2X1Passage of Time \u25aa Assume we have current belief P(X | evidence to date) \u25aa Then, after one time step passes: \u25aa Basic idea: beliefs get \u201cpushed\u201d through the transitions \u25aa With the \u201cB\u201d notation, we have to be careful about what time step t the belief is about, and what evidence it includes X2X1 \u25aa Or compactly:Example: Passage of Time \u25aa As time passes, uncertainty \u201caccumulates\u201d T = 1 T = 2 T = 5 (Transition model: ghosts usually go clockwise)Observation \u25aa Assume we have current belief P(X | previous evidence): \u25aa Then, after evidence comes in: \u25aa Or, compactly: E1 X1 \u25aa Basic idea: beliefs \u201creweighted\u201d by likelihood of evidence \u25aa Unlike passage of time, we have to renormalizeExample: Observation \u25aa As we get observations, beliefs get reweighted, uncertainty \u201cdecreases\u201d Before observation After observationExample: Weather HMM Rt Rt+1 P(Rt+1|Rt) +r +r 0.7 +r -r 0.3 -r +r 0.3 -r -r 0.7 Rt Ut P(Ut|Rt) +r +u 0.9 +r -u 0.1 -r +u 0.2 -r -u 0.8 Umbrella",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 4,
+        "source_page": 38,
+        "source_pages": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_18_slide_chunk_005",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 18: Hidden Markov Models] -r -r 0.7 Rt Ut P(Ut|Rt) +r +u 0.9 +r -u 0.1 -r +u 0.2 -r -u 0.8 Umbrella1 Umbrella2 Rain0 Rain1 Rain2 B(+r) = 0.5 B(-r) = 0.5 B\u2019(+r) = 0.5 B\u2019(-r) = 0.5 B(+r) = 0.818 B(-r) = 0.182 B\u2019(+r) = 0.627 B\u2019(-r) = 0.373 B(+r) = 0.883 B(-r) = 0.117The Forward Algorithm \u25aa We are given evidence at each time and want to know \u25aa We can derive the following updates We can normalize as we go if we want to have P(x|e) at each time step, or just once at the end\u2026Online Belief Updates \u25aa Every time step, we start with current P(X | evidence) \u25aa We update for time: \u25aa We update for evidence: \u25aa The forward algorithm does both at once (and doesn\u2019t normalize) X2X1 X2 E2Pacman \u2013 Sonar (P4) [Demo: Pacman \u2013 Sonar \u2013 No Beliefs(L14D1)]Video of Demo Pacman \u2013 Sonar (with beliefs)Next Time: Particle Filtering and Applications of HMMs",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_18",
+        "chunk_index": 5,
+        "source_page": 38,
+        "source_pages": [
+          38,
+          39,
+          40,
+          41,
+          42,
+          43
+        ],
+        "chunk_type": "summary",
+        "token_count": 311
+      }
+    }
+  ]
+}

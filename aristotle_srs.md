@@ -515,89 +515,159 @@ A course package is the **raw input format** for ingestion. It lives on disk as 
 #### 7.3.1 Folder Layout
 
 ```
-demo_course/
-├── manifest.json          # top-level course metadata
-├── syllabus.pdf           # raw syllabus (optional if manifest has text)
-├── schedule.json          # lecture-by-lecture schedule
+{course_slug}/
+├── course.json            # top-level course metadata (richer than Course entity — see §7.3.2)
+├── syllabus.md            # human-readable syllabus (converted from PDF)
+├── schedule.json          # lecture-by-lecture schedule (canonical source of truth)
 ├── slides/
-│   ├── lecture_01.pdf
-│   ├── lecture_02.pdf
+│   ├── lec_01.pdf
+│   ├── lec_02.pdf
 │   ├── ...
-│   └── lecture_15.pdf
+│   └── lec_NN.pdf
+├── lectures/              # generated per-lecture JSONs with slide chunks (see §7.3.5)
+│   ├── lec_01.json
+│   └── lec_NN.json
+├── chunk_slides.py        # reproducible chunking script (run once to generate lectures/)
 └── skills_graph.json      # optional pre-computed; else generated at ingest
 ```
 
-#### 7.3.2 `manifest.json`
+#### 7.3.2 `course.json`
+
+> **Note:** `course.json` replaces the earlier `manifest.json` concept. It contains real-world course metadata beyond the SRS `Course` entity (§7.1). Fields like `theme`, `user_id`, and `skills_graph` are runtime/gameplay state attached at ingest time and do NOT live here.
 
 ```json
 {
-  "course_id": "cs3000-fall2025",
-  "name": "CS 3000 — Algorithms",
-  "instructor": "Prof. Smith",
-  "term": "Fall 2025",
-  "theme": "greek",
-  "description": "Introduction to algorithm design and analysis.",
-  "total_lectures": 15,
-  "exam_schedule": {
-    "midterms": [{ "after_lecture": 7, "title": "Midterm 1" }],
-    "final": { "after_lecture": 15, "title": "Final Exam" }
-  }
+  "id": "cs188-fall-2025",
+  "code": "CS 188",
+  "name": "Introduction to Artificial Intelligence",
+  "semester": "Fall 2025",
+  "university": "UC Berkeley",
+  "department": "Electrical Engineering and Computer Science",
+  "units": 4,
+  "faculty": ["Pieter Abbeel", "Stuart Russell", "Anca Dragan"],
+  "lecture_count": 24,
+  "description": "Ideas and techniques underlying the design of intelligent computer systems.",
+  "textbook": {
+    "title": "Artificial Intelligence: A Modern Approach",
+    "edition": "4th US ed.",
+    "authors": ["Stuart Russell", "Peter Norvig"]
+  },
+  "grading": {
+    "projects": 25,
+    "homeworks": 20,
+    "midterm": 20,
+    "final_exam": 35
+  },
+  "assessment": {
+    "midterm": { "week": 8, "duration_hours": 2, "type": "paper" },
+    "final": { "week": 14, "duration_hours": 3, "type": "paper" }
+  },
+  "prerequisites": [
+    "CS 61A or CS 61B",
+    "CS 70 or Math 55"
+  ],
+  "course_website": "https://inst.eecs.berkeley.edu/~cs188",
+  "created_at": "2025-08-01"
 }
 ```
 
 #### 7.3.3 `schedule.json`
 
+> **Deviations from earlier design:**
+> - Top-level fields (`semester`, `start_date`, `end_date`, `midterm_date`, `final_date`, `break_week`) make the file self-contained.
+> - `lecture_id` is a zero-padded numeric string (`"01"`, `"02"`) — the prefix `lec_` is added by the loader when constructing Chroma doc IDs and SQL foreign keys.
+> - `slide_deck` replaces `slide_file`.
+> - `exam` (nullable string: `"midterm" | "final" | null`) replaces the `is_exam` + `exam_type` pair. Exam is flagged on the last content lecture before the exam date, not as a separate schedule entry.
+> - `week` field added; `estimated_difficulty` and `covers_lectures` fields dropped (difficulty is computed at battle-generation time; coverage is derived from order).
+
 ```json
 {
-  "course_id": "cs3000-fall2025",
+  "semester": "Fall 2025",
+  "start_date": "2025-09-02",
+  "end_date": "2025-12-12",
+  "midterm_date": "2025-10-24",
+  "final_date": "2025-12-15",
+  "break_week": 9,
   "lectures": [
     {
-      "lecture_id": "lec_01",
+      "lecture_id": "01",
+      "week": 1,
       "order_index": 1,
-      "title": "Introduction and Asymptotic Analysis",
-      "scheduled_date": "2025-09-04",
-      "topics": ["Big-O notation", "Big-Theta", "Big-Omega", "Growth rates"],
-      "slide_file": "slides/lecture_01.pdf",
-      "is_exam": false,
-      "exam_type": null,
-      "estimated_difficulty": "easy"
+      "title": "Introduction to AI",
+      "topics": ["Overview of Artificial Intelligence", "Intelligent Agents", "Problem Formulation"],
+      "scheduled_date": "2025-09-02",
+      "slide_deck": "slides/lec_01.pdf",
+      "exam": null
     },
     {
-      "lecture_id": "lec_02",
+      "lecture_id": "02",
+      "week": 1,
       "order_index": 2,
-      "title": "Divide and Conquer",
-      "scheduled_date": "2025-09-09",
-      "topics": ["Merge sort", "Master theorem", "Recurrence relations"],
-      "slide_file": "slides/lecture_02.pdf",
-      "is_exam": false,
-      "exam_type": null,
-      "estimated_difficulty": "medium"
+      "title": "Uninformed Search",
+      "topics": ["Search Strategies", "BFS", "DFS", "Uniform Cost Search"],
+      "scheduled_date": "2025-09-04",
+      "slide_deck": "slides/lec_02.pdf",
+      "exam": null
     },
     {
-      "lecture_id": "lec_midterm_01",
-      "order_index": 8,
-      "title": "Midterm 1",
-      "scheduled_date": "2025-10-14",
-      "topics": ["Covers lectures 1–7"],
-      "slide_file": null,
-      "is_exam": true,
-      "exam_type": "midterm",
-      "estimated_difficulty": "hard",
-      "covers_lectures": [
-        "lec_01",
-        "lec_02",
-        "lec_03",
-        "lec_04",
-        "lec_05",
-        "lec_06",
-        "lec_07"
-      ]
+      "lecture_id": "15",
+      "week": 8,
+      "order_index": 15,
+      "title": "Bayes Nets: Inference",
+      "topics": ["Exact Inference", "Variable Elimination", "Belief Propagation"],
+      "scheduled_date": "2025-10-21",
+      "slide_deck": "slides/lec_15.pdf",
+      "exam": "midterm"
     }
   ]
 }
 ```
 
-#### 7.3.4 `skills_graph.json` (Optional Pre-Computed)
+#### 7.3.4 `lectures/lec_NN.json` (Generated by `chunk_slides.py`)
+
+Each file bundles all slide chunks for one lecture alongside per-page token metadata. The `chunks` array is the primary output consumed by the ingestor.
+
+```json
+{
+  "lecture_id": "lec_01",
+  "order_index": 1,
+  "week": 1,
+  "title": "Introduction to AI",
+  "topics": ["Overview of Artificial Intelligence", "Intelligent Agents"],
+  "scheduled_date": "2025-09-02",
+  "slide_deck": "slides/lec_01.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 74,
+    "total_tokens": 4807,
+    "pages": [
+      { "page_number": 1, "token_count": 50, "char_count": 218 }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_01_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 1: Introduction to AI] ...",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_01",
+        "chunk_index": 0,
+        "source_page": 3,
+        "source_pages": [1, 2, 3, 4, 5, 6, 7],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    }
+  ]
+}
+```
+
+Regenerate with `cd {course_slug} && python3 chunk_slides.py`. Requires `pypdf` and `tiktoken`. Idempotent.
+
+#### 7.3.5 `skills_graph.json` (Optional Pre-Computed)
 
 For the demo course, this file SHOULD be hand-authored to skip the ~30s Claude generation step at ingest. For arbitrary courses, ingestion generates this automatically.
 
@@ -727,18 +797,27 @@ Each lecture/course produces documents across these types. All text fields are w
 
 **LECTURE_SLIDE_CHUNK** — N per lecture, extracted from the slide PDF. Each chunk is prefixed with a **context header** (`[From CS 3000 Lecture 2: Divide and Conquer]`) so the chunk is self-identifying when retrieved in isolation.
 
+> **Schema notes from CS188 build:**
+> - `doc_id` embeds the full semester slug: `cs188_fall_2025_lec_01_slide_chunk_000` (3-digit zero-padded index).
+> - `source_page` (int) is the **dominant page** (most tokens originated here); `source_pages` (list of ints) is the full provenance list — a 500-token chunk frequently spans 4–7 slide pages.
+> - `chunk_type` is a positional heuristic: `"intro"` (first chunk), `"summary"` (last chunk), `"body"` (all others). Semantic classification is post-MVP.
+> - `token_count` is included so the retrieval layer can enforce context budgets (NFR-PRF-04) without re-encoding chunks.
+> - Chunks for a lecture are **bundled** into `lectures/lec_NN.json` under a `chunks: [...]` array rather than stored as individual files. The loader flattens `chunks → chroma.add(...)` at ingest time. Each chunk object still conforms to this schema exactly.
+
 ```json
 {
-  "doc_id": "cs3000_lec02_slide_chunk_03",
-  "course_id": "cs3000-fall2025",
+  "doc_id": "cs188_fall_2025_lec_02_slide_chunk_003",
+  "course_id": "cs188-fall-2025",
   "doc_type": "lecture_slide_chunk",
-  "text": "[From CS 3000 Lecture 2: Divide and Conquer] The master theorem states that for recurrences of the form T(n) = aT(n/b) + f(n) where a >= 1 and b > 1, the solution depends on comparing f(n) to n^(log_b(a)). There are three cases: when f(n) is polynomially smaller, equal up to polylogarithmic factors, or polynomially larger than n^(log_b(a)).",
+  "text": "[From CS 188 Lecture 2: Uninformed Search] Breadth-first search explores nodes level by level, guaranteeing the shallowest solution is found first. It uses a FIFO queue for the frontier. Time and space complexity are both O(b^d) where b is the branching factor and d is the depth of the shallowest goal.",
   "metadata": {
-    "course_id": "cs3000-fall2025",
+    "course_id": "cs188-fall-2025",
     "lecture_id": "lec_02",
     "chunk_index": 3,
     "source_page": 12,
-    "chunk_type": "body"
+    "source_pages": [10, 11, 12, 13],
+    "chunk_type": "body",
+    "token_count": 487
   }
 }
 ```

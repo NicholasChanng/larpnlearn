@@ -1,0 +1,278 @@
+{
+  "lecture_id": "lec_16",
+  "order_index": 16,
+  "week": 8,
+  "title": "Bayes Nets: Sampling",
+  "topics": [
+    "Sampling Methods",
+    "Rejection Sampling",
+    "Likelihood Weighting",
+    "Gibbs Sampling"
+  ],
+  "scheduled_date": "2025-10-23",
+  "slide_deck": "slides/lec_16.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 28,
+    "total_tokens": 2043,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 55,
+        "char_count": 219
+      },
+      {
+        "page_number": 2,
+        "token_count": 84,
+        "char_count": 418
+      },
+      {
+        "page_number": 3,
+        "token_count": 57,
+        "char_count": 277
+      },
+      {
+        "page_number": 4,
+        "token_count": 6,
+        "char_count": 31
+      },
+      {
+        "page_number": 5,
+        "token_count": 85,
+        "char_count": 416
+      },
+      {
+        "page_number": 6,
+        "token_count": 122,
+        "char_count": 446
+      },
+      {
+        "page_number": 7,
+        "token_count": 24,
+        "char_count": 92
+      },
+      {
+        "page_number": 8,
+        "token_count": 2,
+        "char_count": 14
+      },
+      {
+        "page_number": 9,
+        "token_count": 129,
+        "char_count": 233
+      },
+      {
+        "page_number": 10,
+        "token_count": 41,
+        "char_count": 88
+      },
+      {
+        "page_number": 11,
+        "token_count": 40,
+        "char_count": 186
+      },
+      {
+        "page_number": 12,
+        "token_count": 174,
+        "char_count": 429
+      },
+      {
+        "page_number": 13,
+        "token_count": 3,
+        "char_count": 18
+      },
+      {
+        "page_number": 14,
+        "token_count": 138,
+        "char_count": 409
+      },
+      {
+        "page_number": 15,
+        "token_count": 67,
+        "char_count": 209
+      },
+      {
+        "page_number": 16,
+        "token_count": 4,
+        "char_count": 20
+      },
+      {
+        "page_number": 17,
+        "token_count": 101,
+        "char_count": 461
+      },
+      {
+        "page_number": 18,
+        "token_count": 121,
+        "char_count": 226
+      },
+      {
+        "page_number": 19,
+        "token_count": 86,
+        "char_count": 225
+      },
+      {
+        "page_number": 20,
+        "token_count": 33,
+        "char_count": 170
+      },
+      {
+        "page_number": 21,
+        "token_count": 117,
+        "char_count": 554
+      },
+      {
+        "page_number": 22,
+        "token_count": 84,
+        "char_count": 212
+      },
+      {
+        "page_number": 23,
+        "token_count": 4,
+        "char_count": 14
+      },
+      {
+        "page_number": 24,
+        "token_count": 147,
+        "char_count": 758
+      },
+      {
+        "page_number": 25,
+        "token_count": 87,
+        "char_count": 247
+      },
+      {
+        "page_number": 26,
+        "token_count": 85,
+        "char_count": 330
+      },
+      {
+        "page_number": 27,
+        "token_count": 45,
+        "char_count": 139
+      },
+      {
+        "page_number": 28,
+        "token_count": 102,
+        "char_count": 439
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_16_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 16: Bayes Nets: Sampling] CS 188: Artificial IntelligenceBayes\u2019 Nets: Sampling Fall 2025[These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Bayes\u2019 Net Representation\u00a7A directed, acyclic graph, one node per random variable\u00a7A conditional probability table (CPT) for each node\u00a7A collection of distributions over X, one for each combination of parents\u2019values \u00a7Bayes\u2019nets implicitly encode joint distributions\u00a7As a product of local conditional distributions\u00a7To see what probability a BN gives to a full assignment, multiply all the relevant conditionals together:Variable Elimination\u00a7Interleave joining and marginalizing\u00a7dkentries computed for a factor over k variables with domain sizes d\u00a7Ordering of elimination of hidden variables can affect size of factors generated\u00a7Worst case: running time exponential in the size of the Bayes\u2019 net \u2026\u2026Approximate Inference: SamplingSampling\u00a7Sampling is a lot like repeated simulation\u00a7Predicting the weather, basketball games, \u2026\u00a7Basic idea\u00a7Draw N samples from a sampling distribution S\u00a7Compute an approximate posterior probability\u00a7Show this converges to the true probability P \u00a7Why sample?\u00a7Learning: get samples from a distribution you don\u2019t know\u00a7Inference: getting a sample is faster than computing the right answer (e.g. with variable elimination)Sampling\u00a7Sampling from given distribution\u00a7Step 1: Get sample ufrom uniform distribution over [0, 1)\u00a7E.g. random() in python\u00a7Step 2: Convert this sample uinto an outcome for the given distribution by having each target outcome associated with a sub-interval of [0,1) with sub-interval size equal to probability of the outcome \u00a7Example \u00a7If random() returns u= 0.83, then our sample is C= blue\u00a7E.g, after sampling 8 times: CP(C)red0.6green0.1blue0.3Sampling in Bayes\u2019Nets\u00a7Prior Sampling\u00a7Rejection Sampling\u00a7Likelihood Weighting\u00a7Gibbs SamplingPrior SamplingPrior SamplingCloudy SprinklerRain WetGrass Cloudy SprinklerRain WetGrass +c0.5-c0.5 +c+s0.1-s0.9-c+s0.5-s0.5 +c+r0.8-r0.2-c+r0.2-r0",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_16",
+        "chunk_index": 0,
+        "source_page": 6,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_16_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 16: Bayes Nets: Sampling] lerRain WetGrass +c0.5-c0.5 +c+s0.1-s0.9-c+s0.5-s0.5 +c+r0.8-r0.2-c+r0.2-r0.8 +s+r+w0.99-w0.01-r+w0.90-w0.10-s+r+w0.90-w0.10-r+w0.01-w0.99 Samples:+c, -s, +r, +w-c, +s, -r, +w\u2026Prior Sampling\u00a7For i= 1, 2, \u2026, n\u00a7Sample xifrom P(Xi| Parents(Xi))\u00a7Return (x1, x2, \u2026, xn)Prior Sampling\u00a7This process generates samples with probability: \u2026i.e. the BN\u2019s joint probability\u00a7Let the number of samples of an event be\u00a7Then \u00a7I.e., the sampling procedure is consistentExample\u00a7We\u2019ll get a bunch of samples from the BN:+c, -s, +r, +w+c, +s, +r, +w-c, +s, +r, -w+c, -s, +r, +w-c, -s, -r, +w\u00a7If we want to know P(W)\u00a7We have counts <+w:4, -w:1>\u00a7Normalize to get P(W) = <+w:0.8, -w:0.2>\u00a7This will get closer to the true distribution with more samples\u00a7Can estimate anything else, too\u00a7What about P(C | +w)? P(C | +r, +w)? P(C | -r, -w)?\u00a7Fast: can use fewer samples if less time (what\u2019sthe drawback?) SRW CRejection Sampling+c, -s, +r, +w+c, +s, +r, +w-c, +s, +r, -w+c, -s, +r, +w-c, -s, -r, +w Rejection Sampling\u00a7Let\u2019s say we want P(C)\u00a7No point keeping all samples around\u00a7Just tally counts of C as we go\u00a7Let\u2019s say we want P(C | +s)\u00a7Same thing: tally C outcomes, but ignore (reject) samples which don\u2019t have S=+s\u00a7This is called rejection sampling\u00a7It is also consistent for conditional probabilities (i",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_16",
+        "chunk_index": 1,
+        "source_page": 12,
+        "source_pages": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_16_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 16: Bayes Nets: Sampling] \u00a7Let\u2019s say we want P(C | +s)\u00a7Same thing: tally C outcomes, but ignore (reject) samples which don\u2019t have S=+s\u00a7This is called rejection sampling\u00a7It is also consistent for conditional probabilities (i.e., correct in the limit) SRW CRejection Sampling\u00a7Input: evidence instantiation\u00a7For i= 1, 2, \u2026, n\u00a7Sample xifrom P(Xi| Parents(Xi))\u00a7If xinot consistent with evidence\u00a7Reject: return \u2013no sample is generated in this cycle\u00a7Return (x1, x2, \u2026, xn)Likelihood Weighting\u00a7Idea: fix evidence variables and sample the rest\u00a7Problem: sample distribution not consistent!\u00a7Solution: weight by probability of evidence given parents Likelihood Weighting\u00a7Problem with rejection sampling:\u00a7If evidence is unlikely, rejects lots of samples\u00a7Evidence not exploited as you sample\u00a7Consider P( Shape | blue ) ShapeColorShapeColorpyramid, greenpyramid, redsphere, bluecube, redsphere, green pyramid, bluepyramid, bluesphere, bluecube, bluesphere, blueLikelihood Weighting +c0.5-c0.5 +c+s0.1-s0.9-c+s0.5-s0.5 +c+r0.8-r0.2-c+r0.2-r0.8 +s+r+w0.99-w0.01-r+w0.90-w0.10-s+r+w0.90-w0.10-r+w0.01-w0.99 Samples:+c, +s, +r, +w\u2026 Cloudy SprinklerRain WetGrass Cloudy SprinklerRain WetGrassLikelihood Weighting\u00a7Input: evidence instantiation\u00a7w = 1.0\u00a7for i= 1, 2, \u2026, n\u00a7if Xiis an evidence variable\u00a7Xi= observation xifor Xi\u00a7Set w = w * P(xi| Parents(Xi))\u00a7else\u00a7Sample xifrom P(Xi| Parents(Xi))\u00a7return (x1, x2, \u2026, xn), wLikelihood Weighting\u00a7Sampling distribution if z sampled and e fixed evidence \u00a7Now, samples have weights \u00a7Together, weighted sampling distribution is consistent CloudyRCSWLikelihood Weighting\u00a7Likelihood weighting is good\u00a7We have taken evidence into account as we generate the sample\u00a7E.g. here,",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_16",
+        "chunk_index": 2,
+        "source_page": 18,
+        "source_pages": [
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_16_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 16: Bayes Nets: Sampling] e fixed evidence \u00a7Now, samples have weights \u00a7Together, weighted sampling distribution is consistent CloudyRCSWLikelihood Weighting\u00a7Likelihood weighting is good\u00a7We have taken evidence into account as we generate the sample\u00a7E.g. here, W\u2019s value will get picked based on the evidence values of S, R\u00a7More of our samples will reflect the state of the world suggested by the evidence \u00a7Likelihood weighting doesn\u2019t solve all our problems\u00a7Evidence influences the choice of downstream variables, but not upstream ones (C isn\u2019t more likely to get a value matching the evidence)\u00a7We would like to consider evidence when we sample every variable (leads to Gibbs sampling) SRW CExample: Fire Alarm F A P(+f)0.001P(-f)0.999 P(+a|+f)0.9P(-a|+f)0.1P(+a|-f)0.01P(-a|-f)0.99 \u00a7In likelihood weighting, evidence influences the choice of downstream variables, but not upstream ones\u00a7Example: P(F|+a)Gibbs SamplingGibbs Sampling\u00a7Procedure: keep track of a full instantiation x1, x2, \u2026, xn. Start with an arbitrary instantiation consistent with the evidence. Sample one variable at a time, conditioned on all the rest, but keep evidence fixed. Keep repeating this for a long time.\u00a7Property: in the limit of repeating this infinitely many times the resulting samples come from the correct distribution (i.e. conditioned on evidence).\u00a7Rationale: both upstream and downstream variables condition on evidence.\u00a7In contrast: likelihood weighting only conditions on upstream evidence, and hence weights obtained in likelihood weighting can sometimes be very small. Sum of weights over all samples is indicative of how many \u201ceffective\u201dsamples were obtained, so we want high weight.\u00a7Step 2: Initialize other variables \u00a7Randomly Gibbs Sampling Example: P( S | +r)\u00a7Step 1: Fix evidence\u00a7R = +r \u00a7Steps 3: Repeat\u00a7Choose a non-evidence variable X\u00a7Resample X from P( X | all other variables) S+rW C S+rW C S+rWCS+rWCS+rWCS+rWCS+rWCS+rWCEfficient Resampling of One Variable\u00a7Sample from P(S | +c, +r, -w) \u00a7Many things cancel out \u2013only CPTs with S remain!\u00a7More generally",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_16",
+        "chunk_index": 3,
+        "source_page": 24,
+        "source_pages": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_16_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 16: Bayes Nets: Sampling] +rWCS+rWCS+rWCS+rWCEfficient Resampling of One Variable\u00a7Sample from P(S | +c, +r, -w) \u00a7Many things cancel out \u2013only CPTs with S remain!\u00a7More generally: only CPTs that have resampled variable need to be considered, and joined together S+rW C def. of conditional probabilityintroduce summationdef. of Bayes\u2019 Netsmove summation term outcancel out termsBayes\u2019 Net Sampling Summary\u00a7Prior Sampling P( Q ) \u00a7Likelihood Weighting P( Q | e) \u00a7Rejection Sampling P( Q | e ) \u00a7Gibbs Sampling P( Q | e )Further Reading on Gibbs Sampling*\u00a7Gibbs sampling produces sample from the query distribution P( Q | e ) in limit of re-sampling infinitely often\u00a7Gibbs sampling is a special case of more general methods called Markov chain Monte Carlo (MCMC) methods \u00a7Metropolis-Hastings is one of the more famous MCMC methods (in fact, Gibbs sampling is a special case of Metropolis-Hastings) \u00a7You may read about Monte Carlo methods \u2013they\u2019re just sampling",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_16",
+        "chunk_index": 4,
+        "source_page": 28,
+        "source_pages": [
+          25,
+          26,
+          27,
+          28
+        ],
+        "chunk_type": "summary",
+        "token_count": 243
+      }
+    }
+  ]
+}

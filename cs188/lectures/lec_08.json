@@ -1,0 +1,479 @@
+{
+  "lecture_id": "lec_08",
+  "order_index": 8,
+  "week": 4,
+  "title": "Markov Decision Processes I",
+  "topics": [
+    "Sequential Decision Making",
+    "MDP Formulation",
+    "Policies and Value Functions",
+    "Bellman Equation"
+  ],
+  "scheduled_date": "2025-09-25",
+  "slide_deck": "slides/lec_08.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 58,
+    "total_tokens": 2574,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 88,
+        "char_count": 373
+      },
+      {
+        "page_number": 2,
+        "token_count": 191,
+        "char_count": 783
+      },
+      {
+        "page_number": 3,
+        "token_count": 5,
+        "char_count": 24
+      },
+      {
+        "page_number": 4,
+        "token_count": 16,
+        "char_count": 54
+      },
+      {
+        "page_number": 5,
+        "token_count": 4,
+        "char_count": 22
+      },
+      {
+        "page_number": 6,
+        "token_count": 54,
+        "char_count": 162
+      },
+      {
+        "page_number": 7,
+        "token_count": 7,
+        "char_count": 31
+      },
+      {
+        "page_number": 8,
+        "token_count": 7,
+        "char_count": 31
+      },
+      {
+        "page_number": 9,
+        "token_count": 10,
+        "char_count": 50
+      },
+      {
+        "page_number": 10,
+        "token_count": 10,
+        "char_count": 35
+      },
+      {
+        "page_number": 11,
+        "token_count": 15,
+        "char_count": 50
+      },
+      {
+        "page_number": 12,
+        "token_count": 147,
+        "char_count": 559
+      },
+      {
+        "page_number": 13,
+        "token_count": 11,
+        "char_count": 65
+      },
+      {
+        "page_number": 14,
+        "token_count": 154,
+        "char_count": 500
+      },
+      {
+        "page_number": 15,
+        "token_count": 7,
+        "char_count": 36
+      },
+      {
+        "page_number": 16,
+        "token_count": 86,
+        "char_count": 360
+      },
+      {
+        "page_number": 17,
+        "token_count": 120,
+        "char_count": 493
+      },
+      {
+        "page_number": 18,
+        "token_count": 35,
+        "char_count": 64
+      },
+      {
+        "page_number": 19,
+        "token_count": 3,
+        "char_count": 15
+      },
+      {
+        "page_number": 20,
+        "token_count": 86,
+        "char_count": 241
+      },
+      {
+        "page_number": 21,
+        "token_count": 4,
+        "char_count": 18
+      },
+      {
+        "page_number": 22,
+        "token_count": 71,
+        "char_count": 222
+      },
+      {
+        "page_number": 23,
+        "token_count": 4,
+        "char_count": 22
+      },
+      {
+        "page_number": 24,
+        "token_count": 66,
+        "char_count": 163
+      },
+      {
+        "page_number": 25,
+        "token_count": 45,
+        "char_count": 221
+      },
+      {
+        "page_number": 26,
+        "token_count": 106,
+        "char_count": 305
+      },
+      {
+        "page_number": 27,
+        "token_count": 38,
+        "char_count": 164
+      },
+      {
+        "page_number": 28,
+        "token_count": 92,
+        "char_count": 294
+      },
+      {
+        "page_number": 29,
+        "token_count": 133,
+        "char_count": 499
+      },
+      {
+        "page_number": 30,
+        "token_count": 105,
+        "char_count": 306
+      },
+      {
+        "page_number": 31,
+        "token_count": 5,
+        "char_count": 12
+      },
+      {
+        "page_number": 32,
+        "token_count": 130,
+        "char_count": 433
+      },
+      {
+        "page_number": 33,
+        "token_count": 25,
+        "char_count": 82
+      },
+      {
+        "page_number": 34,
+        "token_count": 25,
+        "char_count": 82
+      },
+      {
+        "page_number": 35,
+        "token_count": 63,
+        "char_count": 254
+      },
+      {
+        "page_number": 36,
+        "token_count": 4,
+        "char_count": 18
+      },
+      {
+        "page_number": 37,
+        "token_count": 4,
+        "char_count": 18
+      },
+      {
+        "page_number": 38,
+        "token_count": 95,
+        "char_count": 401
+      },
+      {
+        "page_number": 39,
+        "token_count": 66,
+        "char_count": 234
+      },
+      {
+        "page_number": 40,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 41,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 42,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 43,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 44,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 45,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 46,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 47,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 48,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 49,
+        "token_count": 20,
+        "char_count": 48
+      },
+      {
+        "page_number": 50,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 51,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 52,
+        "token_count": 20,
+        "char_count": 49
+      },
+      {
+        "page_number": 53,
+        "token_count": 20,
+        "char_count": 50
+      },
+      {
+        "page_number": 54,
+        "token_count": 6,
+        "char_count": 29
+      },
+      {
+        "page_number": 55,
+        "token_count": 3,
+        "char_count": 15
+      },
+      {
+        "page_number": 56,
+        "token_count": 111,
+        "char_count": 422
+      },
+      {
+        "page_number": 57,
+        "token_count": 31,
+        "char_count": 66
+      },
+      {
+        "page_number": 58,
+        "token_count": 6,
+        "char_count": 31
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] CS 188: Artificial Intelligence Markov Decision Processes Instructors: Peyrin Kao and Emma Pierson University of California, Berkeley [These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley, and incorporate material from Evgeny Pobachienko, Pieter Abbeel, and many others. All CS188 materials are available at http://ai.berkeley.edu.]Review: Expectimax Search \u25aa Uncertain outcomes controlled by chance, not an adversary\u25aa Why wouldn\u2019t we know what the result of an action will be?\u25aa Explicit randomness: rolling dice\u25aa Unpredictable opponents: the ghosts respond randomly\u25aa Actions can fail: when moving a robot, wheels might slip \u25aa Values should now reflect average-case (expectimax) outcomes, not worst-case (minimax) outcomes\u25aa Expectimax search: compute the average score under optimal play\u25aa Max nodes as in minimax search\u25aa Chance nodes are like min nodes but the outcome is uncertain\u25aa Calculate their expected utilities\u25aa I.e. take weighted average (expectation) of children\u25aa Today, we\u2019ll learn how to formalize the underlying uncertain-result problems as Markov Decision Processes 1 0 4 5 7 max chance 1 0 1 0 9 1 0 0Non-Deterministic SearchReinforcement learning Atari (Minh et al, Nature 2015)Reinforcement learningReinforcement learning Step 0 Schulman, Wolski, Dhariwal, Radford, and Klimov, 2017 Schulman, Levine, Moritz, Jordan, and Abbeel, 2015 Video: Mukilan KrishnakumarReinforcement learning Step 100Reinforcement learning Step 500Reinforcement learning Physical Intelligence, 2024Reinforcement learning OpenAI, 2022Reinforcement learning DeGrave et al, Nature, 2022Example: Grid World \u25aa A maze-like problem \u25aa The agent lives in a grid \u25aa Walls block the agent\u2019s path \u25aa Noisy movement: actions do not always go as planned \u25aa 80% of the time, the action North takes the agent North (if there is no wall there) \u25aa 10% of the time, North takes the agent West; 10% East \u25aa If there is a wall in the direction the",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 0,
+        "source_page": 2,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] % of the time, the action North takes the agent North (if there is no wall there) \u25aa 10% of the time, North takes the agent West; 10% East \u25aa If there is a wall in the direction the agent would have been taken, the agent stays put \u25aa The agent receives rewards each time step \u25aa Small \u201cliving\u201d reward each step (can be negative) \u25aa Big rewards come at the end (good or bad) \u25aa Goal: maximize sum of rewardsGrid World Actions Deterministic Grid World Stochastic Grid WorldMarkov Decision Processes \u25aa An MDP is defined by: \u25aa A set of states s \u2208 S \u25aa A set of actions a \u2208 A \u25aa A transition function T(s, a, s\u2019) \u25aa Probability that a from s leads to s\u2019, i.e., P(s\u2019| s, a) \u25aa Also called the model or the dynamics \u25aa A reward function R(s, a, s\u2019) \u25aa Sometimes just R(s) or R(s\u2019) \u25aa A start state \u25aa Maybe a terminal state \u25aa MDPs are non-deterministic search problems \u25aa One way to solve them is with expectimax search \u25aa We\u2019ll have a new tool soon [Demo \u2013 gridworld manual intro (L8D1)]Video of Demo Gridworld Manual IntroWhat is Markov about MDPs? \u25aa \u201cMarkov\u201d generally means that given the present state, the future and the past are independent \u25aa For Markov decision processes, \u201cMarkov\u201d means action outcomes depend only on the current state \u25aa This is just like search, where the successor function could only depend on the current state (not the history) Andrey Markov (1856-1922)Policies Optimal policy when R(s, a, s\u2019) = -0.03 for all non-terminals s \u25aa In deterministic single-agent search problems, we wanted an optimal plan, or sequence of actions, from start to a goal \u25aa For MDPs, we want an optimal policy \u03c0*: S \u2192 A \u25aa A policy \u03c0 gives an action for each state \u25aa An optimal policy is one that maximizes expected utility if followed \u25aa An explicit policy defines a reflex agent \u25aa Expectimax didn\u2019t compute entire policies \u25aa It computed the action for a single state onlyOptimal Policies R(s) = -2.0R(s) = -0.",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 1,
+        "source_page": 14,
+        "source_pages": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] utility if followed \u25aa An explicit policy defines a reflex agent \u25aa Expectimax didn\u2019t compute entire policies \u25aa It computed the action for a single state onlyOptimal Policies R(s) = -2.0R(s) = -0.4 R(s) = -0.03R(s) = -0.01Example: RacingExample: Racing \u25aa A robot car wants to travel far, quickly \u25aa Three states: Cool, Warm, Overheated \u25aa Two actions: Slow, Fast \u25aa Going faster gets double reward Cool Warm Overheated Fast Fast Slow Slow 0.5 0.5 0.5 0.5 1.0 1.0 +1 +1 +1 +2 +2 -10Racing Search TreeMDP Search Trees \u25aa Each MDP state projects an expectimax-like search tree a s \u2019s s, a (s,a,s\u2019) called a transition T(s,a,s\u2019) = P(s\u2019|s,a) transition function R(s,a,s\u2019) reward function s,a,s\u2019 s is a state (s, a) is a q-stateUtilities of SequencesUtilities of Sequences \u25aa What preferences should an agent have over reward sequences? \u25aa More or less? \u25aa Now or later? [1, 2, 2] [2, 3, 4] or [0, 0, 1] [1, 0, 0] orDiscounting \u25aa It\u2019s reasonable to maximize the sum of rewards \u25aa It\u2019s also reasonable to prefer rewards now to rewards later \u25aa One solution: values of rewards decay exponentially Worth Now Worth Next Step Worth In Two StepsDiscounting \u25aa How to discount? \u25aa Each time we descend a level, we multiply in the discount once \u25aa Why discount? \u25aa Sooner rewards probably do have higher utility than later rewards \u25aa Also helps our algorithms converge \u25aa Example: discount of 0.5 \u25aa U([1,2,3]) = 1*1 + 0.5*2 + 0.25*3 \u25aa U([1,2,3]) < U([3,2,1])Stationary Preferences \u25aa Theorem: if we assume stationary preferences: \u25aa Then: there are only two ways to define utilities \u25aa Additive utility: \u25aa Discounted utility:Quiz: Discounting \u25aa Given: \u25aa",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 2,
+        "source_page": 26,
+        "source_pages": [
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] 1])Stationary Preferences \u25aa Theorem: if we assume stationary preferences: \u25aa Then: there are only two ways to define utilities \u25aa Additive utility: \u25aa Discounted utility:Quiz: Discounting \u25aa Given: \u25aa Actions: East, West, and Exit (only available in exit states a, e) \u25aa Transitions: deterministic \u25aa Quiz 1: For \u03b3 = 1, what is the optimal policy? \u25aa Quiz 2: For \u03b3 = 0.1, what is the optimal policy? \u25aa Quiz 3: For which \u03b3 are West and East equally good when in state d?Infinite Utilities?! \u25aa Problem: What if the game lasts forever? Do we get infinite rewards? \u25aa E.g. racing game \u25aa Solutions: \u25aa Finite horizon: (similar to depth-limited search) \u25aa Terminate episodes after a fixed T steps (e.g. life) \u25aa Gives nonstationary policies (\u03c0 depends on time left) \u25aa Discounting: use 0 < \u03b3 < 1 \u25aa Smaller \u03b3 means smaller \u201chorizon\u201d \u2013 shorter term focus \u25aa Absorbing state: guarantee that for every policy, a terminal state will eventually be reached (like \u201coverheated\u201d for racing)Recap: Defining MDPs \u25aa Markov decision processes: \u25aa Set of states S \u25aa Start state s0 \u25aa Set of actions A \u25aa Transitions P(s\u2019|s,a) (or T(s,a,s\u2019)) \u25aa Rewards R(s,a,s\u2019) (and discount \u03b3) \u25aa MDP quantities so far: \u25aa Policy = Choice of action for each state \u25aa Utility = sum of (discounted) rewards a s s, a s,a,s\u2019 \u2019sSolving MDPsOptimal Quantities \u25aa The value (utility) of a state s: V*(s) = expected utility starting in s and acting optimally \u25aa The value (utility) of a q-state (s,a): Q*(s,a) = expected utility starting out having taken action a from state s and (thereafter) acting optimally \u25aa The optimal policy: \u03c0*(s) = optimal action from state s a s \u2019s s, a (s,a,s\u2019) is a transition s,a,s\u2019 s is a state (s, a) is a q-state [Demo \u2013 gridworld values (",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 3,
+        "source_page": 29,
+        "source_pages": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] : \u03c0*(s) = optimal action from state s a s \u2019s s, a (s,a,s\u2019) is a transition s,a,s\u2019 s is a state (s, a) is a q-state [Demo \u2013 gridworld values (L8D4)]Snapshot of Demo \u2013 Gridworld V Values Noise = 0.2 Discount = 0.9 Living reward = 0Snapshot of Demo \u2013 Gridworld Q Values Noise = 0.2 Discount = 0.9 Living reward = 0Values of States \u25aa Fundamental operation: compute the (expectimax) value of a state \u25aa Expected utility under optimal action \u25aa Average sum of (discounted) rewards \u25aa This is just what expectimax computed! \u25aa Recursive definition of value: a s s, a s,a,s\u2019 \u2019sRacing Search TreeRacing Search TreeRacing Search Tree \u25aa We\u2019re doing way too much work with expectimax! \u25aa Problem: States are repeated \u25aa Idea: Only compute needed quantities once \u25aa Problem: Tree goes on forever \u25aa Idea: Do a depth-limited computation, but with increasing depths until change is small \u25aa Note: deep parts of the tree eventually don\u2019t matter if \u03b3 < 1 \u25aa So perhaps we should cache and also ignore very deep parts of the tree?Time-Limited Values \u25aa Key idea: time-limited values \u25aa Define Vk(s) to be the optimal value of s if the game ends in k more time steps \u25aa Equivalently, it\u2019s what a depth-k expectimax would give from s [Demo \u2013 time-limited values (L8D6)]k=0 Noise = 0.2 Discount = 0.9 Living reward = 0k=1 Noise = 0.2 Discount = 0.9 Living reward = 0k=2 Noise = 0.2 Discount = 0.9 Living reward = 0k=3 Noise = 0.2 Discount = 0.9 Living reward = 0k=4 Noise = 0.2 Discount = 0.9 Living reward = 0k=5 Noise = 0.2 Discount = 0.9 Living reward = 0k=6 Noise = 0.2 Discount = 0.9 Living reward = 0k=7 Noise = 0.2 Discount = 0.9 Living reward = 0k=8",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 4,
+        "source_page": 38,
+        "source_pages": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_08_slide_chunk_005",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 8: Markov Decision Processes I] .9 Living reward = 0k=6 Noise = 0.2 Discount = 0.9 Living reward = 0k=7 Noise = 0.2 Discount = 0.9 Living reward = 0k=8 Noise = 0.2 Discount = 0.9 Living reward = 0k=9 Noise = 0.2 Discount = 0.9 Living reward = 0k=10 Noise = 0.2 Discount = 0.9 Living reward = 0k=11 Noise = 0.2 Discount = 0.9 Living reward = 0k=12 Noise = 0.2 Discount = 0.9 Living reward = 0k=100 Noise = 0.2 Discount = 0.9 Living reward = 0Computing Time-Limited ValuesValue IterationValue Iteration \u25aa Start with V0(s) = 0: no time steps left means an expected reward sum of zero \u25aa Given vector of Vk(s) values, do one ply of expectimax from each state: \u25aa Repeat until convergence \u25aa Complexity of each iteration: O(S2A) \u25aa Theorem: will converge to unique optimal values \u25aa Basic idea: approximations get refined towards optimal values \u25aa Policy may converge long before values do a Vk+1(s) s, a s,a,s\u2019 Vk(s\u2019)Example: Value Iteration 0 0 0 2 1 0 3.5 2.5 0 Assume no discount!Next Time: Policy-Based Methods",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_08",
+        "chunk_index": 5,
+        "source_page": 56,
+        "source_pages": [
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "chunk_type": "summary",
+        "token_count": 324
+      }
+    }
+  ]
+}

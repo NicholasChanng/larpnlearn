@@ -1,0 +1,386 @@
+{
+  "lecture_id": "lec_10",
+  "order_index": 10,
+  "week": 5,
+  "title": "Reinforcement Learning I",
+  "topics": [
+    "Learning from Experience",
+    "Q-Learning",
+    "Temporal Difference Learning",
+    "Exploration vs. Exploitation"
+  ],
+  "scheduled_date": "2025-10-02",
+  "slide_deck": "slides/lec_10.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 43,
+    "total_tokens": 2743,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 64,
+        "char_count": 286
+      },
+      {
+        "page_number": 2,
+        "token_count": 4,
+        "char_count": 22
+      },
+      {
+        "page_number": 3,
+        "token_count": 13,
+        "char_count": 46
+      },
+      {
+        "page_number": 4,
+        "token_count": 13,
+        "char_count": 46
+      },
+      {
+        "page_number": 5,
+        "token_count": 13,
+        "char_count": 46
+      },
+      {
+        "page_number": 6,
+        "token_count": 66,
+        "char_count": 291
+      },
+      {
+        "page_number": 7,
+        "token_count": 28,
+        "char_count": 105
+      },
+      {
+        "page_number": 8,
+        "token_count": 28,
+        "char_count": 89
+      },
+      {
+        "page_number": 9,
+        "token_count": 28,
+        "char_count": 91
+      },
+      {
+        "page_number": 10,
+        "token_count": 28,
+        "char_count": 91
+      },
+      {
+        "page_number": 11,
+        "token_count": 23,
+        "char_count": 71
+      },
+      {
+        "page_number": 12,
+        "token_count": 24,
+        "char_count": 60
+      },
+      {
+        "page_number": 13,
+        "token_count": 6,
+        "char_count": 25
+      },
+      {
+        "page_number": 14,
+        "token_count": 106,
+        "char_count": 360
+      },
+      {
+        "page_number": 15,
+        "token_count": 15,
+        "char_count": 63
+      },
+      {
+        "page_number": 16,
+        "token_count": 3,
+        "char_count": 20
+      },
+      {
+        "page_number": 17,
+        "token_count": 96,
+        "char_count": 375
+      },
+      {
+        "page_number": 18,
+        "token_count": 215,
+        "char_count": 484
+      },
+      {
+        "page_number": 19,
+        "token_count": 86,
+        "char_count": 355
+      },
+      {
+        "page_number": 20,
+        "token_count": 3,
+        "char_count": 19
+      },
+      {
+        "page_number": 21,
+        "token_count": 5,
+        "char_count": 30
+      },
+      {
+        "page_number": 22,
+        "token_count": 109,
+        "char_count": 422
+      },
+      {
+        "page_number": 23,
+        "token_count": 61,
+        "char_count": 286
+      },
+      {
+        "page_number": 24,
+        "token_count": 149,
+        "char_count": 361
+      },
+      {
+        "page_number": 25,
+        "token_count": 117,
+        "char_count": 486
+      },
+      {
+        "page_number": 26,
+        "token_count": 116,
+        "char_count": 447
+      },
+      {
+        "page_number": 27,
+        "token_count": 116,
+        "char_count": 447
+      },
+      {
+        "page_number": 28,
+        "token_count": 116,
+        "char_count": 447
+      },
+      {
+        "page_number": 29,
+        "token_count": 116,
+        "char_count": 447
+      },
+      {
+        "page_number": 30,
+        "token_count": 116,
+        "char_count": 447
+      },
+      {
+        "page_number": 31,
+        "token_count": 82,
+        "char_count": 285
+      },
+      {
+        "page_number": 32,
+        "token_count": 3,
+        "char_count": 28
+      },
+      {
+        "page_number": 33,
+        "token_count": 100,
+        "char_count": 413
+      },
+      {
+        "page_number": 34,
+        "token_count": 55,
+        "char_count": 259
+      },
+      {
+        "page_number": 35,
+        "token_count": 133,
+        "char_count": 245
+      },
+      {
+        "page_number": 36,
+        "token_count": 81,
+        "char_count": 315
+      },
+      {
+        "page_number": 37,
+        "token_count": 4,
+        "char_count": 29
+      },
+      {
+        "page_number": 38,
+        "token_count": 104,
+        "char_count": 445
+      },
+      {
+        "page_number": 39,
+        "token_count": 104,
+        "char_count": 357
+      },
+      {
+        "page_number": 40,
+        "token_count": 91,
+        "char_count": 315
+      },
+      {
+        "page_number": 41,
+        "token_count": 9,
+        "char_count": 37
+      },
+      {
+        "page_number": 42,
+        "token_count": 9,
+        "char_count": 35
+      },
+      {
+        "page_number": 43,
+        "token_count": 85,
+        "char_count": 363
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] CS 188: Artificial Intelligence Reinforcement Learning Instructors: Emma Pierson and Peyrin Kao University of California, Berkeley [Based on slides created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Reinforcement LearningCan you teach a cat to play fetch? Iteration 1Can you teach a cat to play fetch? Iteration 2Can you teach a cat to play fetch? Iteration 3Reinforcement Learning \u25aa Basic idea: \u25aa Receive feedback in the form of rewards \u25aa Agent\u2019s utility is defined by the reward function \u25aa Must (learn to) act so as to maximize expected rewards \u25aa All learning is based on observed samples of outcomes! Environment Agent Actions: aState: s Reward: rExample: Learning to Walk Initial A Learning Trial After Learning [1K Trials] [Kohl and Stone, ICRA 2004]Example: Learning to Walk Initial [Video: AIBO WALK \u2013 initial][Kohl and Stone, ICRA 2004]Example: Learning to Walk Training [Video: AIBO WALK \u2013 training][Kohl and Stone, ICRA 2004]Example: Learning to Walk Finished [Video: AIBO WALK \u2013 finished][Kohl and Stone, ICRA 2004]Example: Sidewinding [Andrew Ng] [Video: SNAKE \u2013 climbStep+sidewinding]The Crawler! [Demo: Crawler Bot (L10D1)] [You, in Project 3]Video of Demo Crawler BotReinforcement Learning \u25aa Still assume a Markov decision process (MDP): \u25aa A set of states s \u2208 S \u25aa A set of actions (per state) A \u25aa A model T(s,a,s\u2019) \u25aa A reward function R(s,a,s\u2019) \u25aa Still looking for a policy \u03c0(s) \u25aa New twist: don\u2019t know T or R \u25aa I.e. we don\u2019t know which states are good or what the actions do \u25aa Must actually try out actions and states to learnOffline (MDPs) vs. Online (RL) Offline Solution Online LearningModel-Based LearningModel-Based Learning \u25aa Model-Based Idea: \u25aa Learn an approximate model based on experiences \u25aa Solve for values as if the learned model were correct \u25aa Step 1: Learn empirical",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 0,
+        "source_page": 14,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] . Online (RL) Offline Solution Online LearningModel-Based LearningModel-Based Learning \u25aa Model-Based Idea: \u25aa Learn an approximate model based on experiences \u25aa Solve for values as if the learned model were correct \u25aa Step 1: Learn empirical MDP model \u25aa Count outcomes s\u2019 for each s, a \u25aa Normalize to give an estimate of \u25aa Discover each when we experience (s, a, s\u2019) \u25aa Step 2: Solve the learned MDP \u25aa For example, use value iteration, as beforeExample: Model-Based Learning Input Policy \u03c0 Assume: \u03b3 = 1 Observed Episodes (Training) Learned Model A B C D E B, east, C, -1 C, east, D, -1 D, exit, x, +10 B, east, C, -1 C, east, D, -1 D, exit, x, +10 E, north, C, -1 C, east, A, -1 A, exit, x, -10 Episode 1 Episode 2 Episode 3 Episode 4 E, north, C, -1 C, east, D, -1 D, exit, x, +10 T(s,a,s\u2019). T(B, east, C) = 1.00 T(C, east, D) = 0.75 T(C, east, A) = 0.25 \u2026 R(s,a,s\u2019). R(B, east, C) = -1 R(C, east, D) = -1 R(D, exit, x) = +10 \u2026Example: Expected Age Goal: Compute expected age of cs188 students Unknown P(A): \u201cModel Based\u201d Unknown P(A): \u201cModel Free\u201d Without P(A), instead collect samples [a1, a2, \u2026 aN] Known P(A) Why does this work? Because samples appear with the right frequencies (you see the right # in each bin) Why does this work? Because eventually you learn the right model.Model-Free LearningPassive Reinforcement LearningPassive Reinforcement Learning \u25aa Simplified task: policy evaluation \u25aa Input: a fixed policy \u03c0(s) \u25aa You don\u2019t know the transitions T(s,a,s\u2019) \u25aa You don\u2019t know the rewards R(s,a,s\u2019) \u25aa Goal: learn the state values \u25aa In this case: \u25aa Learner is \u201calong for the ride\u201d \u25aa No choice about what actions to take",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 1,
+        "source_page": 18,
+        "source_pages": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] ,a,s\u2019) \u25aa You don\u2019t know the rewards R(s,a,s\u2019) \u25aa Goal: learn the state values \u25aa In this case: \u25aa Learner is \u201calong for the ride\u201d \u25aa No choice about what actions to take \u25aa Just execute the policy and learn from experience \u25aa This is NOT offline planning! You actually take actions in the world.Direct Evaluation \u25aa Goal: Compute values for each state under \u03c0 \u25aa Idea: Average together observed sample values \u25aa Act according to \u03c0 \u25aa Every time you visit a state, write down what the sum of discounted rewards turned out to be \u25aa Average those samples \u25aa This is called direct evaluationExample: Direct Evaluation Input Policy \u03c0 Assume: \u03b3 = 1 Observed Episodes (Training) Output Values A B C D E B, east, C, -1 C, east, D, -1 D, exit, x, +10 B, east, C, -1 C, east, D, -1 D, exit, x, +10 E, north, C, -1 C, east, A, -1 A, exit, x, -10 Episode 1 Episode 2 Episode 3 Episode 4 E, north, C, -1 C, east, D, -1 D, exit, x, +10 A B C D E +8 +4 +10 -10 -2Problems with Direct Evaluation \u25aa What\u2019s good about direct evaluation? \u25aa It\u2019s easy to understand \u25aa It doesn\u2019t require any knowledge of T, R \u25aa It eventually computes the correct average values, using just sample transitions \u25aa What bad about it? \u25aa It wastes information about state connections \u25aa Each state must be learned separately \u25aa So, it takes a long time to learn Output Values A B C D E +8 +4 +10 -10 -2 If B and E both go to C under this policy, how can their values be different?Why Not Use Policy Evaluation? \u25aa Simplified Bellman updates calculate V for a fixed policy: \u25aa Each round, replace V with a one-step-look-ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 2,
+        "source_page": 24,
+        "source_pages": [
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights? \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sWhy Not Use Policy Evaluation? \u25aa Simplified Bellman updates calculate V for a fixed policy: \u25aa Each round, replace V with a one-step-look-ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights? \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sWhy Not Use Policy Evaluation? \u25aa Simplified Bellman updates calculate V for a fixed policy: \u25aa Each round, replace V with a one-step-look-ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights? \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sWhy Not Use Policy Evaluation? \u25aa Simplified Bellman updates calculate V for a fixed policy: \u25aa Each round, replace V with a one-step-look-ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights? \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sWhy Not Use Policy Evaluation? \u25aa Simplified Bellman updates calculate V for a fixed policy: \u25aa Each round, replace V with a one-step-look-ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 3,
+        "source_page": 27,
+        "source_pages": [
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] -ahead layer over V \u25aa This approach fully exploited the connections between the states \u25aa Unfortunately, we need T and R to do it! \u25aa Key question: how can we do this update to V without knowing T and R? \u25aa In other words, how to we take a weighted average without knowing the weights? \u03c0(s) s s, \u03c0(s) s, \u03c0(s),s\u2019 \u2019sSample-Based Policy Evaluation? \u25aa We want to improve our estimate of V by computing these averages: \u25aa Idea: Take samples of outcomes s\u2019 (by doing the action!) and average \u03c0(s) s s, \u03c0(s) 's1 's2 's3 s, \u03c0(s),s\u2019 's Almost! But we can\u2019t rewind time to get sample after sample from state s.Temporal Difference LearningTemporal Difference Learning \u25aa Big idea: learn from every experience! \u25aa Update V(s) each time we experience a transition (s, a, s\u2019, r) \u25aa Likely outcomes s\u2019 will contribute updates more often \u25aa Temporal difference learning of values \u25aa Policy still fixed, still doing evaluation! \u25aa Move values toward value of whatever successor occurs: running average \u03c0(s) s s, \u03c0(s) \u2019s Sample of V(s): Update to V(s): Same update:Exponential Moving Average \u25aa Exponential moving average \u25aa The running interpolation update: \u25aa Makes recent samples more important: \u25aa Forgets about the past (distant past values were wrong anyway) \u25aa Decreasing learning rate (alpha) can give converging averagesExample: Temporal Difference Learning Assume: \u03b3 = 1, \u03b1 = 1/2 Observed Transitions B, east, C, -2 0 0 0 8 0 0 -1 0 8 0 0 -1 3 8 0 C, east, D, -2 A B C D E States New V(B) <- 0.5 * 0 + 0.5[-2 + 1 * 0] = -1 New V(C) <- 0.5 * 0 + 0.5[-2 + 1 * 8] = 3Problems with TD Value Learning \u25aa TD value leaning is a model-free way to do policy evaluation, mimicking Bellman updates with running sample averages \u25aa However, if we want to turn values into a (new",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 4,
+        "source_page": 35,
+        "source_pages": [
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_10_slide_chunk_005",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 10: Reinforcement Learning I] 8] = 3Problems with TD Value Learning \u25aa TD value leaning is a model-free way to do policy evaluation, mimicking Bellman updates with running sample averages \u25aa However, if we want to turn values into a (new) policy, we\u2019re sunk: \u25aa Idea: learn Q-values, not values \u25aa Makes action selection model-free too! a s s, a s,a,s\u2019 \u2019sActive Reinforcement LearningActive Reinforcement Learning \u25aa Full reinforcement learning: optimal policies (like value iteration) \u25aa You don\u2019t know the transitions T(s,a,s\u2019) \u25aa You don\u2019t know the rewards R(s,a,s\u2019) \u25aa You choose the actions now \u25aa Goal: learn the optimal policy / values \u25aa In this case: \u25aa Learner makes choices! \u25aa Fundamental tradeoff: exploration vs. exploitation \u25aa This is NOT offline planning! You actually take actions in the world and find out what happens\u2026Detour: Q-Value Iteration \u25aa Value iteration: find successive (depth-limited) values \u25aa Start with V0(s) = 0, which we know is right \u25aa Given Vk, calculate the depth k+1 values for all states: \u25aa But Q-values are more useful, so compute them instead \u25aa Start with Q0(s,a) = 0, which we know is right \u25aa Given Qk, calculate the depth k+1 q-values for all q-states:Q-Learning \u25aa Q-Learning: sample-based Q-value iteration \u25aa Learn Q(s,a) values as you go \u25aa Receive a sample (s,a,s\u2019,r) \u25aa Consider your old estimate: \u25aa Consider your new sample estimate: \u25aa Incorporate the new estimate into a running average: [Demo: Q-learning \u2013 gridworld (L10D2)] [Demo: Q-learning \u2013 crawler (L10D3)]Video of Demo Q-Learning -- GridworldVideo of Demo Q-Learning -- CrawlerQ-Learning Properties \u25aa Amazing result: Q-learning converges to optimal policy -- even if you\u2019re acting suboptimally! \u25aa This is called off-policy learning \u25aa Caveats: \u25aa You have to explore enough \u25aa You have to eventually make the learning rate small enough \u25aa \u2026 but not decrease it too quickly \u25aa Basically, in the limit, it doesn\u2019t matter how you select actions (!)",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_10",
+        "chunk_index": 5,
+        "source_page": 38,
+        "source_pages": [
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43
+        ],
+        "chunk_type": "summary",
+        "token_count": 493
+      }
+    }
+  ]
+}

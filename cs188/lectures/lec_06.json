@@ -1,0 +1,397 @@
+{
+  "lecture_id": "lec_06",
+  "order_index": 6,
+  "week": 3,
+  "title": "Game Trees I",
+  "topics": [
+    "Game Theory Basics",
+    "Minimax Algorithm",
+    "Game Tree Search",
+    "Perfect Information Games"
+  ],
+  "scheduled_date": "2025-09-18",
+  "slide_deck": "slides/lec_06.pdf",
+  "exam": null,
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 48,
+    "total_tokens": 2250,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 50,
+        "char_count": 208
+      },
+      {
+        "page_number": 2,
+        "token_count": 159,
+        "char_count": 700
+      },
+      {
+        "page_number": 3,
+        "token_count": 141,
+        "char_count": 609
+      },
+      {
+        "page_number": 4,
+        "token_count": 14,
+        "char_count": 54
+      },
+      {
+        "page_number": 5,
+        "token_count": 6,
+        "char_count": 28
+      },
+      {
+        "page_number": 6,
+        "token_count": 4,
+        "char_count": 17
+      },
+      {
+        "page_number": 7,
+        "token_count": 59,
+        "char_count": 254
+      },
+      {
+        "page_number": 8,
+        "token_count": 87,
+        "char_count": 281
+      },
+      {
+        "page_number": 9,
+        "token_count": 77,
+        "char_count": 356
+      },
+      {
+        "page_number": 10,
+        "token_count": 4,
+        "char_count": 18
+      },
+      {
+        "page_number": 11,
+        "token_count": 9,
+        "char_count": 29
+      },
+      {
+        "page_number": 12,
+        "token_count": 34,
+        "char_count": 136
+      },
+      {
+        "page_number": 13,
+        "token_count": 22,
+        "char_count": 46
+      },
+      {
+        "page_number": 14,
+        "token_count": 27,
+        "char_count": 103
+      },
+      {
+        "page_number": 15,
+        "token_count": 8,
+        "char_count": 21
+      },
+      {
+        "page_number": 16,
+        "token_count": 96,
+        "char_count": 393
+      },
+      {
+        "page_number": 17,
+        "token_count": 59,
+        "char_count": 234
+      },
+      {
+        "page_number": 18,
+        "token_count": 101,
+        "char_count": 413
+      },
+      {
+        "page_number": 19,
+        "token_count": 12,
+        "char_count": 30
+      },
+      {
+        "page_number": 20,
+        "token_count": 34,
+        "char_count": 109
+      },
+      {
+        "page_number": 21,
+        "token_count": 10,
+        "char_count": 30
+      },
+      {
+        "page_number": 22,
+        "token_count": 10,
+        "char_count": 30
+      },
+      {
+        "page_number": 23,
+        "token_count": 67,
+        "char_count": 212
+      },
+      {
+        "page_number": 24,
+        "token_count": 2,
+        "char_count": 15
+      },
+      {
+        "page_number": 25,
+        "token_count": 4,
+        "char_count": 17
+      },
+      {
+        "page_number": 26,
+        "token_count": 12,
+        "char_count": 30
+      },
+      {
+        "page_number": 27,
+        "token_count": 12,
+        "char_count": 27
+      },
+      {
+        "page_number": 28,
+        "token_count": 125,
+        "char_count": 488
+      },
+      {
+        "page_number": 29,
+        "token_count": 120,
+        "char_count": 383
+      },
+      {
+        "page_number": 30,
+        "token_count": 125,
+        "char_count": 527
+      },
+      {
+        "page_number": 31,
+        "token_count": 4,
+        "char_count": 15
+      },
+      {
+        "page_number": 32,
+        "token_count": 6,
+        "char_count": 17
+      },
+      {
+        "page_number": 33,
+        "token_count": 2,
+        "char_count": 15
+      },
+      {
+        "page_number": 34,
+        "token_count": 125,
+        "char_count": 518
+      },
+      {
+        "page_number": 35,
+        "token_count": 35,
+        "char_count": 101
+      },
+      {
+        "page_number": 36,
+        "token_count": 99,
+        "char_count": 400
+      },
+      {
+        "page_number": 37,
+        "token_count": 99,
+        "char_count": 400
+      },
+      {
+        "page_number": 38,
+        "token_count": 37,
+        "char_count": 109
+      },
+      {
+        "page_number": 39,
+        "token_count": 2,
+        "char_count": 20
+      },
+      {
+        "page_number": 40,
+        "token_count": 58,
+        "char_count": 263
+      },
+      {
+        "page_number": 41,
+        "token_count": 38,
+        "char_count": 125
+      },
+      {
+        "page_number": 42,
+        "token_count": 10,
+        "char_count": 41
+      },
+      {
+        "page_number": 43,
+        "token_count": 14,
+        "char_count": 52
+      },
+      {
+        "page_number": 44,
+        "token_count": 61,
+        "char_count": 301
+      },
+      {
+        "page_number": 45,
+        "token_count": 8,
+        "char_count": 31
+      },
+      {
+        "page_number": 46,
+        "token_count": 8,
+        "char_count": 32
+      },
+      {
+        "page_number": 47,
+        "token_count": 148,
+        "char_count": 693
+      },
+      {
+        "page_number": 48,
+        "token_count": 6,
+        "char_count": 23
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_06_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 6: Game Trees I] CS 188: Artificial IntelligenceAdversarial Search Fall 2025University of California, Berkeley [These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley (ai.berkeley.edu).]Game Playing State-of-the-Art\u00a7Checkers:1950: First computer player. 1994: First computer champion: Chinook ended 40-year-reign of human champion Marion Tinsley using complete 8-piece endgame. 2007: Checkers solved!\u00a7Chess:1997: Deep Blue defeats human champion Gary Kasparov in a six-game match. Deep Blue examined 200M positions per second, used very sophisticated evaluation and undisclosed methods for extending some lines of search up to 40 ply. Current programs are even better, if less historic.\u00a7Go:Human champions are now starting to be challenged by machines. In go, b > 300! Classic programs use pattern knowledge bases, but big recent advances use Monte Carlo (randomized) expansion methods.Game Playing State-of-the-Art\u00a7Checkers:1950: First computer player. 1994: First computer champion: Chinook ended 40-year-reign of human champion Marion Tinsley using complete 8-piece endgame. 2007: Checkers solved!\u00a7Chess:1997: Deep Blue defeats human champion Gary Kasparov in a six-game match. Deep Blue examined 200M positions per second, used very sophisticated evaluation and undisclosed methods for extending some lines of search up to 40 ply. Current programs are even better, if less historic.\u00a7Go: 2016: Alpha GO defeats human champion. Uses Monte Carlo Tree Search, learned evaluation function.\u00a7PacmanBehavior from Computation [Demo: mystery pacman(L6D1)]Video of Demo Mystery PacmanAdversarial Games\u00a7Many different kinds of games!\u00a7Axes:\u00a7Deterministic or stochastic?\u00a7One, two, or more players?\u00a7Zero sum?\u00a7Perfect information (can you see the state)?\u00a7Want algorithms for calculating a strategy (policy)which recommends a move from each state Types of GamesDeterministic Games\u00a7Many possible formalizations, one is:\u00a7States: S (start at s0)\u00a7Players: P={1...N} (usually take turns)\u00a7Actions: A (may depend on player / state)\u00a7Transition Function: SxA\u00aeS\u00a7Terminal Test: S \u00ae{t,f}\u00a7",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_06",
+        "chunk_index": 0,
+        "source_page": 2,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_06_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 6: Game Trees I] start at s0)\u00a7Players: P={1...N} (usually take turns)\u00a7Actions: A (may depend on player / state)\u00a7Transition Function: SxA\u00aeS\u00a7Terminal Test: S \u00ae{t,f}\u00a7Terminal Utilities: SxP\u00aeR \u00a7Solution for a player is a policy: S \u00aeAZero-Sum Games \u00a7Zero-Sum Games\u00a7Agents have opposite utilities (values on outcomes)\u00a7Lets us think of a single value that one maximizes and the other minimizes\u00a7Adversarial, pure competition \u00a7General Games\u00a7Agents have independent utilities (values on outcomes)\u00a7Cooperation, indifference, competition, and more are all possible\u00a7More later on non-zero-sum gamesAdversarial SearchSingle-Agent Trees 8 202646\u2026\u2026Value of a StateNon-Terminal States: 8 202646\u2026\u2026 Terminal States: Value of a state: The best achievable outcome (utility) from that stateAdversarial Game Trees -20-8-18-5-10+4\u2026\u2026 -20+8MinimaxValues +8-10-5-8 States Under Agent\u2019s Control: Terminal States: States Under Opponent\u2019s Control:Tic-Tac-Toe Game TreeAdversarial Search (Minimax)\u00a7Deterministic, zero-sum games:\u00a7Tic-tac-toe, chess, checkers\u00a7One player maximizes result\u00a7The other minimizes result\u00a7Minimaxsearch:\u00a7A state-space search tree\u00a7Players alternate turns\u00a7Compute each node\u2019s minimaxvalue: the best achievable utility against a rational (optimal) adversary8256 max min25 5 Terminal values:part of the game Minimaxvalues:computed recursivelyMinimaxImplementationdef min-value(state):initialize v = +\u221efor each successor of state:v = min(v, max-value(successor))return v def max-value(state):initialize v = -\u221efor each successor of state:v = max(v, min-value(successor))return vMinimaxImplementation (Dispatch)def value(state):if the state is a terminal state: return the state\u2019s utilityif the next agent is MAX: return max-value(state)if the next agent is MIN: return min-value(state) def min-value(state):initialize v = +\u221efor each successor of state:v = min(v, value(successor))return v def max-value(state):initialize v = -\u221efor each successor of state:v = max(v",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_06",
+        "chunk_index": 1,
+        "source_page": 16,
+        "source_pages": [
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_06_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 6: Game Trees I] -value(state) def min-value(state):initialize v = +\u221efor each successor of state:v = min(v, value(successor))return v def max-value(state):initialize v = -\u221efor each successor of state:v = max(v, value(successor))return vMinimax Example 128 523 2 1446Minimax Properties Optimal against a perfect player. Otherwise?10109100 max min [Demo: min vsexp(L6D2, L6D3)]Video of Demo Min vs. Exp(Min)Video of Demo Min vs. Exp(Exp)MinimaxEfficiency\u00a7How efficient is minimax?\u00a7Just like (exhaustive) DFS\u00a7Time: O(bm)\u00a7Space: O(bm)\u00a7Example: For chess, b \u00bb35, m \u00bb100\u00a7Exact solution is completely infeasible\u00a7But, do we need to explore the whole tree?Resource LimitsGame Tree PruningMinimax Example 128 523 2 1446MinimaxPruning 128 523 2 14Alpha-Beta Pruning\u00a7General configuration (MIN version)\u00a7We\u2019re computing the MIN-VALUE at some node n\u00a7We\u2019re looping over n\u2019schildren\u00a7n\u2019sestimate of the childrens\u2019 min is dropping\u00a7Who cares about n\u2019svalue? MAX\u00a7Let abe the best value that MAX can get at any choice point along the current path from the root\u00a7If nbecomes worse than a, MAX will avoid it, so we can stop considering n\u2019sother children (it\u2019s already bad enough that it won\u2019t be played) \u00a7MAX version is symmetric MAX MIN MAXMIN a nAlpha-Beta Implementation def min-value(state, \u03b1, \u03b2):initialize v = +\u221efor each successor of state:v = min(v, value(successor, \u03b1, \u03b2))if v \u2264 \u03b1return v\u03b2 = min(\u03b2, v)return v def max-value(state, \u03b1, \u03b2):initialize v = -\u221efor each successor of state:v = max(v, value(successor, \u03b1, \u03b2))ifv \u2265 \u03b2return v\u03b1= max(\u03b1, v)return v \u03b1: MAX\u2019s best option on path to root\u03b2:MIN\u2019s best option on path to rootAlpha-Beta Pruning Properties\u00a7This pruning has no effecton minimaxvalue computed for the root!\u00a7Values of intermediate nodes might be wrong\u00a7Important: children of the",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_06",
+        "chunk_index": 2,
+        "source_page": 28,
+        "source_pages": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_06_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 6: Game Trees I] option on path to root\u03b2:MIN\u2019s best option on path to rootAlpha-Beta Pruning Properties\u00a7This pruning has no effecton minimaxvalue computed for the root!\u00a7Values of intermediate nodes might be wrong\u00a7Important: children of the root may have the wrong value\u00a7So the most na\u00efve version won\u2019t let you do action selection\u00a7Good child ordering improves effectiveness of pruning\u00a7With \u201cperfect ordering\u201d:\u00a7Time complexity drops to O(bm/2)\u00a7Doubles solvable depth!\u00a7Full search of, e.g. chess, is still hopeless\u2026\u00a7This is a simple example of metareasoning(computing about what to compute) 10100 max minAlpha-Beta QuizAlpha-Beta Quiz 2Resource LimitsResource Limits\u00a7Problem: In realistic games, cannot search to leaves!\u00a7Solution: Depth-limited search\u00a7Instead, search only to a limited depth in the tree\u00a7Replace terminal utilities with an evaluation function for non-terminal positions\u00a7Example:\u00a7Suppose we have 100 seconds, can explore 10K nodes / sec\u00a7So can check 1M nodes per move\u00a7a-breaches about depth 8 \u2013decent chess program\u00a7Guarantee of optimal play is gone\u00a7More plies makes a BIG difference\u00a7Use iterative deepening for an anytime algorithm???? -1-249 4 minmax-24Video of Demo Thrashing (d=2) [Demo: thrashing d=2, thrashing d=2 (fixed evaluation function) (L6D6)]Why Pacman Starves \u00a7A danger of replanningagents!\u00a7He knows his score will go up by eating the dot now (west, east)\u00a7He knows his score will go up just as much by eating the dot later (east, west)\u00a7There are no point-scoring opportunities after eating the dot (within the horizon, two here)\u00a7Therefore, waiting seems just as good as eating: he may go east, then back west in the next round of replanning!Why Pacman Starves \u00a7A danger of replanningagents!\u00a7He knows his score will go up by eating the dot now (west, east)\u00a7He knows his score will go up just as much by eating the dot later (east, west)\u00a7There are no point-scoring opportunities after eating the dot (within the horizon, two here)\u00a7Therefore, waiting seems just as good as eating: he may go east, then",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_06",
+        "chunk_index": 3,
+        "source_page": 30,
+        "source_pages": [
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_06_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 6: Game Trees I] just as much by eating the dot later (east, west)\u00a7There are no point-scoring opportunities after eating the dot (within the horizon, two here)\u00a7Therefore, waiting seems just as good as eating: he may go east, then back west in the next round of replanning!Video of Demo Thrashing --Fixed (d=2) [Demo: thrashing d=2, thrashing d=2 (fixed evaluation function) (L6D7)]Evaluation FunctionsEvaluation Functions\u00a7Evaluation functions score non-terminals in depth-limited search \u00a7Ideal function: returns the actual minimaxvalue of the position\u00a7In practice: typically weighted linear sum of features: \u00a7e.g. f1(s) = (num white queens \u2013num black queens), etc.Evaluation for Pacman [Demo: thrashing d=2, thrashing d=2 (fixed evaluation function), smart ghosts coordinate (L6D6,7,8,10)]Video of Demo Smart Ghosts (Coordination)Video of Demo Smart Ghosts (Coordination) \u2013Zoomed InDepth Matters\u00a7Evaluation functions are always imperfect\u00a7The deeper in the tree the evaluation function is buried, the less the quality of the evaluation function matters\u00a7An important example of the tradeoff between complexity of features and complexity of computation[Demo: depth limited (L6D4, L6D5)]Video of Demo Limited Depth (2)Video of Demo Limited Depth (10)Synergies between Evaluation Function and Alpha-Beta?\u00a7Alpha-Beta: amount of pruning depends on expansion ordering\u00a7Evaluation function can provide guidance to expand most promising nodes first (which later makes it more likely there is already a good alternative on the path to the root)\u00a7(somewhat similar to role of A* heuristic, CSPs filtering) \u00a7Alpha-Beta: (similar for roles of min-max swapped)\u00a7Value at a min-node will only keep going down\u00a7Once value of min-node lower than better option for max along path to root, can prune\u00a7Hence: IF evaluation function provides upper-bound on value at min-node, and upper-bound already lower than better option for max along path to root THEN can pruneNext Time: Uncertainty!",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_06",
+        "chunk_index": 4,
+        "source_page": 47,
+        "source_pages": [
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "chunk_type": "summary",
+        "token_count": 450
+      }
+    }
+  ]
+}

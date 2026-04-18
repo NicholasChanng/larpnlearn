@@ -1,0 +1,344 @@
+{
+  "lecture_id": "lec_15",
+  "order_index": 15,
+  "week": 8,
+  "title": "Bayes Nets: Inference",
+  "topics": [
+    "Exact Inference",
+    "Variable Elimination",
+    "Belief Propagation",
+    "Computational Complexity"
+  ],
+  "scheduled_date": "2025-10-21",
+  "slide_deck": "slides/lec_15.pdf",
+  "exam": "midterm",
+  "course_id": "cs188-fall-2025",
+  "slide_metadata": {
+    "page_count": 36,
+    "total_tokens": 2656,
+    "pages": [
+      {
+        "page_number": 1,
+        "token_count": 62,
+        "char_count": 258
+      },
+      {
+        "page_number": 2,
+        "token_count": 63,
+        "char_count": 288
+      },
+      {
+        "page_number": 3,
+        "token_count": 27,
+        "char_count": 150
+      },
+      {
+        "page_number": 4,
+        "token_count": 74,
+        "char_count": 299
+      },
+      {
+        "page_number": 5,
+        "token_count": 231,
+        "char_count": 430
+      },
+      {
+        "page_number": 6,
+        "token_count": 5,
+        "char_count": 25
+      },
+      {
+        "page_number": 7,
+        "token_count": 74,
+        "char_count": 360
+      },
+      {
+        "page_number": 8,
+        "token_count": 2,
+        "char_count": 10
+      },
+      {
+        "page_number": 9,
+        "token_count": 108,
+        "char_count": 300
+      },
+      {
+        "page_number": 10,
+        "token_count": 101,
+        "char_count": 255
+      },
+      {
+        "page_number": 11,
+        "token_count": 47,
+        "char_count": 132
+      },
+      {
+        "page_number": 12,
+        "token_count": 70,
+        "char_count": 221
+      },
+      {
+        "page_number": 13,
+        "token_count": 113,
+        "char_count": 213
+      },
+      {
+        "page_number": 14,
+        "token_count": 6,
+        "char_count": 25
+      },
+      {
+        "page_number": 15,
+        "token_count": 148,
+        "char_count": 386
+      },
+      {
+        "page_number": 16,
+        "token_count": 117,
+        "char_count": 356
+      },
+      {
+        "page_number": 17,
+        "token_count": 5,
+        "char_count": 23
+      },
+      {
+        "page_number": 18,
+        "token_count": 161,
+        "char_count": 275
+      },
+      {
+        "page_number": 19,
+        "token_count": 68,
+        "char_count": 209
+      },
+      {
+        "page_number": 20,
+        "token_count": 94,
+        "char_count": 189
+      },
+      {
+        "page_number": 21,
+        "token_count": 15,
+        "char_count": 72
+      },
+      {
+        "page_number": 22,
+        "token_count": 9,
+        "char_count": 44
+      },
+      {
+        "page_number": 23,
+        "token_count": 76,
+        "char_count": 213
+      },
+      {
+        "page_number": 24,
+        "token_count": 183,
+        "char_count": 308
+      },
+      {
+        "page_number": 25,
+        "token_count": 125,
+        "char_count": 315
+      },
+      {
+        "page_number": 26,
+        "token_count": 65,
+        "char_count": 199
+      },
+      {
+        "page_number": 27,
+        "token_count": 64,
+        "char_count": 283
+      },
+      {
+        "page_number": 28,
+        "token_count": 3,
+        "char_count": 16
+      },
+      {
+        "page_number": 29,
+        "token_count": 7,
+        "char_count": 38
+      },
+      {
+        "page_number": 30,
+        "token_count": 112,
+        "char_count": 361
+      },
+      {
+        "page_number": 31,
+        "token_count": 63,
+        "char_count": 317
+      },
+      {
+        "page_number": 32,
+        "token_count": 101,
+        "char_count": 345
+      },
+      {
+        "page_number": 33,
+        "token_count": 67,
+        "char_count": 330
+      },
+      {
+        "page_number": 34,
+        "token_count": 59,
+        "char_count": 227
+      },
+      {
+        "page_number": 35,
+        "token_count": 71,
+        "char_count": 309
+      },
+      {
+        "page_number": 36,
+        "token_count": 60,
+        "char_count": 275
+      }
+    ]
+  },
+  "chunks": [
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_000",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] CS 188: Artificial IntelligenceBayes\u2019 Nets: Inference Fall 2025 ---University of California, Berkeley[These slides were created by Dan Klein and Pieter Abbeel for CS188 Intro to AI at UC Berkeley. All CS188 materials are available at http://ai.berkeley.edu.]Bayes\u2019Nets\u00a7Representation\u00a7Conditional Independences\u00a7Probabilistic Inference\u00a7Enumeration (exact, exponential complexity)\u00a7Variable elimination (exact, worst-caseexponential complexity, often better)\u00a7Probabilistic inference is NP-complete\u00a7Sampling (approximate)\u00a7Learning Bayes\u2019Nets from Data\u00a7Examples:\u00a7Posterior probability \u00a7Most likely explanation: Inference\u00a7Inference: calculating some useful quantity from a joint probability distributionInference by Enumeration\u00a7General case:\u00a7Evidence variables: \u00a7Query* variable:\u00a7Hidden variables: All variables * Works fine with multiple query variables, too\u00a7We want: \u00a7Step 1: Select the entries consistent with the evidence\u00a7Step 2: Sum out H to get joint of Query and evidence\u00a7Step 3: Normalize \u21e5 1 ZInference by Enumeration in Bayes\u2019 Net\u00a7Given unlimited time, inference in BNs is easy\u00a7Reminder of inference by enumeration by example:BEA MJ P (B |+ j, + m ) / B P (B, + j, + m ) = X e,a P (B, e, a, + j, + m ) = X e,a P (B )P (e)P (a|B, e )P (+ j|a)P (+ m |a) =P(B)P(+ e)P(+ a|B, +e)P(+ j|+ a)P(+ m|+ a)+ P(B)P(+ e)P(\u0000a|B, +e)P(+ j|\u0000 a)P(+ m|\u0000 a) P(B)P(\u0000e)P(+ a|B, \u0000e)P(+ j|+ a)P(+ m|+ a)+ P(B)P(\u0000e)P(\u0000a|B, \u0000e)P(+ j|\u0000 a)P(+ m|\u0000 a)Inference by Enumeration?Inference by Enumeration vs. Variable Elimination\u00a7Why is inference by enumeration so slow?\u00a7You join up the whole joint distribution before you sum out the hidden variables \u00a7Idea: inter",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 0,
+        "source_page": 5,
+        "source_pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "chunk_type": "intro",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_001",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] P(+ m|\u0000 a)Inference by Enumeration?Inference by Enumeration vs. Variable Elimination\u00a7Why is inference by enumeration so slow?\u00a7You join up the whole joint distribution before you sum out the hidden variables \u00a7Idea: interleave joining and marginalizing!\u00a7Called \u201cVariable Elimination\u201d\u00a7Still NP-hard, but usually much faster than inference by enumeration \u00a7First we\u2019ll need some new notation: factorsFactor ZooFactor Zoo I\u00a7Joint distribution: P(X,Y)\u00a7Entries P(x,y) for all x, y\u00a7Sums to 1 \u00a7Selected joint: P(x,Y)\u00a7A slice of the joint distribution\u00a7Entries P(x,y) for fixed x, all y\u00a7Sums to P(x)\u00a7Number of capitals = dimensionality of the table TWPhotsun0.4hotrain0.1coldsun0.2coldrain0.3 TWPcoldsun0.2coldrain0.3Factor Zoo II\u00a7Single conditional: P(Y | x)\u00a7Entries P(y | x) for fixed x, all y\u00a7Sums to 1 \u00a7Family of conditionals: P(Y | X)\u00a7Multiple conditionals\u00a7Entries P(y | x) for all x, y\u00a7Sums to |X| TWPhotsun0.8hotrain0.2coldsun0.4coldrain0.6 TWPcoldsun0.4coldrain0.6Factor Zoo III\u00a7Specified family: P( y | X )\u00a7Entries P(y | x) for fixed y,but for all x\u00a7Sums to \u2026 who knows! TWPhotrain0.2coldrain0.6Factor Zoo Summary\u00a7In general, when we write P(Y1\u2026 YN| X1\u2026 XM)\u00a7It is a \u201cfactor,\u201da multi-dimensional array\u00a7Its values are P(y1\u2026 yN| x1\u2026 xM)\u00a7Any assigned (=lower-case) X or Y is a dimension missing (selected) from the arrayExample: Traffic Domain\u00a7Random Variables\u00a7R: Raining\u00a7T: Traffic\u00a7L: Late for class!T L R +r0.1-r0.9 +r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 P (L )=? = X r,t",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 1,
+        "source_page": 9,
+        "source_pages": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_002",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 P (L )=? = X r,t P (r, t, L ) = X r,t P (r)P (t|r)P (L|t)Variable Elimination (VE)Inference by Enumeration: Procedural Outline\u00a7Track objects called factors\u00a7Initial factors are local CPTs (one per node) \u00a7Any known values are selected\u00a7E.g. if we know , the initial factors are \u00a7Procedure: Join all factors, eliminate all hidden variables, normalize +r0.1-r0.9+r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 +t+l0.3-t+l0.1 +r0.1-r0.9+r+t0.8+r-t0.2-r+t0.1-r-t0.9Operation 1: Join Factors\u00a7First basic operation: joining factors\u00a7Combining factors:\u00a7Just like a database join\u00a7Get all factors over the joining variable\u00a7Build a new factor over the union of the variables involved\u00a7Example: Join on R \u00a7Computation for each entry: pointwiseproducts +r0.1-r0.9+r+t0.8+r-t0.2-r+t0.1-r-t0.9 +r+t0.08+r-t0.02-r+t0.09-r-t0.81T R R,TExample: Multiple JoinsExample: Multiple Joins T RJoin R L R,T L +r0.1-r0.9 +r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 +r+t0.08+r-t0.02-r+t0.09-r-t0.81 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 R,T, L +r+t+l0.024+r+t-l0.056+r-t+l0.002+r-t-l0.018-r+t+l0.027-r+t-l0.063",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 2,
+        "source_page": 15,
+        "source_pages": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_003",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] +l0.1-t-l0.9 R,T, L +r+t+l0.024+r+t-l0.056+r-t+l0.002+r-t-l0.018-r+t+l0.027-r+t-l0.063-r-t+l0.081-r-t-l0.729 Join TOperation 2: Eliminate\u00a7Second basic operation: marginalization\u00a7Take a factor and sum out a variable\u00a7Shrinks a factor to a smaller one\u00a7A projectionoperation\u00a7Example: +r+t0.08+r-t0.02-r+t0.09-r-t0.81+t0.17-t0.83Multiple EliminationSumout RSumout TT, L L R,T, L +r+t+l0.024+r+t-l0.056+r-t+l0.002+r-t-l0.018-r+t+l0.027-r+t-l0.063-r-t+l0.081-r-t-l0.729 +t+l0.051+t-l0.119-t+l0.083-t-l0.747+l0.134-l0.886Thus Far: Multiple Join, Multiple Eliminate (= Inference by Enumeration)Marginalizing Early (= Variable Elimination)Traffic Domain \u00a7Inference by EnumerationT L RP (L )=? \u00a7Variable Elimination= X t P(L|t) X r P(r)P(t|r) Join on rJoin on rJoin on t Join on tEliminate r Eliminate tEliminate r = X t X r P(L|t)P(r)P(t|r) Eliminate tMarginalizing Early! (aka VE)Sum out R T L +r+t0.08+r-t0.02-r+t0.09-r-t0.81 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 +t0.17-t0.83 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 T R L +r0.1-r0.9 +r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 Join R R,T L T, L L +t+l0.051+t-l0.119-t+l0.083-t-l0.747+l0.134",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 3,
+        "source_page": 24,
+        "source_pages": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_004",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] 3+t-l0.7-t+l0.1-t-l0.9 Join R R,T L T, L L +t+l0.051+t-l0.119-t+l0.083-t-l0.747+l0.134-l0.866 Join TSum out TEvidence\u00a7If evidence, start with factors that select that evidence\u00a7No evidence uses these initial factors: \u00a7Computing , the initial factors become: \u00a7We eliminate all vars other than query + evidence +r0.1-r0.9+r+t0.8+r-t0.2-r+t0.1-r-t0.9 +t+l0.3+t-l0.7-t+l0.1-t-l0.9 +r0.1+r+t0.8+r-t0.2 +t+l0.3+t-l0.7-t+l0.1-t-l0.9Evidence II\u00a7Result will be a selected joint of query and evidence\u00a7E.g. for P(L | +r), we wouldend up with: \u00a7To get our answer, just normalize this!\u00a7That\u2019s it! +l0.26-l0.74+r+l0.026+r-l0.074 NormalizeGeneral Variable Elimination\u00a7Query:\u00a7Start with initial factors:\u00a7Local CPTs (but instantiated by evidence)\u00a7While there are still hidden variables (not Q or evidence):\u00a7Pick a hidden variable H\u00a7Join all factors mentioning H\u00a7Eliminate (sum out) H\u00a7Join all remaining factors and normalizeExample Choose AExampleChoose E Finish with BNormalizeSame Example in Equations marginal obtained from joint by summing outuse Bayes\u2019net joint distribution expressionuse x*(y+z) = xy+ xzjoining on a, and then summing out gives f1use x*(y+z) = xy+ xzjoining on e, and then summing out gives f2 All we are doing is exploiting uwy+ uwz+ uxy+ uxz+ vwy+ vwz+ vxy+vxz= (u+v)(w+x)(y+z) to improve computational efficiency!Another Variable Elimination Example Computational complexity critically depends on the largest factor being generated in this process. Size of factor = number of entries in table. In example above (assuming binary) all factors generated are of size 2 ---as they all only have one variable (Z, Z, and X3respectively).Variable Elim",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 4,
+        "source_page": 25,
+        "source_pages": [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "chunk_type": "body",
+        "token_count": 500
+      }
+    },
+    {
+      "doc_id": "cs188_fall_2025_lec_15_slide_chunk_005",
+      "course_id": "cs188-fall-2025",
+      "doc_type": "lecture_slide_chunk",
+      "text": "[From CS 188 Lecture 15: Bayes Nets: Inference] in this process. Size of factor = number of entries in table. In example above (assuming binary) all factors generated are of size 2 ---as they all only have one variable (Z, Z, and X3respectively).Variable Elimination Ordering\u00a7For the query P(Xn|y1,\u2026,yn) work through the following two different orderings as done in previous slide: Z, X1, \u2026, Xn-1and X1, \u2026, Xn-1, Z. What is the size of the maximum factor generated for each of the orderings? \u00a7Answer: 2n+1versus 22(assuming binary)\u00a7In general: the ordering can greatly affect efficiency. \u2026 \u2026VE: Computational and Space Complexity\u00a7The computational and space complexity of variable elimination is determined by the largest factor\u00a7The elimination ordering can greatly affect the size of the largest factor. \u00a7E.g., previous slide\u2019s example 2nvs. 2 \u00a7Does there always exist an ordering that only results in small factors?\u00a7No!Worst Case Complexity?\u00a7CSP: \u00a7If we can answer P(z) equal to zero or not, we answered whether the 3-SAT problem has a solution.\u00a7Hence inference in Bayes\u2019nets is NP-hard. No known efficient probabilistic inference in general. \u2026 \u2026Polytrees\u00a7A polytreeis a directed graph with no undirected cycles\u00a7For poly-trees you can always find an ordering that is efficient \u00a7Try it!!\u00a7Cut-set conditioning for Bayes\u2019net inference\u00a7Choose set of variables such that if removed only a polytreeremains\u00a7Exercise: Think about how the specifics would work out!Bayes\u2019Nets\u00a7Representation\u00a7Conditional Independences\u00a7Probabilistic Inference\u00a7Enumeration (exact, exponential complexity)\u00a7Variable elimination (exact, worst-case exponential complexity, often better)\u00a7Inference is NP-complete\u00a7Sampling (approximate)\u00a7Learning Bayes\u2019Nets from Data",
+      "metadata": {
+        "course_id": "cs188-fall-2025",
+        "lecture_id": "lec_15",
+        "chunk_index": 5,
+        "source_page": 32,
+        "source_pages": [
+          31,
+          32,
+          33,
+          34,
+          35,
+          36
+        ],
+        "chunk_type": "summary",
+        "token_count": 406
+      }
+    }
+  ]
+}

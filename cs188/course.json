@@ -1,0 +1,47 @@
+{
+  "id": "cs188-fall-2025",
+  "code": "CS 188",
+  "name": "Introduction to Artificial Intelligence",
+  "semester": "Fall 2025",
+  "university": "UC Berkeley",
+  "department": "Electrical Engineering and Computer Science",
+  "units": 4,
+  "faculty": [
+    "Pieter Abbeel",
+    "Stuart Russell",
+    "Anca Dragan",
+    "Igor Mordatch",
+    "Peyrin Kao"
+  ],
+  "lecture_count": 24,
+  "description": "Ideas and techniques underlying the design of intelligent computer systems. Topics include search, game playing, knowledge representation, inference, planning, reasoning under uncertainty, machine learning, robotics, perception, and language understanding.",
+  "textbook": {
+    "title": "Artificial Intelligence: A Modern Approach",
+    "edition": "4th US ed.",
+    "authors": ["Stuart Russell", "Peter Norvig"]
+  },
+  "grading": {
+    "projects": 25,
+    "homeworks": 20,
+    "midterm": 20,
+    "final_exam": 35
+  },
+  "assessment": {
+    "midterm": {
+      "week": 8,
+      "duration_hours": 2,
+      "type": "paper"
+    },
+    "final": {
+      "week": 14,
+      "duration_hours": 3,
+      "type": "paper"
+    }
+  },
+  "prerequisites": [
+    "CS 61A (Structure & Interpretation of Computer Programs) or CS 61B (Data Structures)",
+    "CS 70 (Discrete Mathematics and Probability Theory) or Math 55 (Discrete Mathematics)"
+  ],
+  "course_website": "https://inst.eecs.berkeley.edu/~cs188",
+  "created_at": "2025-08-01"
+}
