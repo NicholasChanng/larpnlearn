@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Databases & vector stores
+*.db
+*.sqlite
+*.sqlite3
+chroma_data/
+backend/chroma_data/
+backend/app.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Demo course large assets (slides PDFs can be large; keep tracked for now but ignore derived)
+demo_course/slides/*.txt
+demo_course/slides/*.parsed.json

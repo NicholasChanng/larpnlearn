@@ -1,0 +1,64 @@
+{
+  "theme_id": "greek",
+  "display_name": "Greek Mythology",
+  "segments": [
+    { "id": "olympus", "range": [1, 3], "bg_image": "/themes/greek/bg/olympus.png", "music": "/themes/greek/music/olympus.mp3" },
+    { "id": "athens", "range": [4, 6], "bg_image": "/themes/greek/bg/athens.png", "music": "/themes/greek/music/athens.mp3" },
+    { "id": "aegean", "range": [7, 9], "bg_image": "/themes/greek/bg/aegean.png", "music": "/themes/greek/music/aegean.mp3" },
+    { "id": "island", "range": [10, 12], "bg_image": "/themes/greek/bg/island.png", "music": "/themes/greek/music/island.mp3" },
+    { "id": "underworld", "range": [13, 16], "bg_image": "/themes/greek/bg/underworld.png", "music": "/themes/greek/music/underworld.mp3" }
+  ],
+  "monsters": [
+    {
+      "id": "minor_spirit",
+      "name": "Minor Spirit",
+      "sprite_path": "/themes/greek/sprites/minor_spirit.png",
+      "hp": 100,
+      "attack_animation": "wind_gust",
+      "attack_sound": "/themes/greek/sfx/wind.mp3",
+      "voice_tone": "Speak in a whispering, ethereal tone."
+    },
+    {
+      "id": "siren",
+      "name": "Siren",
+      "sprite_path": "/themes/greek/sprites/siren.png",
+      "hp": 100,
+      "attack_animation": "sound_wave",
+      "attack_sound": "/themes/greek/sfx/siren.mp3",
+      "voice_tone": "Speak in a melodic, seductive tone that lures the listener."
+    },
+    {
+      "id": "cerberus",
+      "name": "Cerberus",
+      "sprite_path": "/themes/greek/sprites/cerberus.png",
+      "hp": 300,
+      "attack_animation": "triple_bite",
+      "attack_sound": "/themes/greek/sfx/cerberus.mp3",
+      "voice_tone": "Growl with a chorus of three overlapping voices."
+    },
+    {
+      "id": "hades",
+      "name": "Hades",
+      "sprite_path": "/themes/greek/sprites/hades.png",
+      "hp": 300,
+      "attack_animation": "flame_burst",
+      "attack_sound": "/themes/greek/sfx/hades.mp3",
+      "voice_tone": "Speak with cold gravitas, as the lord of the underworld."
+    },
+    {
+      "id": "zeus",
+      "name": "Zeus",
+      "sprite_path": "/themes/greek/sprites/zeus.png",
+      "hp": 500,
+      "attack_animation": "lightning_strike",
+      "attack_sound": "/themes/greek/sfx/thunder.mp3",
+      "voice_tone": "Speak with booming, imperious authority."
+    }
+  ],
+  "avatars": [
+    { "id": "hero", "sprite": "/themes/greek/avatars/hero.png", "attack_anim": "sword_slash" },
+    { "id": "heroine", "sprite": "/themes/greek/avatars/heroine.png", "attack_anim": "spear_thrust" },
+    { "id": "scholar", "sprite": "/themes/greek/avatars/scholar.png", "attack_anim": "scroll_throw" }
+  ],
+  "voice_tone_prompt": "Phrase questions with formal, oracle-like language. Use 'mortal', 'hero', 'seeker' as address forms. Invoke Olympus, the Fates, and the gods when praising or rebuking answers. Do NOT change the technical content of the question — only the flavor."
+}

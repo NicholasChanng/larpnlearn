@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: aristotle-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    region: oregon
+    disk:
+      name: chroma-data
+      mountPath: /app/chroma_data
+      sizeGB: 1
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CHROMA_PERSIST_DIR
+        value: /app/chroma_data
+      - key: DATABASE_URL
+        value: sqlite:////app/app.db
+      - key: CORS_ORIGINS
+        sync: false
+      - key: APP_ENV
+        value: production

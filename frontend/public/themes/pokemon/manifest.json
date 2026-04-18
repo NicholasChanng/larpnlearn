@@ -1,0 +1,24 @@
+{
+  "theme_id": "pokemon",
+  "display_name": "Pokémon",
+  "segments": [
+    { "id": "pallet_town", "range": [1, 3], "bg_image": "/themes/pokemon/bg/pallet.png", "music": "/themes/pokemon/music/pallet.mp3" },
+    { "id": "viridian_forest", "range": [4, 6], "bg_image": "/themes/pokemon/bg/forest.png", "music": "/themes/pokemon/music/forest.mp3" },
+    { "id": "mt_moon", "range": [7, 9], "bg_image": "/themes/pokemon/bg/mt_moon.png", "music": "/themes/pokemon/music/cave.mp3" },
+    { "id": "cerulean_city", "range": [10, 12], "bg_image": "/themes/pokemon/bg/cerulean.png", "music": "/themes/pokemon/music/city.mp3" },
+    { "id": "elite_four", "range": [13, 16], "bg_image": "/themes/pokemon/bg/elite_four.png", "music": "/themes/pokemon/music/elite_four.mp3" }
+  ],
+  "monsters": [
+    { "id": "rattata", "name": "Rattata", "sprite_path": "/themes/pokemon/sprites/rattata.png", "hp": 100, "attack_animation": "tackle", "attack_sound": "/themes/pokemon/sfx/tackle.mp3", "voice_tone": "Squeak briefly." },
+    { "id": "pidgey", "name": "Pidgey", "sprite_path": "/themes/pokemon/sprites/pidgey.png", "hp": 100, "attack_animation": "gust", "attack_sound": "/themes/pokemon/sfx/gust.mp3", "voice_tone": "Chirp musically." },
+    { "id": "gyarados", "name": "Gyarados", "sprite_path": "/themes/pokemon/sprites/gyarados.png", "hp": 300, "attack_animation": "hydro_pump", "attack_sound": "/themes/pokemon/sfx/hydro.mp3", "voice_tone": "Roar like a leviathan." },
+    { "id": "alakazam", "name": "Alakazam", "sprite_path": "/themes/pokemon/sprites/alakazam.png", "hp": 300, "attack_animation": "psychic", "attack_sound": "/themes/pokemon/sfx/psychic.mp3", "voice_tone": "Calm, telepathic, intellectually superior." },
+    { "id": "charizard", "name": "Charizard", "sprite_path": "/themes/pokemon/sprites/charizard.png", "hp": 500, "attack_animation": "flamethrower", "attack_sound": "/themes/pokemon/sfx/flame.mp3", "voice_tone": "Ancient dragon — regal, fiery, impatient." }
+  ],
+  "avatars": [
+    { "id": "pikachu", "sprite": "/themes/pokemon/avatars/pikachu.png", "attack_anim": "thunderbolt" },
+    { "id": "charmander", "sprite": "/themes/pokemon/avatars/charmander.png", "attack_anim": "ember" },
+    { "id": "squirtle", "sprite": "/themes/pokemon/avatars/squirtle.png", "attack_anim": "water_gun" }
+  ],
+  "voice_tone_prompt": "Phrase questions as a Pokémon trainer's prompt or a rival's challenge. Reference types (Fire/Water/Electric), evolution, gym badges, and 'super effective!' on correct answers. Keep the technical content unchanged."
+}
