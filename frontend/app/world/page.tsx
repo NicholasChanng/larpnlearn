@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Volume2, VolumeX } from "lucide-react";
-
 import { TopBar } from "@/components/layout/TopBar";
 import { WorldMap } from "@/components/world/WorldMap";
-import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 import { AVAILABLE_THEMES } from "@/lib/theme";
 import type { Theme, WorldResponse } from "@/lib/types";
@@ -56,11 +54,7 @@ export default function WorldPage() {
           currentLevelId={world.current_level_id}
         />
       )}
-      {manifest?.narrative && (
-        <div className="pointer-events-none absolute left-6 top-32 max-w-sm rounded-md border border-yellow-500/30 bg-black/70 p-3 text-xs italic text-yellow-100 shadow-xl backdrop-blur">
-          {manifest.narrative}
-        </div>
-      )}
+      <AudioAndNav />
     </main>
   );
 }
@@ -72,7 +66,6 @@ function ToolRow({
   currentTheme: Theme;
   setTheme: (t: Theme) => void;
 }) {
-  const { muted, toggleMute } = useAudioStore();
   return (
     <div className="flex items-center justify-between border-b border-border bg-black/60 px-6 py-2 backdrop-blur">
       <div className="flex items-center gap-2 text-xs text-slate-400">
@@ -89,19 +82,29 @@ function ToolRow({
           </button>
         ))}
       </div>
-      <div className="flex items-center gap-2">
-        <Button size="sm" variant="ghost" onClick={toggleMute} aria-label="toggle audio">
-          {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        </Button>
+    </div>
+  );
+}
+
+function AudioAndNav() {
+  const { muted, toggleMute } = useAudioStore();
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+      <button onClick={toggleMute} aria-label="toggle audio">
+        <Image
+          src={muted ? "/assets/audioOffIcon.png" : "/assets/audioOnIcon.png"}
+          alt={muted ? "Audio off" : "Audio on"}
+          width={70}
+          height={70}
+          className="cursor-pointer transition-transform duration-200 hover:scale-125 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
+        />
+      </button>
+      <div className="flex items-center gap-0">
         <Link href="/skills">
-          <Button size="sm" variant="outline">
-            Skills
-          </Button>
+          <Image src="/assets/map_icon.png" alt="Skills" width={100} height={100} className="cursor-pointer transition-transform duration-200 hover:scale-125 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]" />
         </Link>
         <Link href="/shop">
-          <Button size="sm" variant="outline">
-            Shop
-          </Button>
+          <Image src="/assets/shop_icon.png" alt="Shop" width={100} height={100} className="cursor-pointer transition-transform duration-200 hover:scale-125 drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]" />
         </Link>
       </div>
     </div>

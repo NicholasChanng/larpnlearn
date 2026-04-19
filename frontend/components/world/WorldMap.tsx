@@ -155,10 +155,10 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
           />
         )}
 
-        <div className="absolute inset-0 flex items-center">
-          <SegmentBanner segment={segment} />
+        <SegmentBanner segment={segment} />
 
-          <div className="flex flex-1 items-end justify-around gap-10 px-6 pb-20 pt-32">
+        <div className="absolute inset-0 flex items-center">
+          <div className="flex flex-1 items-end justify-around gap-10 px-6 pb-20 pt-40">
             {items.map((level, i) => {
               const monster = monsterForLevel(manifest, level.order_index, level.is_exam);
               const isCurrent = level.id === currentLevelId;
