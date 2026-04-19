@@ -4,11 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import type { Level, ThemeMonster } from "@/lib/types";
+import type { Level } from "@/lib/types";
 
 interface LevelNodeProps {
   level: Level;
-  monster: ThemeMonster | null;
   isCurrent: boolean;
   avatarEmoji: string;
   avatarSprite?: string | null;
@@ -20,7 +19,6 @@ interface LevelNodeProps {
  */
 export function LevelNode({
   level,
-  monster,
   isCurrent,
   avatarEmoji,
   avatarSprite,
@@ -34,12 +32,15 @@ export function LevelNode({
         ? "MIDTERM"
         : `L${level.order_index}`;
 
-  const size = isExam ? "h-28 w-56" : "h-24 w-48";
+  const size = isExam ? "h-[72px] w-[72px]" : "h-[60px] w-[60px]";
   const borderColor =
     level.state === "completed"
       ? "border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.7)]"
       : level.state === "available"
-        ? "border-yellow-300 shadow-[0_0_35px_rgba(252,211,77,0.9)] animate-pulse"
+        ? cn(
+            "border-yellow-300 shadow-[0_0_35px_rgba(252,211,77,0.9)]",
+            !isCurrent && "animate-pulse",
+          )
         : "border-slate-600";
 
   const bgColor = isExam
@@ -60,25 +61,26 @@ export function LevelNode({
       )}
     >
       {isCurrent && (
-        <motion.div
-          className="absolute -top-16"
-          animate={{ y: [0, -6, 0] }}
-          transition={{ duration: 1.2, repeat: Infinity }}
-        >
-          {avatarSprite ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={avatarSprite}
-              alt="avatar"
-              width={56}
-              height={56}
-              className="h-14 w-14 object-contain drop-shadow-[0_4px_0_rgba(0,0,0,0.5)]"
-              style={{ imageRendering: "pixelated" }}
-            />
-          ) : (
-            <span className="text-3xl">{avatarEmoji}</span>
-          )}
-        </motion.div>
+        <div className="absolute bottom-full left-1/2 mb-2 ml-[-84px] h-[168px] w-[168px]">
+          <motion.div
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+          >
+            {avatarSprite ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={avatarSprite}
+                alt="avatar"
+                width={168}
+                height={168}
+                className="h-[168px] w-[168px] object-contain drop-shadow-[0_4px_0_rgba(0,0,0,0.5)]"
+                style={{ imageRendering: "pixelated" }}
+              />
+            ) : (
+              <span className="inline-block text-9xl">{avatarEmoji}</span>
+            )}
+          </motion.div>
+        </div>
       )}
 
       <div
@@ -90,33 +92,16 @@ export function LevelNode({
           bgColor,
         )}
       >
-        {level.state === "locked" ? (
-          <span className="text-4xl drop-shadow-lg" style={{ filter: "grayscale(1) brightness(0.5)" }}>
+        {level.state === "locked" && (
+          <span className="text-2xl drop-shadow-lg" style={{ filter: "grayscale(1) brightness(0.5)" }}>
             🔒
           </span>
-        ) : monster?.sprite_path ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={monster.sprite_path}
-            alt={monster.name}
-            width={72}
-            height={72}
-            className="h-[80%] w-[80%] object-contain"
-            style={{ imageRendering: "pixelated" }}
-          />
-        ) : (
-          <span className="text-4xl drop-shadow-lg">{monster?.emoji ?? "❓"}</span>
         )}
       </div>
 
       <div className="mt-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold tracking-wider text-yellow-100 backdrop-blur">
         {label}
       </div>
-      {!disabled && monster && (
-        <div className="mt-1 max-w-[110px] truncate text-[10px] text-slate-200">
-          {monster.name}
-        </div>
-      )}
     </motion.div>
   );
 

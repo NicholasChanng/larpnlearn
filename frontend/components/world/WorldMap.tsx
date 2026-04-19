@@ -7,7 +7,7 @@ import { CloudTransition } from "./CloudTransition";
 import { LevelNode } from "./LevelNode";
 import { SegmentBanner } from "./SegmentBanner";
 import { audio } from "@/lib/audio";
-import { avatarForCharacter, monsterForLevel, segmentForLevel } from "@/lib/useTheme";
+import { avatarForCharacter, segmentForLevel } from "@/lib/useTheme";
 import { cn } from "@/lib/utils";
 import type { Level, ThemeManifest, ThemeSegment } from "@/lib/types";
 import { useUserStore } from "@/store/useUserStore";
@@ -160,7 +160,6 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
         <div className="absolute inset-0 flex items-center">
           <div className="flex flex-1 items-end justify-around gap-10 px-6 pb-20 pt-40">
             {items.map((level, i) => {
-              const monster = monsterForLevel(manifest, level.order_index, level.is_exam);
               const isCurrent = level.id === currentLevelId;
               return (
                 <div
@@ -169,7 +168,6 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
                 >
                   <LevelNode
                     level={level}
-                    monster={monster}
                     isCurrent={isCurrent}
                     avatarEmoji={avatarEmoji}
                     avatarSprite={avatarSprite}
