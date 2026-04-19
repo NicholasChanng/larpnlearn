@@ -94,18 +94,27 @@ export default function BattlePage({ params }: { params: { id: string } }) {
     async (answer: string, audioBlobB64?: string | null) => {
       if (!active || store.phase !== "asking") return;
       store.setSubmitting();
+      console.log("[handleSubmit] submitting answer", {
+        question_type: active.question_type,
+        has_audio: !!audioBlobB64,
+        audio_b64_length: audioBlobB64?.length ?? 0,
+        user_response: answer || null,
+      });
       try {
+        console.log("[handleSubmit] calling validateAnswer...");
         const resp = await api.battles.validateAnswer({
           user_response: answer || null,
           audio_blob_b64: audioBlobB64 ?? null,
           question_metadata: active,
         });
+        console.log("[handleSubmit] validateAnswer response:", resp);
         store.applyValidation({
           correct: resp.correct,
           feedback: resp.feedback,
           transcript: resp.transcript,
         });
       } catch (err) {
+        console.error("[handleSubmit] validateAnswer error:", err);
         // surface failure as incorrect with error feedback so the loop continues
         store.applyValidation({
           correct: false,

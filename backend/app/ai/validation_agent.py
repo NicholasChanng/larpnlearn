@@ -7,12 +7,16 @@ MVP contract:
 
 from __future__ import annotations
 
+import logging
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
 from ..config import settings
 from ..models import QuizQuestionMetadata
+
+logger = logging.getLogger(__name__)
 
 
 class _ValidationResult(BaseModel):
@@ -51,12 +55,17 @@ async def validate_voice_answer(
         [("system", _SYSTEM_PROMPT), ("human", _USER_PROMPT)]
     )
     chain = prompt | ChatOpenAI(
-        model="gpt-5-mini",
+        model="gpt-4o-mini",
         api_key=settings.openai_api_key,
         max_tokens=256,
         timeout=settings.generation_timeout_s,
     ).with_structured_output(_ValidationResult)
 
+    logger.info(
+        "validation_agent:invoke student_response_preview=%r requirements=%s",
+        student_response[:80],
+        requirements,
+    )
     result: _ValidationResult = await chain.ainvoke(
         {
             "question": question_metadata.content,
@@ -64,4 +73,5 @@ async def validate_voice_answer(
             "student_response": student_response,
         }
     )
+    logger.info("validation_agent:result correct=%s feedback=%r", result.correct, result.feedback)
     return result.feedback, result.correct
