@@ -4,12 +4,37 @@ import { create } from "zustand";
 
 import type { AvatarConfig, User } from "@/lib/types";
 
+/**
+ * Avatar-character id the user has currently equipped. Resolved against the
+ * current theme manifest's `avatars[]` list to pick a sprite path. Default
+ * "boy" → greey_boy.png under every theme's `sprites/hero/boy/` folder.
+ * Swap this when the avatar-selection UI lands.
+ */
+export type AvatarCharacterId = "boy" | "girl" | "satyr";
+
+export const DEFAULT_AVATAR_CHARACTER: AvatarCharacterId = "boy";
+
+/**
+ * Shop price per character, in points. The `boy` starter is free and starts
+ * owned. Other characters must be purchased with earned points before they
+ * can be equipped.
+ */
+export const CHARACTER_PRICES: Record<AvatarCharacterId, number> = {
+  boy: 0,
+  girl: 500,
+  satyr: 1000,
+};
+
+export type PurchaseResult = "ok" | "insufficient_points" | "already_owned";
+
 interface UserState {
   user: User | null;
   points: number;
   streak: number;
   lives: number;
   avatar: AvatarConfig | null;
+  avatarCharacter: AvatarCharacterId;
+  ownedCharacters: AvatarCharacterId[];
   setUser: (user: User) => void;
   setProgress: (args: {
     points: number;
@@ -17,14 +42,18 @@ interface UserState {
     lives: number;
     avatar: AvatarConfig;
   }) => void;
+  setAvatarCharacter: (id: AvatarCharacterId) => void;
+  purchaseCharacter: (id: AvatarCharacterId) => PurchaseResult;
 }
 
-export const useUserStore = create<UserState>((set) => ({
+export const useUserStore = create<UserState>((set, get) => ({
   user: null,
   points: 0,
   streak: 0,
   lives: 3,
   avatar: null,
+  avatarCharacter: DEFAULT_AVATAR_CHARACTER,
+  ownedCharacters: [DEFAULT_AVATAR_CHARACTER],
   setUser: (user) =>
     set({
       user,
@@ -35,4 +64,16 @@ export const useUserStore = create<UserState>((set) => ({
     }),
   setProgress: ({ points, streak, lives, avatar }) =>
     set({ points, streak, lives, avatar }),
+  setAvatarCharacter: (id) => set({ avatarCharacter: id }),
+  purchaseCharacter: (id) => {
+    const state = get();
+    if (state.ownedCharacters.includes(id)) return "already_owned";
+    const price = CHARACTER_PRICES[id];
+    if (state.points < price) return "insufficient_points";
+    set({
+      points: state.points - price,
+      ownedCharacters: [...state.ownedCharacters, id],
+    });
+    return "ok";
+  },
 }));

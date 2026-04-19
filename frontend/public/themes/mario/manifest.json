@@ -2,12 +2,13 @@
   "theme_id": "mario",
   "display_name": "Super Mario — Rescue the Princess",
   "narrative": "Leave the sunlit Mushroom Kingdom, duck into the Underground pipes, swim through the Water World, soar through the Sky realm on airships, and storm Bowser's Castle to rescue Princess Peach.",
+  "battle_bg": "/themes/mario/background/battles/battle_hell.png",
   "segments": [
     {
       "id": "mushroom_kingdom",
       "range": [1, 3],
       "display_name": "Mushroom Kingdom",
-      "bg_image": "/themes/mario/bg/mushroom.png",
+      "bg_image": "/themes/mario/background/world/mountolympus.png",
       "bg_gradient": "linear-gradient(180deg, #64b5f6 0%, #a5d6a7 70%, #66bb6a 100%)",
       "music": "/themes/mario/music/overworld.mp3",
       "music_tone": "Classic NES overworld — cheerful, bouncy, 6/8."
@@ -16,7 +17,7 @@
       "id": "underground",
       "range": [4, 6],
       "display_name": "Underground Pipes",
-      "bg_image": "/themes/mario/bg/underground.png",
+      "bg_image": "/themes/mario/background/world/athens.png",
       "bg_gradient": "linear-gradient(180deg, #3e2723 0%, #1b0f0a 60%, #000000 100%)",
       "music": "/themes/mario/music/underground.mp3",
       "music_tone": "Classic underground theme — tense, staccato, minor key."
@@ -25,7 +26,7 @@
       "id": "water_world",
       "range": [7, 9],
       "display_name": "Water World",
-      "bg_image": "/themes/mario/bg/water.png",
+      "bg_image": "/themes/mario/background/world/aegen_sea.png",
       "bg_gradient": "linear-gradient(180deg, #4fc3f7 0%, #01579b 70%, #002171 100%)",
       "music": "/themes/mario/music/water.mp3",
       "music_tone": "Waltz-time underwater theme. Floaty, graceful."
@@ -34,7 +35,7 @@
       "id": "sky_airship",
       "range": [10, 12],
       "display_name": "Sky Airships",
-      "bg_image": "/themes/mario/bg/sky.png",
+      "bg_image": "/themes/mario/background/world/jungle.png",
       "bg_gradient": "linear-gradient(180deg, #bbdefb 0%, #90caf9 60%, #ffb74d 100%)",
       "music": "/themes/mario/music/sky.mp3",
       "music_tone": "Airship march — brass-forward, military, triumphant."
@@ -43,34 +44,34 @@
       "id": "bowser_castle",
       "range": [13, 16],
       "display_name": "Bowser's Castle",
-      "bg_image": "/themes/mario/bg/castle.png",
+      "bg_image": "/themes/mario/background/world/hell.png",
       "bg_gradient": "linear-gradient(180deg, #424242 0%, #b71c1c 60%, #000000 100%)",
       "music": "/themes/mario/music/castle.mp3",
       "music_tone": "Castle theme — menacing, heavy percussion, minor-key ostinato."
     }
   ],
   "monsters": [
-    { "id": "goomba", "name": "Goomba", "emoji": "🍄", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/goomba.png", "attack_animation": "stomp_forward", "attack_sound": "/themes/mario/sfx/stomp.mp3", "damage_effect": "bonk", "voice_tone": "Grunt twice before each sentence." },
-    { "id": "koopa_troopa", "name": "Koopa Troopa", "emoji": "🐢", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/koopa.png", "attack_animation": "shell_spin", "attack_sound": "/themes/mario/sfx/shell.mp3", "damage_effect": "shell_knockback", "voice_tone": "Stoic, slow, determined." },
-    { "id": "piranha_plant", "name": "Piranha Plant", "emoji": "🌱", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/piranha.png", "attack_animation": "chomp", "attack_sound": "/themes/mario/sfx/chomp.mp3", "damage_effect": "bite", "voice_tone": "Only snarls and chomping sounds." },
-    { "id": "buzzy_beetle", "name": "Buzzy Beetle", "emoji": "🪲", "segment": "underground", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/buzzy.png", "attack_animation": "shell_charge", "attack_sound": "/themes/mario/sfx/shell.mp3", "damage_effect": "shell_thud", "voice_tone": "Click-click mechanical chatter." },
-    { "id": "boo", "name": "Boo", "emoji": "👻", "segment": "underground", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/boo.png", "attack_animation": "ghost_lunge", "attack_sound": "/themes/mario/sfx/boo.mp3", "damage_effect": "ghost_chill", "voice_tone": "Giggle between sentences. Mischievous." },
-    { "id": "dry_bones", "name": "Dry Bones", "emoji": "💀", "segment": "underground", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/drybones.png", "attack_animation": "bone_throw", "attack_sound": "/themes/mario/sfx/bones.mp3", "damage_effect": "bone_bruise", "voice_tone": "Rattling laugh between lines." },
-    { "id": "cheep_cheep", "name": "Cheep-Cheep", "emoji": "🐟", "segment": "water_world", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/cheep.png", "attack_animation": "headbutt", "attack_sound": "/themes/mario/sfx/splash.mp3", "damage_effect": "soaked", "voice_tone": "Bubbly underwater voice." },
-    { "id": "blooper", "name": "Blooper", "emoji": "🦑", "segment": "water_world", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/blooper.png", "attack_animation": "ink_squirt", "attack_sound": "/themes/mario/sfx/ink.mp3", "damage_effect": "ink_blind", "voice_tone": "Gurgling, malevolent." },
-    { "id": "king_choomp", "name": "King Choomp", "emoji": "🦈", "segment": "water_world", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/choomp.png", "attack_animation": "mega_chomp", "attack_sound": "/themes/mario/sfx/chomp.mp3", "damage_effect": "tooth_gash", "voice_tone": "Royal underwater bellow." },
-    { "id": "lakitu", "name": "Lakitu", "emoji": "☁️", "segment": "sky_airship", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/lakitu.png", "attack_animation": "spiny_drop", "attack_sound": "/themes/mario/sfx/spiny.mp3", "damage_effect": "spiny_puncture", "voice_tone": "Smug, sing-song commentary." },
-    { "id": "bullet_bill", "name": "Bullet Bill", "emoji": "🚀", "segment": "sky_airship", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/bill.png", "attack_animation": "missile_launch", "attack_sound": "/themes/mario/sfx/cannon.mp3", "damage_effect": "explosion", "voice_tone": "Only mechanical whirring — no words." },
-    { "id": "bowser_jr", "name": "Bowser Jr.", "emoji": "🐢", "segment": "sky_airship", "hp_tier": "boss", "sprite_path": "/themes/mario/sprites/bowserjr.png", "attack_animation": "fire_breath", "attack_sound": "/themes/mario/sfx/fireball.mp3", "damage_effect": "burn", "voice_tone": "Bratty, overconfident young villain. Daddy's boy." },
-    { "id": "hammer_bro", "name": "Hammer Bro", "emoji": "🔨", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/hammer.png", "attack_animation": "hammer_volley", "attack_sound": "/themes/mario/sfx/hammer.mp3", "damage_effect": "hammer_bruise", "voice_tone": "Military cadence. Confident." },
-    { "id": "magikoopa", "name": "Magikoopa (Kamek)", "emoji": "🧙", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/magikoopa.png", "attack_animation": "magic_bolt", "attack_sound": "/themes/mario/sfx/magic.mp3", "damage_effect": "magic_burn", "voice_tone": "Crackling wizard cackle." },
-    { "id": "dry_bowser", "name": "Dry Bowser", "emoji": "☠️", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/drybowser.png", "attack_animation": "bone_flame", "attack_sound": "/themes/mario/sfx/bones.mp3", "damage_effect": "burn_bone", "voice_tone": "Undead growl with fire-crackle." },
-    { "id": "bowser", "name": "Bowser", "emoji": "🐉", "segment": "bowser_castle", "hp_tier": "boss", "sprite_path": "/themes/mario/sprites/bowser.png", "attack_animation": "mega_fire_breath", "attack_sound": "/themes/mario/sfx/bowser.mp3", "damage_effect": "inferno", "voice_tone": "Thundering roar, taunting. Wah-hah-hah." }
+    { "id": "goomba", "name": "Goomba", "emoji": "🍄", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "stomp_forward", "attack_sound": "/themes/mario/sfx/stomp.mp3", "damage_effect": "bonk", "voice_tone": "Grunt twice before each sentence." },
+    { "id": "koopa_troopa", "name": "Koopa Troopa", "emoji": "🐢", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "shell_spin", "attack_sound": "/themes/mario/sfx/shell.mp3", "damage_effect": "shell_knockback", "voice_tone": "Stoic, slow, determined." },
+    { "id": "piranha_plant", "name": "Piranha Plant", "emoji": "🌱", "segment": "mushroom_kingdom", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "chomp", "attack_sound": "/themes/mario/sfx/chomp.mp3", "damage_effect": "bite", "voice_tone": "Only snarls and chomping sounds." },
+    { "id": "buzzy_beetle", "name": "Buzzy Beetle", "emoji": "🪲", "segment": "underground", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "shell_charge", "attack_sound": "/themes/mario/sfx/shell.mp3", "damage_effect": "shell_thud", "voice_tone": "Click-click mechanical chatter." },
+    { "id": "boo", "name": "Boo", "emoji": "👻", "segment": "underground", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "ghost_lunge", "attack_sound": "/themes/mario/sfx/boo.mp3", "damage_effect": "ghost_chill", "voice_tone": "Giggle between sentences. Mischievous." },
+    { "id": "dry_bones", "name": "Dry Bones", "emoji": "💀", "segment": "underground", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "bone_throw", "attack_sound": "/themes/mario/sfx/bones.mp3", "damage_effect": "bone_bruise", "voice_tone": "Rattling laugh between lines." },
+    { "id": "cheep_cheep", "name": "Cheep-Cheep", "emoji": "🐟", "segment": "water_world", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "headbutt", "attack_sound": "/themes/mario/sfx/splash.mp3", "damage_effect": "soaked", "voice_tone": "Bubbly underwater voice." },
+    { "id": "blooper", "name": "Blooper", "emoji": "🦑", "segment": "water_world", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "ink_squirt", "attack_sound": "/themes/mario/sfx/ink.mp3", "damage_effect": "ink_blind", "voice_tone": "Gurgling, malevolent." },
+    { "id": "king_choomp", "name": "King Choomp", "emoji": "🦈", "segment": "water_world", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "mega_chomp", "attack_sound": "/themes/mario/sfx/chomp.mp3", "damage_effect": "tooth_gash", "voice_tone": "Royal underwater bellow." },
+    { "id": "lakitu", "name": "Lakitu", "emoji": "☁️", "segment": "sky_airship", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "spiny_drop", "attack_sound": "/themes/mario/sfx/spiny.mp3", "damage_effect": "spiny_puncture", "voice_tone": "Smug, sing-song commentary." },
+    { "id": "bullet_bill", "name": "Bullet Bill", "emoji": "🚀", "segment": "sky_airship", "hp_tier": "low", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "missile_launch", "attack_sound": "/themes/mario/sfx/cannon.mp3", "damage_effect": "explosion", "voice_tone": "Only mechanical whirring — no words." },
+    { "id": "bowser_jr", "name": "Bowser Jr.", "emoji": "🐢", "segment": "sky_airship", "hp_tier": "boss", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "fire_breath", "attack_sound": "/themes/mario/sfx/fireball.mp3", "damage_effect": "burn", "voice_tone": "Bratty, overconfident young villain. Daddy's boy." },
+    { "id": "hammer_bro", "name": "Hammer Bro", "emoji": "🔨", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "hammer_volley", "attack_sound": "/themes/mario/sfx/hammer.mp3", "damage_effect": "hammer_bruise", "voice_tone": "Military cadence. Confident." },
+    { "id": "magikoopa", "name": "Magikoopa (Kamek)", "emoji": "🧙", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "magic_bolt", "attack_sound": "/themes/mario/sfx/magic.mp3", "damage_effect": "magic_burn", "voice_tone": "Crackling wizard cackle." },
+    { "id": "dry_bowser", "name": "Dry Bowser", "emoji": "☠️", "segment": "bowser_castle", "hp_tier": "medium", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "bone_flame", "attack_sound": "/themes/mario/sfx/bones.mp3", "damage_effect": "burn_bone", "voice_tone": "Undead growl with fire-crackle." },
+    { "id": "bowser", "name": "Bowser", "emoji": "🐉", "segment": "bowser_castle", "hp_tier": "boss", "sprite_path": "/themes/mario/sprites/monsters/minotaur/minotaur.png", "attack_animation": "mega_fire_breath", "attack_sound": "/themes/mario/sfx/bowser.mp3", "damage_effect": "inferno", "voice_tone": "Thundering roar, taunting. Wah-hah-hah." }
   ],
   "avatars": [
-    { "id": "mario", "name": "Mario", "emoji": "🧢", "sprite": "/themes/mario/avatars/mario.png", "attack_anim": "jump_kick", "attack_sound": "/themes/mario/sfx/jump.mp3", "grunt": "/themes/mario/sfx/mario_yahoo.mp3" },
-    { "id": "luigi", "name": "Luigi", "emoji": "🟢", "sprite": "/themes/mario/avatars/luigi.png", "attack_anim": "high_jump", "attack_sound": "/themes/mario/sfx/jump.mp3", "grunt": "/themes/mario/sfx/luigi_yeah.mp3" },
-    { "id": "peach", "name": "Princess Peach", "emoji": "👑", "sprite": "/themes/mario/avatars/peach.png", "attack_anim": "parasol_spin", "attack_sound": "/themes/mario/sfx/parasol.mp3", "grunt": "/themes/mario/sfx/peach_hoh.mp3" }
+    { "id": "boy", "name": "Mario", "emoji": "🧢", "sprite": "/themes/mario/sprites/hero/boy/greey_boy.png", "sprite_gif": "/themes/mario/sprites/hero/boy/greek_boy.gif", "attack_anim": "jump_kick", "attack_sound": "/themes/mario/sfx/jump.mp3", "grunt": "/themes/mario/sfx/mario_yahoo.mp3" },
+    { "id": "girl", "name": "Luigi", "emoji": "🟢", "sprite": "/themes/mario/sprites/hero/girl/greey_girl.png", "sprite_gif": "/themes/mario/sprites/hero/girl/greek_girl.gif", "attack_anim": "high_jump", "attack_sound": "/themes/mario/sfx/jump.mp3", "grunt": "/themes/mario/sfx/luigi_yeah.mp3" },
+    { "id": "satyr", "name": "Princess Peach", "emoji": "👑", "sprite": "/themes/mario/sprites/hero/satyr/satyr.png", "sprite_gif": "/themes/mario/sprites/hero/satyr/satyr.gif", "attack_anim": "parasol_spin", "attack_sound": "/themes/mario/sfx/parasol.mp3", "grunt": "/themes/mario/sfx/peach_hoh.mp3" }
   ],
   "voice_tone_prompt": "Phrase questions with plumber-flavored Italian-American exclamations ('Mamma mia!', 'Let's-a go!', 'Wahoo!'). Reference coins, 1-Ups, mushrooms, and fire-flowers on wins. Use 'paisano' or 'hero' as address. Do NOT change the technical content of the question — only the flavor.",
   "victory_sfx": "/themes/mario/sfx/level_complete.mp3",

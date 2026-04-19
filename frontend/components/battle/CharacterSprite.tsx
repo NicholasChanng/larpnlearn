@@ -9,6 +9,7 @@ type TriggerKind = "idle" | "attack" | "hit" | "faint" | "victory";
 
 interface Props {
   emoji: string;
+  spriteSrc?: string | null;
   facing: "left" | "right";
   size?: "sm" | "md" | "lg" | "boss";
   trigger: TriggerKind;
@@ -23,6 +24,13 @@ const SIZE_CLASS: Record<NonNullable<Props["size"]>, string> = {
   boss: "text-9xl",
 };
 
+const SPRITE_PX: Record<NonNullable<Props["size"]>, number> = {
+  sm: 120,
+  md: 160,
+  lg: 240,
+  boss: 320,
+};
+
 /**
  * Pixelated character sprite with idle bob + triggered animations.
  *
@@ -33,6 +41,7 @@ const SIZE_CLASS: Record<NonNullable<Props["size"]>, string> = {
  */
 export function CharacterSprite({
   emoji,
+  spriteSrc,
   facing,
   size = "md",
   trigger,
@@ -93,13 +102,15 @@ export function CharacterSprite({
     run();
   }, [trigger, controls, facing]);
 
+  const px = SPRITE_PX[size];
+
   return (
     <div className="relative flex flex-col items-center">
-      <motion.span
+      <motion.div
         animate={controls}
         className={cn(
           "select-none drop-shadow-[0_6px_0_rgba(0,0,0,0.6)]",
-          SIZE_CLASS[size],
+          !spriteSrc && SIZE_CLASS[size],
           facing === "right" && "scale-x-[-1]",
         )}
         style={{
@@ -107,8 +118,20 @@ export function CharacterSprite({
           filter: trigger === "faint" ? "grayscale(1) brightness(0.5)" : undefined,
         }}
       >
-        {emoji}
-      </motion.span>
+        {spriteSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={spriteSrc}
+            alt={label ?? ""}
+            width={px}
+            height={px}
+            className="h-auto object-contain"
+            style={{ width: px, imageRendering: "pixelated" }}
+          />
+        ) : (
+          <span>{emoji}</span>
+        )}
+      </motion.div>
       {damageEffect && trigger === "hit" && (
         <motion.div
           className="pointer-events-none absolute inset-0 flex items-center justify-center text-5xl"

@@ -2,12 +2,13 @@
   "theme_id": "pokemon",
   "display_name": "Pokémon — The Kanto Gauntlet",
   "narrative": "A rookie trainer leaves Pallet Town with one partner. Route by route, gym by gym, climb from Viridian Forest all the way to the Elite Four and face the Champion's Charizard.",
+  "battle_bg": "/themes/pokemon/background/battles/battle_hell.png",
   "segments": [
     {
       "id": "pallet_route1",
       "range": [1, 3],
       "display_name": "Pallet Town & Route 1",
-      "bg_image": "/themes/pokemon/bg/pallet.png",
+      "bg_image": "/themes/pokemon/background/world/mountolympus.png",
       "bg_gradient": "linear-gradient(180deg, #b3e5fc 0%, #c5e1a5 70%, #81c784 100%)",
       "music": "/themes/pokemon/music/pallet.mp3",
       "music_tone": "Bright chiptune — gameboy overworld. Adventure is starting."
@@ -16,7 +17,7 @@
       "id": "viridian_forest",
       "range": [4, 6],
       "display_name": "Viridian Forest",
-      "bg_image": "/themes/pokemon/bg/forest.png",
+      "bg_image": "/themes/pokemon/background/world/athens.png",
       "bg_gradient": "linear-gradient(180deg, #388e3c 0%, #1b5e20 60%, #0d3313 100%)",
       "music": "/themes/pokemon/music/forest.mp3",
       "music_tone": "Mysterious low-fi chiptune with rustling percussion."
@@ -25,7 +26,7 @@
       "id": "mt_moon",
       "range": [7, 9],
       "display_name": "Mt. Moon",
-      "bg_image": "/themes/pokemon/bg/mt_moon.png",
+      "bg_image": "/themes/pokemon/background/world/aegen_sea.png",
       "bg_gradient": "linear-gradient(180deg, #4a148c 0%, #1a237e 60%, #000051 100%)",
       "music": "/themes/pokemon/music/cave.mp3",
       "music_tone": "Echoing chiptune cave theme. Sparse, unnerving."
@@ -34,7 +35,7 @@
       "id": "cerulean_vermilion",
       "range": [10, 12],
       "display_name": "Cerulean & Vermilion Gyms",
-      "bg_image": "/themes/pokemon/bg/city.png",
+      "bg_image": "/themes/pokemon/background/world/jungle.png",
       "bg_gradient": "linear-gradient(180deg, #4fc3f7 0%, #0288d1 60%, #01579b 100%)",
       "music": "/themes/pokemon/music/gym.mp3",
       "music_tone": "Urgent gym leader battle theme. Electric organ stabs."
@@ -43,34 +44,34 @@
       "id": "elite_four",
       "range": [13, 16],
       "display_name": "Indigo Plateau — Elite Four",
-      "bg_image": "/themes/pokemon/bg/elite_four.png",
+      "bg_image": "/themes/pokemon/background/world/hell.png",
       "bg_gradient": "linear-gradient(180deg, #311b92 0%, #b71c1c 60%, #000000 100%)",
       "music": "/themes/pokemon/music/elite_four.mp3",
       "music_tone": "Minor-key chiptune. Epic, final-tier boss."
     }
   ],
   "monsters": [
-    { "id": "rattata", "name": "Rattata", "emoji": "🐀", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/rattata.png", "attack_animation": "quick_attack", "attack_sound": "/themes/pokemon/sfx/tackle.mp3", "damage_effect": "scratch", "voice_tone": "Squeak and scurry. Terse, anxious." },
-    { "id": "pidgey", "name": "Pidgey", "emoji": "🕊️", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/pidgey.png", "attack_animation": "gust", "attack_sound": "/themes/pokemon/sfx/gust.mp3", "damage_effect": "feather_flurry", "voice_tone": "Chirp politely." },
-    { "id": "spearow", "name": "Spearow", "emoji": "🦜", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/spearow.png", "attack_animation": "peck", "attack_sound": "/themes/pokemon/sfx/peck.mp3", "damage_effect": "peck_bleed", "voice_tone": "Aggressive, territorial chirps." },
-    { "id": "caterpie", "name": "Caterpie", "emoji": "🐛", "segment": "viridian_forest", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/caterpie.png", "attack_animation": "string_shot", "attack_sound": "/themes/pokemon/sfx/string.mp3", "damage_effect": "webbed", "voice_tone": "Soft bug murmurs." },
-    { "id": "weedle", "name": "Weedle", "emoji": "🐞", "segment": "viridian_forest", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/weedle.png", "attack_animation": "poison_sting", "attack_sound": "/themes/pokemon/sfx/sting.mp3", "damage_effect": "poisoned", "voice_tone": "Sinister buzz." },
-    { "id": "beedrill", "name": "Beedrill", "emoji": "🐝", "segment": "viridian_forest", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/beedrill.png", "attack_animation": "twin_needle", "attack_sound": "/themes/pokemon/sfx/buzz.mp3", "damage_effect": "double_poison", "voice_tone": "Angry high-pitched buzz." },
-    { "id": "zubat", "name": "Zubat", "emoji": "🦇", "segment": "mt_moon", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/zubat.png", "attack_animation": "supersonic", "attack_sound": "/themes/pokemon/sfx/screech.mp3", "damage_effect": "confusion_daze", "voice_tone": "Echolocating squeaks." },
-    { "id": "geodude", "name": "Geodude", "emoji": "🪨", "segment": "mt_moon", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/geodude.png", "attack_animation": "rock_throw", "attack_sound": "/themes/pokemon/sfx/rock.mp3", "damage_effect": "rock_bruise", "voice_tone": "Stony grunts." },
-    { "id": "onix", "name": "Onix", "emoji": "🗿", "segment": "mt_moon", "hp_tier": "boss", "sprite_path": "/themes/pokemon/sprites/onix.png", "attack_animation": "rock_slide", "attack_sound": "/themes/pokemon/sfx/rumble.mp3", "damage_effect": "buried_rubble", "voice_tone": "Deep seismic roar. Brock's ace." },
-    { "id": "staryu", "name": "Staryu", "emoji": "⭐", "segment": "cerulean_vermilion", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/staryu.png", "attack_animation": "water_pulse", "attack_sound": "/themes/pokemon/sfx/water.mp3", "damage_effect": "soaked", "voice_tone": "Mechanical click-hum." },
-    { "id": "gyarados", "name": "Misty's Gyarados", "emoji": "🐉", "segment": "cerulean_vermilion", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/gyarados.png", "attack_animation": "hydro_pump", "attack_sound": "/themes/pokemon/sfx/hydro.mp3", "damage_effect": "drenched_knockback", "voice_tone": "Leviathan roar, relentless." },
-    { "id": "raichu", "name": "Lt. Surge's Raichu", "emoji": "⚡", "segment": "cerulean_vermilion", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/raichu.png", "attack_animation": "thunderbolt", "attack_sound": "/themes/pokemon/sfx/thunder.mp3", "damage_effect": "electrocution", "voice_tone": "Sharp, commanding yips." },
-    { "id": "alakazam", "name": "Sabrina's Alakazam", "emoji": "🔮", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/alakazam.png", "attack_animation": "psybeam", "attack_sound": "/themes/pokemon/sfx/psychic.mp3", "damage_effect": "psychic_headache", "voice_tone": "Telepathic, condescending, impossibly calm." },
-    { "id": "arcanine", "name": "Blaine's Arcanine", "emoji": "🐕", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/arcanine.png", "attack_animation": "flamethrower", "attack_sound": "/themes/pokemon/sfx/flame.mp3", "damage_effect": "burn", "voice_tone": "Regal bark, heroic growl." },
-    { "id": "dragonite", "name": "Lance's Dragonite", "emoji": "🐲", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/dragonite.png", "attack_animation": "hyper_beam", "attack_sound": "/themes/pokemon/sfx/hyperbeam.mp3", "damage_effect": "beam_scorch", "voice_tone": "Noble dragon growl." },
-    { "id": "charizard", "name": "Champion's Charizard", "emoji": "🐉🔥", "segment": "elite_four", "hp_tier": "boss", "sprite_path": "/themes/pokemon/sprites/charizard.png", "attack_animation": "blast_burn", "attack_sound": "/themes/pokemon/sfx/charizard_roar.mp3", "damage_effect": "ashes", "voice_tone": "Ancient, fiery, impatient. Wings flared." }
+    { "id": "rattata", "name": "Rattata", "emoji": "🐀", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "quick_attack", "attack_sound": "/themes/pokemon/sfx/tackle.mp3", "damage_effect": "scratch", "voice_tone": "Squeak and scurry. Terse, anxious." },
+    { "id": "pidgey", "name": "Pidgey", "emoji": "🕊️", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "gust", "attack_sound": "/themes/pokemon/sfx/gust.mp3", "damage_effect": "feather_flurry", "voice_tone": "Chirp politely." },
+    { "id": "spearow", "name": "Spearow", "emoji": "🦜", "segment": "pallet_route1", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "peck", "attack_sound": "/themes/pokemon/sfx/peck.mp3", "damage_effect": "peck_bleed", "voice_tone": "Aggressive, territorial chirps." },
+    { "id": "caterpie", "name": "Caterpie", "emoji": "🐛", "segment": "viridian_forest", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "string_shot", "attack_sound": "/themes/pokemon/sfx/string.mp3", "damage_effect": "webbed", "voice_tone": "Soft bug murmurs." },
+    { "id": "weedle", "name": "Weedle", "emoji": "🐞", "segment": "viridian_forest", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "poison_sting", "attack_sound": "/themes/pokemon/sfx/sting.mp3", "damage_effect": "poisoned", "voice_tone": "Sinister buzz." },
+    { "id": "beedrill", "name": "Beedrill", "emoji": "🐝", "segment": "viridian_forest", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "twin_needle", "attack_sound": "/themes/pokemon/sfx/buzz.mp3", "damage_effect": "double_poison", "voice_tone": "Angry high-pitched buzz." },
+    { "id": "zubat", "name": "Zubat", "emoji": "🦇", "segment": "mt_moon", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "supersonic", "attack_sound": "/themes/pokemon/sfx/screech.mp3", "damage_effect": "confusion_daze", "voice_tone": "Echolocating squeaks." },
+    { "id": "geodude", "name": "Geodude", "emoji": "🪨", "segment": "mt_moon", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "rock_throw", "attack_sound": "/themes/pokemon/sfx/rock.mp3", "damage_effect": "rock_bruise", "voice_tone": "Stony grunts." },
+    { "id": "onix", "name": "Onix", "emoji": "🗿", "segment": "mt_moon", "hp_tier": "boss", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "rock_slide", "attack_sound": "/themes/pokemon/sfx/rumble.mp3", "damage_effect": "buried_rubble", "voice_tone": "Deep seismic roar. Brock's ace." },
+    { "id": "staryu", "name": "Staryu", "emoji": "⭐", "segment": "cerulean_vermilion", "hp_tier": "low", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "water_pulse", "attack_sound": "/themes/pokemon/sfx/water.mp3", "damage_effect": "soaked", "voice_tone": "Mechanical click-hum." },
+    { "id": "gyarados", "name": "Misty's Gyarados", "emoji": "🐉", "segment": "cerulean_vermilion", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "hydro_pump", "attack_sound": "/themes/pokemon/sfx/hydro.mp3", "damage_effect": "drenched_knockback", "voice_tone": "Leviathan roar, relentless." },
+    { "id": "raichu", "name": "Lt. Surge's Raichu", "emoji": "⚡", "segment": "cerulean_vermilion", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "thunderbolt", "attack_sound": "/themes/pokemon/sfx/thunder.mp3", "damage_effect": "electrocution", "voice_tone": "Sharp, commanding yips." },
+    { "id": "alakazam", "name": "Sabrina's Alakazam", "emoji": "🔮", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "psybeam", "attack_sound": "/themes/pokemon/sfx/psychic.mp3", "damage_effect": "psychic_headache", "voice_tone": "Telepathic, condescending, impossibly calm." },
+    { "id": "arcanine", "name": "Blaine's Arcanine", "emoji": "🐕", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "flamethrower", "attack_sound": "/themes/pokemon/sfx/flame.mp3", "damage_effect": "burn", "voice_tone": "Regal bark, heroic growl." },
+    { "id": "dragonite", "name": "Lance's Dragonite", "emoji": "🐲", "segment": "elite_four", "hp_tier": "medium", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "hyper_beam", "attack_sound": "/themes/pokemon/sfx/hyperbeam.mp3", "damage_effect": "beam_scorch", "voice_tone": "Noble dragon growl." },
+    { "id": "charizard", "name": "Champion's Charizard", "emoji": "🐉🔥", "segment": "elite_four", "hp_tier": "boss", "sprite_path": "/themes/pokemon/sprites/monsters/minotaur/minotaur.png", "attack_animation": "blast_burn", "attack_sound": "/themes/pokemon/sfx/charizard_roar.mp3", "damage_effect": "ashes", "voice_tone": "Ancient, fiery, impatient. Wings flared." }
   ],
   "avatars": [
-    { "id": "pikachu", "name": "Pikachu", "emoji": "⚡", "sprite": "/themes/pokemon/avatars/pikachu.png", "attack_anim": "thunderbolt", "attack_sound": "/themes/pokemon/sfx/pikachu_attack.mp3", "grunt": "/themes/pokemon/sfx/pika.mp3" },
-    { "id": "charmander", "name": "Charmander", "emoji": "🔥", "sprite": "/themes/pokemon/avatars/charmander.png", "attack_anim": "ember", "attack_sound": "/themes/pokemon/sfx/ember.mp3", "grunt": "/themes/pokemon/sfx/char.mp3" },
-    { "id": "squirtle", "name": "Squirtle", "emoji": "💧", "sprite": "/themes/pokemon/avatars/squirtle.png", "attack_anim": "water_gun", "attack_sound": "/themes/pokemon/sfx/water_gun.mp3", "grunt": "/themes/pokemon/sfx/squirt.mp3" }
+    { "id": "boy", "name": "Pikachu", "emoji": "⚡", "sprite": "/themes/pokemon/sprites/hero/boy/greey_boy.png", "sprite_gif": "/themes/pokemon/sprites/hero/boy/greek_boy.gif", "attack_anim": "thunderbolt", "attack_sound": "/themes/pokemon/sfx/pikachu_attack.mp3", "grunt": "/themes/pokemon/sfx/pika.mp3" },
+    { "id": "girl", "name": "Charmander", "emoji": "🔥", "sprite": "/themes/pokemon/sprites/hero/girl/greey_girl.png", "sprite_gif": "/themes/pokemon/sprites/hero/girl/greek_girl.gif", "attack_anim": "ember", "attack_sound": "/themes/pokemon/sfx/ember.mp3", "grunt": "/themes/pokemon/sfx/char.mp3" },
+    { "id": "satyr", "name": "Squirtle", "emoji": "💧", "sprite": "/themes/pokemon/sprites/hero/satyr/satyr.png", "sprite_gif": "/themes/pokemon/sprites/hero/satyr/satyr.gif", "attack_anim": "water_gun", "attack_sound": "/themes/pokemon/sfx/water_gun.mp3", "grunt": "/themes/pokemon/sfx/squirt.mp3" }
   ],
   "voice_tone_prompt": "Phrase questions as a Pokémon trainer's prompt or a rival's taunt. Use moves as verbs ('Use Confusion!'), call out types ('It's super effective!'), reference gym badges on wins. Use 'trainer' or 'challenger' as address. Do NOT change the technical content of the question — only the flavor.",
   "victory_sfx": "/themes/pokemon/sfx/victory_jingle.mp3",

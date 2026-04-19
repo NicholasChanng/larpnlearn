@@ -11,13 +11,20 @@ interface LevelNodeProps {
   monster: ThemeMonster | null;
   isCurrent: boolean;
   avatarEmoji: string;
+  avatarSprite?: string | null;
 }
 
 /**
  * Trophy-road style node. Circular sprite with state-dependent coloring,
  * bouncy hover, and the player avatar pinned to the current level.
  */
-export function LevelNode({ level, monster, isCurrent, avatarEmoji }: LevelNodeProps) {
+export function LevelNode({
+  level,
+  monster,
+  isCurrent,
+  avatarEmoji,
+  avatarSprite,
+}: LevelNodeProps) {
   const disabled = level.state === "locked";
   const isExam = level.is_exam;
   const label =
@@ -54,26 +61,52 @@ export function LevelNode({ level, monster, isCurrent, avatarEmoji }: LevelNodeP
     >
       {isCurrent && (
         <motion.div
-          className="absolute -top-12 text-3xl"
+          className="absolute -top-16"
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         >
-          {avatarEmoji}
+          {avatarSprite ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={avatarSprite}
+              alt="avatar"
+              width={56}
+              height={56}
+              className="h-14 w-14 object-contain drop-shadow-[0_4px_0_rgba(0,0,0,0.5)]"
+              style={{ imageRendering: "pixelated" }}
+            />
+          ) : (
+            <span className="text-3xl">{avatarEmoji}</span>
+          )}
         </motion.div>
       )}
 
       <div
         className={cn(
-          "flex items-center justify-center rounded-full border-4",
+          "flex items-center justify-center overflow-hidden rounded-full border-4",
           "transition-all duration-300",
           size,
           borderColor,
           bgColor,
         )}
       >
-        <span className="text-4xl drop-shadow-lg" style={{ filter: disabled ? "grayscale(1) brightness(0.5)" : undefined }}>
-          {level.state === "locked" ? "🔒" : monster?.emoji ?? "❓"}
-        </span>
+        {level.state === "locked" ? (
+          <span className="text-4xl drop-shadow-lg" style={{ filter: "grayscale(1) brightness(0.5)" }}>
+            🔒
+          </span>
+        ) : monster?.sprite_path ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={monster.sprite_path}
+            alt={monster.name}
+            width={72}
+            height={72}
+            className="h-[80%] w-[80%] object-contain"
+            style={{ imageRendering: "pixelated" }}
+          />
+        ) : (
+          <span className="text-4xl drop-shadow-lg">{monster?.emoji ?? "❓"}</span>
+        )}
       </div>
 
       <div className="mt-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold tracking-wider text-yellow-100 backdrop-blur">
