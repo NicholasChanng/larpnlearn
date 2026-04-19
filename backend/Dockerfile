@@ -10,10 +10,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:${PATH}"
 
-COPY pyproject.toml ./
+COPY backend/pyproject.toml ./
 RUN uv sync --no-dev
 
-COPY . .
+COPY backend/ .
+COPY cs188/ /cs188/
 
 EXPOSE 8000
 
