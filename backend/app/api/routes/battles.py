@@ -71,6 +71,50 @@ def complete_battle(body: CompleteBattleRequest) -> CompleteBattleResponse:
     )
 
 
+def _compute_mcq_voice_counts(total_questions: int) -> tuple[int, int]:
+    if total_questions <= 0:
+        return 0, 0
+
+    floor_voice = total_questions // 4
+    ceil_voice = min(total_questions, floor_voice + 1)
+
+    def _distance_from_target(voice_count: int) -> float:
+        return abs((voice_count / total_questions) - 0.25)
+
+    if _distance_from_target(floor_voice) <= _distance_from_target(ceil_voice):
+        voice_count = floor_voice
+    else:
+        voice_count = ceil_voice
+
+    mcq_count = total_questions - voice_count
+    return mcq_count, voice_count
+
+
+def _split_mcq_across_subbatches(
+    batch_count: int,
+    batch_mcq_count: int,
+    left_count: int,
+    right_count: int,
+) -> tuple[int, int]:
+    if batch_count <= 0:
+        return 0, 0
+
+    left_mcq = int(batch_mcq_count * (left_count / batch_count))
+    left_mcq = max(0, min(left_count, left_mcq))
+    right_mcq = batch_mcq_count - left_mcq
+
+    if right_mcq > right_count:
+        overflow = right_mcq - right_count
+        right_mcq = right_count
+        left_mcq = min(left_count, left_mcq + overflow)
+    if left_mcq > left_count:
+        overflow = left_mcq - left_count
+        left_mcq = left_count
+        right_mcq = min(right_count, right_mcq + overflow)
+
+    return left_mcq, right_mcq
+
+
 async def _invoke_generation_batch(
     llm: ChatOpenAI,
     context: str,
@@ -132,8 +176,12 @@ Lecture context:
         left_count = batch_count // 2
         right_count = batch_count - left_count
 
-        left_mcq = min(batch_mcq_count, (left_count + 1) // 2)
-        right_mcq = max(0, batch_mcq_count - left_mcq)
+        left_mcq, right_mcq = _split_mcq_across_subbatches(
+            batch_count=batch_count,
+            batch_mcq_count=batch_mcq_count,
+            left_count=left_count,
+            right_count=right_count,
+        )
         left_voice = left_count - left_mcq
         right_voice = right_count - right_mcq
 
@@ -321,8 +369,7 @@ async def _generate_with_llm(
         retrieve_elapsed_ms,
     )
 
-    mcq_count = (num_of_questions + 1) // 2
-    voice_count = num_of_questions - mcq_count
+    mcq_count, voice_count = _compute_mcq_voice_counts(num_of_questions)
     difficulty_label = _difficulty_label(difficulty)
 
     llm = ChatOpenAI(
@@ -347,8 +394,22 @@ async def _generate_with_llm(
 
     while remaining_total > 0:
         batch_count = min(max_questions_per_llm_call, remaining_total)
-        batch_mcq_count = min(remaining_mcq, (batch_count + 1) // 2)
-        batch_voice_count = batch_count - batch_mcq_count
+        target_batch_mcq, target_batch_voice = _compute_mcq_voice_counts(batch_count)
+        batch_mcq_count = min(remaining_mcq, target_batch_mcq)
+        batch_voice_count = min(remaining_voice, target_batch_voice)
+
+        allocated = batch_mcq_count + batch_voice_count
+        if allocated < batch_count:
+            remaining_slots = batch_count - allocated
+            mcq_room = max(0, remaining_mcq - batch_mcq_count)
+            add_mcq = min(remaining_slots, mcq_room)
+            batch_mcq_count += add_mcq
+            remaining_slots -= add_mcq
+
+            if remaining_slots > 0:
+                voice_room = max(0, remaining_voice - batch_voice_count)
+                add_voice = min(remaining_slots, voice_room)
+                batch_voice_count += add_voice
 
         logger.info(
             "generate_with_llm:llm_batch_start call=%d batch_count=%d batch_mcq=%d batch_voice=%d",

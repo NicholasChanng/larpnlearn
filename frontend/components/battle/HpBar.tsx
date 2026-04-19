@@ -23,16 +23,19 @@ export function HpBar({
           {hp}/{max}
         </span>
       </div>
-      <motion.div
+      <div
         className={`h-8 overflow-hidden rounded-sm border-4 border-black/70 bg-black/50 shadow-inner ${
           align === "right" ? "ml-auto" : ""
         }`}
-        animate={{ width: `${pct}%` }}
-        initial={false}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className={`h-full w-full ${color}`} />
-      </motion.div>
+        <motion.div
+          className={`h-full ${color}`}
+          style={{ transformOrigin: align === "right" ? "right center" : "left center" }}
+          animate={{ scaleX: pct / 100 }}
+          initial={false}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        />
+      </div>
     </div>
   );
 }

@@ -8,14 +8,14 @@ import { Spinner } from "@/components/ui/Spinner";
 import { CloudLoadingOverlay } from "@/components/world/CloudLoadingOverlay";
 import { api } from "@/lib/api";
 import {
-  quizToQuestion,
-  type Level,
-  type LevelDetailResponse,
-  type QuizQuestionMetadata,
-  type WorldResponse,
+    quizToQuestion,
+    type Level,
+    type LevelDetailResponse,
+    type QuizQuestionMetadata,
+    type WorldResponse,
 } from "@/lib/types";
 import { useThemeManifest } from "@/lib/useTheme";
-import { useBattleStore, currentQuestion } from "@/store/useBattleStore";
+import { currentQuestion, useBattleStore } from "@/store/useBattleStore";
 import { useThemeStore } from "@/store/useThemeStore";
 import { useUserStore } from "@/store/useUserStore";
 
@@ -24,10 +24,10 @@ const DIFFICULTY = 5;
 
 function getBattleHp(level: Level): { userHp: number; monsterHp: number } {
   if (level.is_exam) {
-    if (level.exam_type === "final") return { userHp: 100, monsterHp: 250 };
-    return { userHp: 50, monsterHp: 100 };
+    if (level.exam_type === "final") return { userHp: 100, monsterHp: 100 };
+    return { userHp: 50, monsterHp: 50 };
   }
-  return { userHp: 30, monsterHp: 50 };
+  return { userHp: 30, monsterHp: 30 };
 }
 
 function computeNumQuestions(userHp: number, monsterHp: number): number {

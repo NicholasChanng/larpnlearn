@@ -69,6 +69,7 @@ class AudioManager {
     if (!howl) return;
     this.currentBgm = howl;
     this.currentBgmSrc = src;
+    howl.loop(true);
     howl.volume(0);
     try {
       howl.play();
@@ -100,6 +101,9 @@ class AudioManager {
   setMuted(v: boolean) {
     this.muted = v;
     Howler.mute(v);
+    if (!v && this.currentBgmSrc && !this.currentBgm?.playing()) {
+      this.playBgm(this.currentBgmSrc);
+    }
   }
 
   isMuted() {

@@ -10,7 +10,7 @@ import type { AvatarConfig, User } from "@/lib/types";
  * "boy" → greey_boy.png under every theme's `sprites/hero/boy/` folder.
  * Swap this when the avatar-selection UI lands.
  */
-export type AvatarCharacterId = "boy" | "girl" | "satyr";
+export type AvatarCharacterId = "boy" | "girl" | "satyr" | "typhon" | "hades" | "chimera" | "minotaur" | "cyclops" | "hydra" | "medusa" | "cerberus";
 
 export const DEFAULT_AVATAR_CHARACTER: AvatarCharacterId = "boy";
 
@@ -23,6 +23,14 @@ export const CHARACTER_PRICES: Record<AvatarCharacterId, number> = {
   boy: 0,
   girl: 500,
   satyr: 1000,
+  chimera: 1500,
+  minotaur: 2000,
+  cyclops: 2500,
+  typhon: 3000,
+  hydra: 3500,
+  medusa: 4000,
+  cerberus: 4500,
+  hades: 5000,
 };
 
 export type PurchaseResult = "ok" | "insufficient_points" | "already_owned";

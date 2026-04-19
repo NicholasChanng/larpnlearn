@@ -15,7 +15,7 @@ import {
   type AvatarCharacterId,
 } from "@/store/useUserStore";
 
-const CHARACTER_ORDER: AvatarCharacterId[] = ["boy", "girl", "satyr"];
+const CHARACTER_ORDER: AvatarCharacterId[] = ["boy", "girl", "satyr", "chimera", "minotaur", "cyclops", "typhon", "hydra", "medusa", "cerberus", "hades"];
 
 export default function ShopPage() {
   const manifest = useThemeManifest();
@@ -54,7 +54,7 @@ export default function ShopPage() {
             <h1 className="font-pixel text-4xl font-bold tracking-wider text-yellow-100 drop-shadow">
               SHOP
             </h1>
-            <p className="mt-1 text-sm text-slate-400">
+            <p className="mt-1 font-pixel text-xs uppercase tracking-[0.3em] text-yellow-500/85">
               Purchase new heroes with points earned in battle. Equip anyone you own.
             </p>
           </div>

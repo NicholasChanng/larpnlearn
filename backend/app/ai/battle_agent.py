@@ -82,7 +82,7 @@ Retrieved lecture context:
 Generate exactly {n} questions for a {battle_type} battle.
 Type distribution:
 - {mcq_count} multiple_choice — exactly 4 options, one correct
-- {short_count} short_answer — 1-2 sentences, include a rubric
+- {short_count} short_answer (voice) — 1-2 sentences, include a rubric
 
 Difficulty: mix easy / medium / hard roughly evenly.
 Phrase each prompt in {monster_name}'s voice, but do NOT alter the technical content.
@@ -116,6 +116,25 @@ def _get_llm() -> ChatOpenAI:
     )
 
 
+def _compute_mcq_short_counts(total_questions: int) -> tuple[int, int]:
+    if total_questions <= 0:
+        return 0, 0
+
+    floor_short = total_questions // 4
+    ceil_short = min(total_questions, floor_short + 1)
+
+    def _distance_from_target(short_count: int) -> float:
+        return abs((short_count / total_questions) - 0.25)
+
+    if _distance_from_target(floor_short) <= _distance_from_target(ceil_short):
+        short_count = floor_short
+    else:
+        short_count = ceil_short
+
+    mcq_count = total_questions - short_count
+    return mcq_count, short_count
+
+
 async def generate_questions(
     course_id: str,
     lecture_ids: list[str],
@@ -134,8 +153,7 @@ async def generate_questions(
     context_docs = await retrieve_for_battle(course_id, lecture_ids, battle_type, query)
 
     n = _QUESTION_COUNTS[battle_type]
-    mcq_count = max(1, n // 2 + n % 2)
-    short_count = n - mcq_count
+    mcq_count, short_count = _compute_mcq_short_counts(n)
 
     prompt = ChatPromptTemplate.from_messages(
         [("system", _SYSTEM_PROMPT), ("human", _USER_PROMPT)]

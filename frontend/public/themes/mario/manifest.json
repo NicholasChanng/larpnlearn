@@ -10,7 +10,7 @@
       "display_name": "Mushroom Kingdom",
       "bg_image": "/themes/mario/background/world/mountolympus.png",
       "bg_gradient": "linear-gradient(180deg, #64b5f6 0%, #a5d6a7 70%, #66bb6a 100%)",
-      "music": "/themes/mario/music/overworld.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Classic NES overworld — cheerful, bouncy, 6/8."
     },
     {
@@ -19,7 +19,7 @@
       "display_name": "Underground Pipes",
       "bg_image": "/themes/mario/background/world/athens.png",
       "bg_gradient": "linear-gradient(180deg, #3e2723 0%, #1b0f0a 60%, #000000 100%)",
-      "music": "/themes/mario/music/underground.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Classic underground theme — tense, staccato, minor key."
     },
     {
@@ -28,7 +28,7 @@
       "display_name": "Water World",
       "bg_image": "/themes/mario/background/world/aegen_sea.png",
       "bg_gradient": "linear-gradient(180deg, #4fc3f7 0%, #01579b 70%, #002171 100%)",
-      "music": "/themes/mario/music/water.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Waltz-time underwater theme. Floaty, graceful."
     },
     {
@@ -37,7 +37,7 @@
       "display_name": "Sky Airships",
       "bg_image": "/themes/mario/background/world/jungle.png",
       "bg_gradient": "linear-gradient(180deg, #bbdefb 0%, #90caf9 60%, #ffb74d 100%)",
-      "music": "/themes/mario/music/sky.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Airship march — brass-forward, military, triumphant."
     },
     {
@@ -46,7 +46,7 @@
       "display_name": "Bowser's Castle",
       "bg_image": "/themes/mario/background/world/hell.png",
       "bg_gradient": "linear-gradient(180deg, #424242 0%, #b71c1c 60%, #000000 100%)",
-      "music": "/themes/mario/music/castle.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Castle theme — menacing, heavy percussion, minor-key ostinato."
     }
   ],

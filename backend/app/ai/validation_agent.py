@@ -26,8 +26,10 @@ class _ValidationResult(BaseModel):
 
 _SYSTEM_PROMPT = (
     "You grade short spoken student responses for correctness. "
-    "Be strict about factual accuracy and whether required points are covered, "
-    "but tolerant of phrasing differences."
+    "Be lenient for spoken answers: allow minor wording issues, disfluencies, "
+    "and small omissions if the core concept is correct. "
+    "Mark correct=True when the student demonstrates substantially correct understanding "
+    "and avoids major conceptual errors."
 )
 
 _USER_PROMPT = """Question:
@@ -40,6 +42,12 @@ Student response:
 {student_response}
 
 Return concise feedback and a boolean correctness decision.
+
+Lenient grading rules for voice answers:
+- Prioritize conceptual understanding over exact phrasing.
+- Accept informal wording and minor transcription artifacts.
+- If most key requirements are met and there are no critical misconceptions, mark correct=true.
+- Mark correct=false only when core understanding is missing or clearly incorrect.
 """
 
 

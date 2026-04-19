@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { GlobalAudioController } from "@/components/layout/GlobalAudioController";
 import { GlobalNav } from "@/components/layout/GlobalNav";
 
 import "./globals.css";
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen font-sans antialiased">
+        <GlobalAudioController />
         {children}
         <GlobalNav />
       </body>

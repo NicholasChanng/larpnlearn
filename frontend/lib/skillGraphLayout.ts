@@ -14,8 +14,8 @@ export interface LayoutResult {
 
 /**
  * Run Dagre over the backend DAG and emit React Flow nodes/edges.
- * `BT` direction puts foundational (level 0) skills at the bottom so the
- * graph grows upward toward advanced topics — matches SRS FR-SKL-02.
+ * `TB` direction puts foundational (level 0) skills at the top so the
+ * graph grows downward toward advanced topics.
  */
 export function layoutSkillGraph(
   backendNodes: SkillDagNode[],
@@ -23,7 +23,7 @@ export function layoutSkillGraph(
 ): LayoutResult {
   const g = new dagre.graphlib.Graph();
   g.setGraph({
-    rankdir: "BT",
+    rankdir: "TB",
     nodesep: 60,
     ranksep: 90,
     marginx: 24,
@@ -52,8 +52,8 @@ export function layoutSkillGraph(
         y: (pos?.y ?? 0) - NODE_HEIGHT / 2,
       },
       data: { node: n },
-      sourcePosition: Position.Top,
-      targetPosition: Position.Bottom,
+      sourcePosition: Position.Bottom,
+      targetPosition: Position.Top,
     };
   });
 

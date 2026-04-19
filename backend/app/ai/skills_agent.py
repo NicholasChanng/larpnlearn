@@ -31,6 +31,10 @@ from ..models import (
 logger = logging.getLogger("uvicorn.error")
 logger.setLevel(logging.INFO)
 
+MIN_MAIN_CONCEPT_NODES = 8
+MAX_MAIN_CONCEPT_NODES = 14
+MAX_MAIN_CONCEPT_EDGES = 16
+
 
 class _LlmSkillNode(BaseModel):
     id: str
@@ -147,6 +151,46 @@ def _build_context(retrieved_docs: list[Document]) -> tuple[str, int]:
     return "\n\n".join(snippets), total_chars
 
 
+def _lecture_overview_snippets(lecture_payloads: list[dict]) -> list[str]:
+    snippets: list[str] = []
+    for payload in sorted(lecture_payloads, key=lambda p: p.get("order_index", 10_000)):
+        lecture_id = payload.get("lecture_id", "unknown")
+        title = payload.get("title", "Untitled Lecture")
+        topics = payload.get("topics") or []
+        topic_text = ", ".join(topics[:6]) if topics else "No explicit topics listed"
+        snippets.append(f"[{lecture_id}] {title} | Core topics: {topic_text}")
+    return snippets
+
+
+def _build_context_with_coverage(
+    retrieved_docs: list[Document],
+    lecture_payloads: list[dict],
+) -> tuple[str, int]:
+    snippets: list[str] = []
+    total_chars = 0
+
+    for overview in _lecture_overview_snippets(lecture_payloads):
+        if total_chars >= settings.max_context_chars:
+            break
+        remaining = settings.max_context_chars - total_chars
+        clipped = overview[:remaining]
+        snippets.append(clipped)
+        total_chars += len(clipped)
+
+    for doc in retrieved_docs:
+        if total_chars >= settings.max_context_chars:
+            break
+        snippet = doc.page_content[: settings.max_context_chunk_chars]
+        if not snippet:
+            continue
+        remaining = settings.max_context_chars - total_chars
+        clipped = snippet[:remaining]
+        snippets.append(clipped)
+        total_chars += len(clipped)
+
+    return "\n\n".join(snippets), total_chars
+
+
 def _slugify(raw: str) -> str:
     lowered = raw.strip().lower()
     normalized = re.sub(r"[^a-z0-9]+", "_", lowered).strip("_")
@@ -188,7 +232,7 @@ def _build_fallback_graph_from_lectures(
             if title:
                 topics = [title]
 
-        topics = topics[:4]
+        topics = topics[:3]
         lecture_base_level = max(0, int(payload.get("order_index", 1)) - 1) * 2
         lecture_node_ids: list[str] = []
 
@@ -277,7 +321,13 @@ def _build_fallback_graph_from_lectures(
             )
 
     nodes = list(node_by_id.values())
-    nodes.sort(key=lambda n: (n.level, n.label.lower()))
+    nodes, edges = _prune_graph_size(
+        nodes,
+        edges,
+        min_nodes=MIN_MAIN_CONCEPT_NODES,
+        max_nodes=MAX_MAIN_CONCEPT_NODES,
+        max_edges=MAX_MAIN_CONCEPT_EDGES,
+    )
     max_level = max((node.level for node in nodes), default=0)
 
     return SkillDagGraph(
@@ -286,6 +336,210 @@ def _build_fallback_graph_from_lectures(
         edges=edges,
         max_level=max_level,
     )
+
+
+def _recompute_levels(nodes: list[SkillDagNode], edges: list[SkillDagEdge]) -> None:
+    node_by_id = {node.id: node for node in nodes}
+    if not node_by_id:
+        return
+
+    indegree = {node_id: 0 for node_id in node_by_id}
+    outgoing: dict[str, list[str]] = {node_id: [] for node_id in node_by_id}
+
+    for edge in edges:
+        if edge.source not in node_by_id or edge.target not in node_by_id:
+            continue
+        indegree[edge.target] += 1
+        outgoing[edge.source].append(edge.target)
+
+    queue = sorted(
+        [node_id for node_id, degree in indegree.items() if degree == 0],
+        key=lambda node_id: (node_by_id[node_id].level, node_by_id[node_id].label.lower()),
+    )
+    levels = {node_id: 0 for node_id in queue}
+    processed = 0
+
+    while queue:
+        current = queue.pop(0)
+        processed += 1
+        current_level = levels.get(current, 0)
+
+        for nxt in outgoing.get(current, []):
+            levels[nxt] = max(levels.get(nxt, 0), current_level + 1)
+            indegree[nxt] -= 1
+            if indegree[nxt] == 0:
+                queue.append(nxt)
+        queue.sort(key=lambda node_id: (node_by_id[node_id].level, node_by_id[node_id].label.lower()))
+
+    if processed != len(node_by_id):
+        min_level = min(node.level for node in nodes)
+        for node in nodes:
+            node.level = max(0, node.level - min_level)
+        return
+
+    for node in nodes:
+        node.level = max(0, levels.get(node.id, 0))
+
+
+def _prune_graph_size(
+    nodes: list[SkillDagNode],
+    edges: list[SkillDagEdge],
+    min_nodes: int,
+    max_nodes: int,
+    max_edges: int,
+) -> tuple[list[SkillDagNode], list[SkillDagEdge]]:
+    if not nodes:
+        return [], []
+
+    node_by_id = {node.id: node for node in nodes}
+    degree = {node.id: 0 for node in nodes}
+    for edge in edges:
+        if edge.source in degree:
+            degree[edge.source] += 1
+        if edge.target in degree:
+            degree[edge.target] += 1
+
+    keep_ids: set[str] = set()
+    nodes_by_level: dict[int, list[SkillDagNode]] = {}
+    for node in nodes:
+        nodes_by_level.setdefault(node.level, []).append(node)
+
+    for level in sorted(nodes_by_level.keys()):
+        if len(keep_ids) >= max_nodes:
+            break
+        ranked_at_level = sorted(
+            nodes_by_level[level],
+            key=lambda node: (-degree.get(node.id, 0), -len(node.lecture_refs), node.label.lower()),
+        )
+        if ranked_at_level:
+            keep_ids.add(ranked_at_level[0].id)
+
+    lecture_to_nodes: dict[str, list[SkillDagNode]] = {}
+    for node in nodes:
+        for lecture_ref in node.lecture_refs:
+            lecture_to_nodes.setdefault(lecture_ref, []).append(node)
+
+    for lecture_ref in sorted(lecture_to_nodes.keys()):
+        if len(keep_ids) >= max_nodes:
+            break
+        ranked_for_lecture = sorted(
+            lecture_to_nodes[lecture_ref],
+            key=lambda node: (-degree.get(node.id, 0), node.level, node.label.lower()),
+        )
+        if ranked_for_lecture:
+            keep_ids.add(ranked_for_lecture[0].id)
+
+    globally_ranked = sorted(
+        nodes,
+        key=lambda node: (
+            -degree.get(node.id, 0),
+            node.level,
+            -len(node.lecture_refs),
+            node.label.lower(),
+        ),
+    )
+    for node in globally_ranked:
+        if len(keep_ids) >= max_nodes:
+            break
+        keep_ids.add(node.id)
+
+    if len(keep_ids) < min_nodes:
+        for node in globally_ranked:
+            if len(keep_ids) >= min_nodes:
+                break
+            keep_ids.add(node.id)
+
+    if not keep_ids:
+        keep_ids.add(globally_ranked[0].id)
+
+    pruned_nodes = [node_by_id[node_id] for node_id in keep_ids if node_id in node_by_id]
+
+    pruned_edges = [
+        edge
+        for edge in edges
+        if edge.source in keep_ids and edge.target in keep_ids and edge.source != edge.target
+    ]
+
+    pruned_edges = _shape_tree_edges(pruned_nodes, pruned_edges, max_edges=max_edges)
+
+    _recompute_levels(pruned_nodes, pruned_edges)
+    pruned_nodes.sort(key=lambda node: (node.level, node.label.lower()))
+    return pruned_nodes, pruned_edges
+
+
+def _shape_tree_edges(
+    nodes: list[SkillDagNode],
+    edges: list[SkillDagEdge],
+    max_edges: int,
+) -> list[SkillDagEdge]:
+    node_by_id = {node.id: node for node in nodes}
+    if not node_by_id:
+        return []
+
+    incoming: dict[str, list[SkillDagEdge]] = {node.id: [] for node in nodes}
+    for edge in edges:
+        if edge.source in node_by_id and edge.target in node_by_id:
+            incoming[edge.target].append(edge)
+
+    ordered_nodes = sorted(nodes, key=lambda node: (node.level, node.label.lower()))
+    min_level = min(node.level for node in ordered_nodes)
+    roots = {node.id for node in ordered_nodes if node.level == min_level}
+
+    tree_edges: list[SkillDagEdge] = []
+    seen_pairs: set[tuple[str, str]] = set()
+
+    for node in ordered_nodes:
+        if node.id in roots:
+            continue
+
+        target_refs = set(node.lecture_refs)
+        best_parent_edge: SkillDagEdge | None = None
+        best_score: tuple[int, int, str] | None = None
+
+        for edge in incoming.get(node.id, []):
+            source_node = node_by_id[edge.source]
+            if source_node.level >= node.level:
+                continue
+            shared = len(set(source_node.lecture_refs) & target_refs)
+            level_gap = node.level - source_node.level
+            score = (shared, -level_gap, source_node.label.lower())
+            if best_score is None or score > best_score:
+                best_score = score
+                best_parent_edge = edge
+
+        if best_parent_edge is None:
+            candidates = [candidate for candidate in ordered_nodes if candidate.level < node.level]
+            if not candidates:
+                continue
+            parent = max(
+                candidates,
+                key=lambda candidate: (
+                    len(set(candidate.lecture_refs) & target_refs),
+                    candidate.level,
+                    candidate.label.lower(),
+                ),
+            )
+            source = parent.id
+            rationale = "Core prerequisite branch"
+        else:
+            source = best_parent_edge.source
+            rationale = best_parent_edge.rationale
+
+        pair = (source, node.id)
+        if pair in seen_pairs:
+            continue
+        seen_pairs.add(pair)
+        tree_edges.append(
+            SkillDagEdge(
+                id=f"e_tree_{len(tree_edges)}_{source}_{node.id}",
+                source=source,
+                target=node.id,
+                rationale=rationale,
+            )
+        )
+
+    max_tree_edges = min(max_edges, max(0, len(nodes) - 1))
+    return tree_edges[:max_tree_edges]
 
 
 async def build_skills_graph(
@@ -309,11 +563,24 @@ async def build_skills_graph(
 
     retrieve_start = time.perf_counter()
     retriever = _build_retriever(docs)
-    retrieved_docs = await retriever.ainvoke(
-        "Build prerequisite concept DAG from foundational to advanced topics for this course"
-    )
+    retrieval_queries = [
+        "Foundational concepts and prerequisites across all provided lectures",
+        "Mid-level bridges that connect early and late lecture ideas",
+        "Advanced concepts introduced in later lectures",
+        "Representative concepts from each lecture that should appear in a study graph",
+    ]
+    retrieved_docs: list[Document] = []
+    seen_doc_keys: set[str] = set()
+    for query in retrieval_queries:
+        docs_for_query = await retriever.ainvoke(query)
+        for doc in docs_for_query:
+            key = f"{doc.metadata.get('lecture_id','')}::{doc.page_content[:120]}"
+            if key in seen_doc_keys:
+                continue
+            seen_doc_keys.add(key)
+            retrieved_docs.append(doc)
     retrieval_elapsed_ms = int((time.perf_counter() - retrieve_start) * 1000)
-    context, context_chars = _build_context(retrieved_docs)
+    context, context_chars = _build_context_with_coverage(retrieved_docs, lecture_payloads)
 
     llm = ChatOpenAI(
         model="gpt-5-mini",
@@ -327,20 +594,27 @@ async def build_skills_graph(
             (
                 "system",
                 "You are a curriculum graph planner. Return only valid DAG content. "
-                "Assign level 0 to most foundational concepts and increase levels by prerequisite depth. "
-                "No cycles. Keep nodes reusable and non-duplicative.",
+                "Use only core, overarching concepts (concept families), not narrow sub-techniques. "
+                "Assign level 0 to foundational concepts and increase levels by prerequisite depth. "
+                "No cycles. Merge similar concepts instead of splitting them.",
             ),
             (
                 "human",
                 """Generate a compact concept DAG for course_id={course_id}.
 
 Requirements:
-- Produce 8-16 concept nodes.
+- Produce exactly 9-14 concept nodes.
+- Aim for a tree-like hierarchy with broad branching, not a dense mesh.
+- Maximum 16 edges.
 - Each node has id, label, description, level, lecture_refs.
-- Keep description <= 14 words.
+- Keep each node as an overarching concept only.
+- Keep description <= 18 words and explain why the concept matters.
 - Edges must point from foundational -> more advanced.
-- Keep rationale <= 12 words.
+- Most nodes should have exactly one direct prerequisite parent.
+- Level 0 must be the most foundational row (top of the graph).
+- Keep rationale <= 10 words.
 - Use lecture ids from this set when possible: {lecture_ids}
+- Ensure every lecture contributes at least one node (via lecture_refs coverage).
 
 Context:
 {context}
@@ -353,18 +627,19 @@ Context:
             (
                 "system",
                 "You are a curriculum graph planner. Return only valid DAG content. "
-                "No cycles. Keep output short and minimal.",
+                "No cycles. Keep output short, minimal, and only core concepts.",
             ),
             (
                 "human",
                 """Generate a minimal concept DAG for course_id={course_id}.
-
 Hard limits:
 - Exactly 8-10 nodes.
 - Maximum 12 edges.
-- Node description <= 8 words.
+- Node description <= 14 words.
 - Edge rationale <= 8 words.
-- Use only most essential concepts.
+- Use only most essential overarching concepts.
+- Level 0 must be foundational.
+- Keep a tree-like parent/child structure.
 
 Lecture ids: {lecture_ids}
 Context:
@@ -477,7 +752,13 @@ Context:
     if not normalized_nodes:
         raise HTTPException(status_code=502, detail="Skills agent produced an empty graph")
 
-    normalized_nodes.sort(key=lambda n: (n.level, n.label.lower()))
+    normalized_nodes, normalized_edges = _prune_graph_size(
+        normalized_nodes,
+        normalized_edges,
+        min_nodes=MIN_MAIN_CONCEPT_NODES,
+        max_nodes=MAX_MAIN_CONCEPT_NODES,
+        max_edges=MAX_MAIN_CONCEPT_EDGES,
+    )
     max_level = max(node.level for node in normalized_nodes)
 
     total_elapsed_ms = int((time.perf_counter() - total_start) * 1000)
@@ -541,7 +822,7 @@ async def build_skill_insight(
         [
             (
                 "system",
-                "You are an AI tutor. Keep explanations concise and practical. "
+                "You are an AI tutor. Explain concepts clearly with intuition first, then mechanics. "
                 "Choose add-ons that genuinely help understanding.",
             ),
             (
@@ -549,7 +830,8 @@ async def build_skill_insight(
                 """Create a concise skill insight for concept {skill_id} in course {course_id}.
 
 Required output:
-- summary: 2-4 bullets
+- summary: 3-6 bullets with 1-2 sentences each
+- include intuition, why it matters, and a common pitfall or confusion
 - pseudocode: optional, include when algorithmic
 - visualization_type + visualization_content: optional, include mermaid or text diagram when helpful
 - addons: optional additional aids judged useful by you

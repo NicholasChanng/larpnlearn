@@ -154,6 +154,7 @@ export interface ThemeAvatar {
   name?: string;
   emoji?: string;
   sprite: string;
+  sprite_idle?: string;
   sprite_gif?: string;
   attack_anim: string;
   attack_sound?: string;

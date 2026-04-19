@@ -11,7 +11,7 @@
       "bg_image": "/themes/greek/background/world/mountolympus.png",
       "battle_bg": "/themes/greek/background/battles/battle_mountolypus.png",
       "bg_gradient": "linear-gradient(180deg, #fff8e1 0%, #ffe082 40%, #ffb74d 100%)",
-      "music": "/themes/greek/music/olympus.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Bright, triumphant French horns and harp arpeggios. Olympian fanfare."
     },
     {
@@ -21,7 +21,7 @@
       "bg_image": "/themes/greek/background/world/athens.png",
       "battle_bg": "/themes/greek/background/battles/battle_athens.png",
       "bg_gradient": "linear-gradient(180deg, #fff3e0 0%, #ffcc80 50%, #bf8050 100%)",
-      "music": "/themes/greek/music/athens.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Lyre ostinato, pastoral flutes. Daytime civic bustle."
     },
     {
@@ -31,7 +31,7 @@
       "bg_image": "/themes/greek/background/world/aegen_sea.png",
       "battle_bg": "/themes/greek/background/battles/battle_aegen_sea.png",
       "bg_gradient": "linear-gradient(180deg, #b3e5fc 0%, #0288d1 60%, #01579b 100%)",
-      "music": "/themes/greek/music/aegean.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Wordless female choir over rolling cellos. Mist and danger."
     },
     {
@@ -41,7 +41,7 @@
       "bg_image": "/themes/greek/background/world/jungle.png",
       "battle_bg": "/themes/greek/background/battles/battle_jungle.png",
       "bg_gradient": "linear-gradient(180deg, #aed581 0%, #558b2f 50%, #33691e 100%)",
-      "music": "/themes/greek/music/island.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Percussive, primal drums with aulos wails. Untamed wilderness."
     },
     {
@@ -51,32 +51,32 @@
       "bg_image": "/themes/greek/background/world/hell.png",
       "battle_bg": "/themes/greek/background/battles/battle_hell.png",
       "bg_gradient": "linear-gradient(180deg, #3e2723 0%, #7f0000 50%, #000000 100%)",
-      "music": "/themes/greek/music/underworld.mp3",
+      "music": "/assets/Greek%20Mythology%20Music%20-%20Hephaestus_%20God%20of%20the%20Forge.mp3",
       "music_tone": "Choral bass chants, timpani, distant echoing strings. Dread and judgment."
     }
   ],
   "monsters": [
-    { "id": "minor_spirit", "name": "Minor Spirit", "emoji": "👻", "segment": "olympus", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "wisp_strike", "attack_sound": "/themes/greek/sfx/whoosh.mp3", "damage_effect": "ghost_chill", "voice_tone": "Whisper cryptically, as if from a great distance." },
-    { "id": "wind_nymph", "name": "Wind Nymph", "emoji": "🌬️", "segment": "olympus", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "gust", "attack_sound": "/themes/greek/sfx/wind.mp3", "damage_effect": "gust_knockback", "voice_tone": "Lilt in airy rhymes." },
-    { "id": "apollo_oracle", "name": "Apollo's Oracle", "emoji": "☀️", "segment": "olympus", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "sunbeam", "attack_sound": "/themes/greek/sfx/chime.mp3", "damage_effect": "blinding_light", "voice_tone": "Pronounce every sentence as a riddle." },
-    { "id": "satyr", "name": "Satyr", "emoji": "🐐", "segment": "athens", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "horn_charge", "attack_sound": "/themes/greek/sfx/stomp.mp3", "damage_effect": "bleeding_scratch", "voice_tone": "Taunt in crude rustic Greek." },
-    { "id": "harpy", "name": "Harpy", "emoji": "🦅", "segment": "athens", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "talon_dive", "attack_sound": "/themes/greek/sfx/screech.mp3", "damage_effect": "talon_gash", "voice_tone": "Shriek and cackle between words." },
+    { "id": "chimera", "name": "The Chimera", "emoji": "🦁", "segment": "olympus", "hp_tier": "low", "sprite_path": "/themes/greek/sprites/monsters/chimera/chimeraIdle.gif", "attack_animation": "fire_breath", "attack_sound": "/themes/greek/sfx/roar.mp3", "damage_effect": "acidic_burn", "voice_tone": "Roar in overlapping voices — lion, goat, serpent." },
     { "id": "minotaur", "name": "Minotaur", "emoji": "🐂", "segment": "athens", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "bull_charge", "attack_sound": "/themes/greek/sfx/roar.mp3", "damage_effect": "gore", "voice_tone": "Bellow and snort. Monosyllabic rage." },
-    { "id": "siren", "name": "Siren", "emoji": "🧜\u200d♀️", "segment": "aegean", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "song_wave", "attack_sound": "/themes/greek/sfx/siren.mp3", "damage_effect": "hypnosis_daze", "voice_tone": "Sing the question as luring melody." },
-    { "id": "kraken", "name": "The Kraken", "emoji": "🐙", "segment": "aegean", "hp_tier": "boss", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "tentacle_crush", "attack_sound": "/themes/greek/sfx/kraken.mp3", "damage_effect": "crushed_drowning", "voice_tone": "Rumble from the abyss. Ancient and vast." },
-    { "id": "scylla", "name": "Scylla", "emoji": "🐍", "segment": "aegean", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "six_headed_bite", "attack_sound": "/themes/greek/sfx/hiss.mp3", "damage_effect": "venom_bite", "voice_tone": "Hiss in overlapping voices." },
-    { "id": "cyclops", "name": "Polyphemus the Cyclops", "emoji": "👁️", "segment": "island", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "boulder_hurl", "attack_sound": "/themes/greek/sfx/rumble.mp3", "damage_effect": "crushed", "voice_tone": "Speak slow, dim-witted, and furious." },
-    { "id": "medusa", "name": "Medusa", "emoji": "🗿", "segment": "island", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "petrify_gaze", "attack_sound": "/themes/greek/sfx/stone.mp3", "damage_effect": "petrification", "voice_tone": "Hiss softly. Every word a threat." },
-    { "id": "hydra", "name": "Lernaean Hydra", "emoji": "🐲", "segment": "island", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "multi_head_strike", "attack_sound": "/themes/greek/sfx/hydra.mp3", "damage_effect": "acidic_burn", "voice_tone": "Speak in a chorus of overlapping heads." },
-    { "id": "cerberus", "name": "Cerberus", "emoji": "🐺", "segment": "underworld", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "triple_bite", "attack_sound": "/themes/greek/sfx/cerberus.mp3", "damage_effect": "triple_bite_bleed", "voice_tone": "Three snarling voices in fractured unison." },
-    { "id": "charon", "name": "Charon", "emoji": "⛵", "segment": "underworld", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "oar_strike", "attack_sound": "/themes/greek/sfx/splash.mp3", "damage_effect": "soul_drain", "voice_tone": "Rasp, bored, demanding a toll." },
-    { "id": "shade_achilles", "name": "Shade of Achilles", "emoji": "⚔️", "segment": "underworld", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "spear_thrust", "attack_sound": "/themes/greek/sfx/clash.mp3", "damage_effect": "wound", "voice_tone": "Speak with a warrior's grief and pride." },
-    { "id": "hades", "name": "Hades, Lord of the Underworld", "emoji": "💀", "segment": "underworld", "hp_tier": "boss", "sprite_path": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "attack_animation": "flame_burst", "attack_sound": "/themes/greek/sfx/hades.mp3", "damage_effect": "hellfire_incineration", "voice_tone": "Cold, patient, final. The judgment of a god." }
+    { "id": "hydra", "name": "Lernaean Hydra", "emoji": "🐲", "segment": "aegean", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/hydra/hydraIdle.gif", "attack_animation": "multi_head_strike", "attack_sound": "/themes/greek/sfx/hydra.mp3", "damage_effect": "acidic_burn", "voice_tone": "Speak in a chorus of overlapping heads." },
+    { "id": "typhon", "name": "Typhon, Father of Monsters", "emoji": "🌪️", "segment": "aegean", "hp_tier": "boss", "sprite_path": "/themes/greek/sprites/boss/typhon/typhonIdle.gif", "attack_animation": "storm_surge", "attack_sound": "/themes/greek/sfx/roar.mp3", "damage_effect": "crushed_drowning", "voice_tone": "Roar from the depths of Tartarus. Ancient chaos given form." },
+    { "id": "cyclops", "name": "Polyphemus the Cyclops", "emoji": "👁️", "segment": "island", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/cyclops/cyclopsIdle.gif", "attack_animation": "boulder_hurl", "attack_sound": "/themes/greek/sfx/rumble.mp3", "damage_effect": "crushed", "voice_tone": "Speak slow, dim-witted, and furious." },
+    { "id": "medusa", "name": "Medusa", "emoji": "🗿", "segment": "island", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/medusa/medusaIdle.gif", "attack_animation": "petrify_gaze", "attack_sound": "/themes/greek/sfx/stone.mp3", "damage_effect": "petrification", "voice_tone": "Hiss softly. Every word a threat." },
+    { "id": "cerberus", "name": "Cerberus", "emoji": "🐺", "segment": "underworld", "hp_tier": "medium", "sprite_path": "/themes/greek/sprites/monsters/cerberus/cerberus.png", "attack_animation": "triple_bite", "attack_sound": "/themes/greek/sfx/cerberus.mp3", "damage_effect": "triple_bite_bleed", "voice_tone": "Three snarling voices in fractured unison." },
+    { "id": "hades", "name": "Hades, Lord of the Underworld", "emoji": "💀", "segment": "underworld", "hp_tier": "boss", "sprite_path": "/themes/greek/sprites/boss/hades/hadesIdle.gif", "attack_animation": "flame_burst", "attack_sound": "/themes/greek/sfx/hades.mp3", "damage_effect": "hellfire_incineration", "voice_tone": "Cold, patient, final. The judgment of a god." }
   ],
   "avatars": [
-    { "id": "boy", "name": "Odysseus", "emoji": "🗡️", "sprite": "/themes/greek/sprites/hero/boy/greey_boy.png", "sprite_gif": "/themes/greek/sprites/hero/boy/greek_boy.gif", "attack_anim": "sword_slash", "attack_sound": "/themes/greek/sfx/slash.mp3", "grunt": "/themes/greek/sfx/hero_grunt.mp3" },
-    { "id": "girl", "name": "Atalanta", "emoji": "🏹", "sprite": "/themes/greek/sprites/hero/girl/greey_girl.png", "sprite_gif": "/themes/greek/sprites/hero/girl/greek_girl.gif", "attack_anim": "spear_thrust", "attack_sound": "/themes/greek/sfx/spear.mp3", "grunt": "/themes/greek/sfx/heroine_grunt.mp3" },
-    { "id": "satyr", "name": "Plato", "emoji": "📜", "sprite": "/themes/greek/sprites/hero/satyr/satyr.png", "sprite_gif": "/themes/greek/sprites/hero/satyr/satyr.gif", "attack_anim": "scroll_throw", "attack_sound": "/themes/greek/sfx/scroll.mp3", "grunt": "/themes/greek/sfx/scholar_grunt.mp3" }
+    { "id": "boy", "name": "Odysseus", "emoji": "🗡️", "sprite": "/themes/greek/sprites/hero/boy/greey_boy.png", "sprite_idle": "/themes/greek/sprites/hero/boy/greek_boy_idle.gif", "sprite_gif": "/themes/greek/sprites/hero/boy/greek_boy.gif", "attack_anim": "sword_slash", "attack_sound": "/themes/greek/sfx/slash.mp3", "grunt": "/themes/greek/sfx/hero_grunt.mp3" },
+    { "id": "girl", "name": "Atalanta", "emoji": "🏹", "sprite": "/themes/greek/sprites/hero/girl/greey_girl.png", "sprite_idle": "/themes/greek/sprites/hero/girl/greek_girl_idle.gif", "sprite_gif": "/themes/greek/sprites/hero/girl/greek_girl.gif", "attack_anim": "spear_thrust", "attack_sound": "/themes/greek/sfx/spear.mp3", "grunt": "/themes/greek/sfx/heroine_grunt.mp3" },
+    { "id": "satyr", "name": "Plato", "emoji": "📜", "sprite": "/themes/greek/sprites/hero/satyr/satyr.png", "sprite_idle": "/themes/greek/sprites/hero/satyr/satyrIdle.gif", "sprite_gif": "/themes/greek/sprites/hero/satyr/satyr.gif", "attack_anim": "scroll_throw", "attack_sound": "/themes/greek/sfx/scroll.mp3", "grunt": "/themes/greek/sfx/scholar_grunt.mp3" },
+    { "id": "chimera", "name": "Chimera", "emoji": "🦁", "sprite": "/themes/greek/sprites/monsters/chimera/chimera.png", "sprite_idle": "/themes/greek/sprites/monsters/chimera/chimeraIdle.gif", "sprite_gif": "/themes/greek/sprites/monsters/chimera/chimeraSpin.gif", "attack_anim": "fire_breath", "attack_sound": "/themes/greek/sfx/roar.mp3" },
+    { "id": "minotaur", "name": "Minotaur", "emoji": "🐂", "sprite": "/themes/greek/sprites/monsters/minotaur/minotaur.png", "sprite_idle": "/themes/greek/sprites/monsters/minotaur/minotaur.gif", "sprite_gif": "/themes/greek/sprites/monsters/minotaur/minotaur.gif", "attack_anim": "bull_charge", "attack_sound": "/themes/greek/sfx/roar.mp3" },
+    { "id": "cyclops", "name": "Cyclops", "emoji": "👁️", "sprite": "/themes/greek/sprites/monsters/cyclops/cyclops.png", "sprite_idle": "/themes/greek/sprites/monsters/cyclops/cyclopsIdle.gif", "sprite_gif": "/themes/greek/sprites/monsters/cyclops/cyclopsSpin.gif", "attack_anim": "boulder_hurl", "attack_sound": "/themes/greek/sfx/rumble.mp3" },
+    { "id": "typhon", "name": "Typhon", "emoji": "🌪️", "sprite": "/themes/greek/sprites/boss/typhon/typhon.png", "sprite_idle": "/themes/greek/sprites/boss/typhon/typhonIdle.gif", "sprite_gif": "/themes/greek/sprites/boss/typhon/typhonSpin.gif", "attack_anim": "storm_surge", "attack_sound": "/themes/greek/sfx/roar.mp3" },
+    { "id": "hydra", "name": "Hydra", "emoji": "🐲", "sprite": "/themes/greek/sprites/monsters/hydra/hydra.png", "sprite_idle": "/themes/greek/sprites/monsters/hydra/hydraIdle.gif", "sprite_gif": "/themes/greek/sprites/monsters/hydra/hydraSpin.gif", "attack_anim": "multi_head_strike", "attack_sound": "/themes/greek/sfx/hydra.mp3" },
+    { "id": "medusa", "name": "Medusa", "emoji": "🗿", "sprite": "/themes/greek/sprites/monsters/medusa/south.png", "sprite_idle": "/themes/greek/sprites/monsters/medusa/medusaIdle.gif", "sprite_gif": "/themes/greek/sprites/monsters/medusa/medusaSpin.gif", "attack_anim": "petrify_gaze", "attack_sound": "/themes/greek/sfx/stone.mp3" },
+    { "id": "cerberus", "name": "Cerberus", "emoji": "🐺", "sprite": "/themes/greek/sprites/monsters/cerberus/cerberus.png", "sprite_idle": "/themes/greek/sprites/monsters/cerberus/cerberus.png", "sprite_gif": "/themes/greek/sprites/monsters/cerberus/cerberusSpin.gif", "attack_anim": "triple_bite", "attack_sound": "/themes/greek/sfx/cerberus.mp3" },
+    { "id": "hades", "name": "Hades", "emoji": "💀", "sprite": "/themes/greek/sprites/boss/hades/hades.png", "sprite_idle": "/themes/greek/sprites/boss/hades/hadesIdle.gif", "sprite_gif": "/themes/greek/sprites/boss/hades/hadesSpin.gif", "attack_anim": "flame_burst", "attack_sound": "/themes/greek/sfx/hades.mp3" }
   ],
   "voice_tone_prompt": "Phrase questions with formal, oracle-like language. Address the student as 'mortal', 'hero', or 'seeker'. Invoke Olympus, the Fates, and the gods when praising correct answers; rebuke with threats of Tartarus when incorrect. Do NOT change the technical content of the question — only the flavor. Use the speaking monster's voice_tone field to color the phrasing for that specific battle.",
   "victory_sfx": "/themes/greek/sfx/victory_fanfare.mp3",
