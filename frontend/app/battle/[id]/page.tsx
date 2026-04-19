@@ -22,10 +22,10 @@ const DIFFICULTY = 5;
 
 function getBattleHp(level: Level): { userHp: number; monsterHp: number } {
   if (level.is_exam) {
-    if (level.exam_type === "final") return { userHp: 100, monsterHp: 500 };
-    return { userHp: 50, monsterHp: 300 };
+    if (level.exam_type === "final") return { userHp: 100, monsterHp: 250 };
+    return { userHp: 50, monsterHp: 100 };
   }
-  return { userHp: 30, monsterHp: 100 };
+  return { userHp: 30, monsterHp: 50 };
 }
 
 function computeNumQuestions(userHp: number, monsterHp: number): number {

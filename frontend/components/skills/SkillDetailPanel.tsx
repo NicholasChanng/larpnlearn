@@ -41,7 +41,7 @@ export function SkillDetailPanel({
     insight?.visualization?.type === "mermaid" && insight.visualization.content;
 
   return (
-    <aside className="flex h-full w-full max-w-md flex-col border-l border-border bg-background/95 backdrop-blur">
+    <aside className="flex h-full w-full flex-col border-l border-border bg-background/95 backdrop-blur">
       <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground">

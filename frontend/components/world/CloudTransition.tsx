@@ -80,13 +80,13 @@ export function CloudTransition({ trigger, onMidpoint, onComplete }: Props) {
   }, [trigger]);
 
   return (
-    <div className="pointer-events-none absolute inset-0 z-40 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
       <motion.img
         src="/assets/cloudspixelright.png"
         alt=""
         aria-hidden
         draggable={false}
-        initial={{ x: "-120%", scale: 1.2 }}
+        initial={{ x: "-120%", scale: 1.3 }}
         animate={left}
         className="absolute inset-y-0 left-0 h-full w-auto max-w-[60%] select-none object-contain"
         style={{ imageRendering: "pixelated" }}
@@ -96,7 +96,7 @@ export function CloudTransition({ trigger, onMidpoint, onComplete }: Props) {
         alt=""
         aria-hidden
         draggable={false}
-        initial={{ x: "120%", scale: 1.2 }}
+        initial={{ x: "120%", scale: 1.3 }}
         animate={right}
         className="absolute inset-y-0 right-0 h-full w-auto max-w-[60%] select-none object-contain"
         style={{ imageRendering: "pixelated" }}

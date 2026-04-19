@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { GlobalNav } from "@/components/layout/GlobalNav";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen font-sans antialiased">{children}</body>
+      <body className="min-h-screen font-sans antialiased">
+        {children}
+        <GlobalNav />
+      </body>
     </html>
   );
 }

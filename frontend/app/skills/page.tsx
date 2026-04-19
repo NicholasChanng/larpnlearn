@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactFlow, {
   Background,
   Controls,
@@ -29,9 +29,38 @@ const SKILL_GRAPH_COURSE_ID = "cs188";
 
 const nodeTypes = { skill: SkillNode };
 
+const PANEL_MIN_WIDTH = 280;
+const PANEL_MAX_WIDTH = 900;
+const PANEL_DEFAULT_WIDTH = 420;
+
 export default function SkillsPage() {
   const [world, setWorld] = useState<WorldResponse | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [panelWidth, setPanelWidth] = useState(PANEL_DEFAULT_WIDTH);
+  const resizingRef = useRef(false);
+
+  const startResize = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    resizingRef.current = true;
+
+    const onMove = (ev: MouseEvent) => {
+      if (!resizingRef.current) return;
+      const next = window.innerWidth - ev.clientX;
+      const clamped = Math.max(PANEL_MIN_WIDTH, Math.min(PANEL_MAX_WIDTH, next));
+      setPanelWidth(clamped);
+    };
+    const onUp = () => {
+      resizingRef.current = false;
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      document.body.style.userSelect = "";
+      document.body.style.cursor = "";
+    };
+    document.body.style.userSelect = "none";
+    document.body.style.cursor = "col-resize";
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }, []);
 
   const { graph, status, error, insights, loadGraph, loadInsight } =
     useSkillGraphStore();
@@ -109,7 +138,7 @@ export default function SkillsPage() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-background">
+    <main className="flex h-screen flex-col overflow-hidden bg-background">
       <TopBar />
       <section className="flex flex-1 flex-col overflow-hidden">
         <div className="flex items-baseline justify-between px-6 py-4">
@@ -162,18 +191,34 @@ export default function SkillsPage() {
           </div>
 
           {decoratedSelectedNode && (
-            <SkillDetailPanel
-              node={decoratedSelectedNode}
-              entry={insights[decoratedSelectedNode.id]}
-              onClose={() => setSelectedId(null)}
-              onRetry={() =>
-                loadInsight({
-                  skillId: decoratedSelectedNode.id,
-                  courseId: SKILL_GRAPH_COURSE_ID,
-                  lectureIds,
-                })
-              }
-            />
+            <>
+              <div
+                role="separator"
+                aria-orientation="vertical"
+                onMouseDown={startResize}
+                className="group relative w-1 shrink-0 cursor-col-resize bg-border hover:bg-primary/60"
+                title="Drag to resize"
+              >
+                <div className="absolute inset-y-0 -left-1 -right-1" />
+              </div>
+              <div
+                className="h-full shrink-0"
+                style={{ width: `${panelWidth}px` }}
+              >
+                <SkillDetailPanel
+                  node={decoratedSelectedNode}
+                  entry={insights[decoratedSelectedNode.id]}
+                  onClose={() => setSelectedId(null)}
+                  onRetry={() =>
+                    loadInsight({
+                      skillId: decoratedSelectedNode.id,
+                      courseId: SKILL_GRAPH_COURSE_ID,
+                      lectureIds,
+                    })
+                  }
+                />
+              </div>
+            </>
           )}
         </div>
       </section>
