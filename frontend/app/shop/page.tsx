@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { TopBar } from "@/components/layout/TopBar";
+import { StatsWidget } from "@/components/layout/StatsWidget";
 import { Button } from "@/components/ui/button";
 import { CloudLoadingOverlay } from "@/components/world/CloudLoadingOverlay";
 import { cn } from "@/lib/utils";
@@ -46,7 +46,7 @@ export default function ShopPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-950">
-      <TopBar />
+      <StatsWidget />
       <section className="mx-auto max-w-6xl px-6 py-10">
         <div className="mb-8 flex items-end justify-between">
           <div>

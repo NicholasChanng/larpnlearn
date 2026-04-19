@@ -11,7 +11,7 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 
-import { TopBar } from "@/components/layout/TopBar";
+import { StatsWidget } from "@/components/layout/StatsWidget";
 import { SkillDetailPanel } from "@/components/skills/SkillDetailPanel";
 import { SkillNode } from "@/components/skills/SkillNode";
 import { CloudLoadingOverlay } from "@/components/world/CloudLoadingOverlay";
@@ -138,8 +138,8 @@ export default function SkillsPage() {
   };
 
   return (
-    <main className="flex h-screen flex-col overflow-hidden bg-background">
-      <TopBar />
+    <main className="flex min-h-screen flex-col bg-background">
+      <StatsWidget />
       <section className="flex flex-1 flex-col overflow-hidden">
         <div className="flex items-baseline justify-between px-6 py-4">
           <h1 className="text-2xl font-bold">Skills Graph</h1>

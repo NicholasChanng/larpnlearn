@@ -133,7 +133,7 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
     <div
       ref={containerRef}
       tabIndex={0}
-      className="relative h-[calc(100vh-120px)] w-full overflow-hidden focus:outline-none"
+      className="relative h-screen w-full overflow-hidden focus:outline-none"
     >
       {/* Single-region panel. Wrap this in AnimatePresence later for transitions. */}
       <div key={segment.id} className="absolute inset-0">
