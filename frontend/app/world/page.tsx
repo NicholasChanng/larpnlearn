@@ -98,9 +98,9 @@ function ToolRow({
             Skills
           </Button>
         </Link>
-        <Link href="/avatar">
+        <Link href="/shop">
           <Button size="sm" variant="outline">
-            Avatar
+            Shop
           </Button>
         </Link>
       </div>

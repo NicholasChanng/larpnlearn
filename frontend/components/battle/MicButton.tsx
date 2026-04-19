@@ -5,15 +5,12 @@ import { Mic, Square } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-/**
- * Mic button — Track-2 wires up actual MediaRecorder upload via
- * api.battles.answer({ audio_blob_b64 }).
- *
- * For the skeleton this is a UI-only scaffold: clicking toggles a recording
- * state and fires onTranscript(stub) when released. Real transcription lands
- * when Track-5 finishes Whisper.
- */
-export function MicButton({ onTranscript }: { onTranscript: (text: string) => void }) {
+interface MicButtonProps {
+  onTranscript?: (text: string) => void;
+  onAudio?: (base64: string) => void;
+}
+
+export function MicButton({ onTranscript, onAudio }: MicButtonProps) {
   const [recording, setRecording] = useState(false);
   const [blocked, setBlocked] = useState(false);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -28,11 +25,13 @@ export function MicButton({ onTranscript }: { onTranscript: (text: string) => vo
       mr.onstop = async () => {
         stream.getTracks().forEach((t) => t.stop());
         const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-        // Stub — encode then hand off via onTranscript. Real path uploads
-        // base64 blob with the answer and waits for Whisper transcription.
         const buf = await blob.arrayBuffer();
-        const b64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
-        onTranscript(`[audio ${Math.round(b64.length / 1024)} KB — Whisper pending]`);
+        const bytes = new Uint8Array(buf);
+        let binary = "";
+        for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+        const b64 = btoa(binary);
+        onAudio?.(b64);
+        onTranscript?.(`[audio recorded — ${Math.round(b64.length / 1024)} KB]`);
       };
       mr.start();
       mediaRecorderRef.current = mr;

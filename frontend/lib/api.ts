@@ -6,18 +6,17 @@
  */
 
 import type {
-  AnswerRequest,
-  AnswerResponse,
   AvatarConfig,
-  Battle,
-  BattleSummary,
   Course,
+  GenerateQuestionsRequest,
+  GenerateQuestionsResponse,
   LevelDetailResponse,
   ProgressResponse,
   SkillsGraph,
-  StartBattleResponse,
   Theme,
   User,
+  ValidateAnswerRequest,
+  ValidateAnswerResponse,
   VisualizeResponse,
   WorldResponse,
 } from "./types";
@@ -75,20 +74,16 @@ export const api = {
   },
 
   battles: {
-    start: (levelId: string) =>
-      request<StartBattleResponse>("/battles/start", {
-        method: "POST",
-        json: { level_id: levelId },
-      }),
-    answer: (battleId: string, body: AnswerRequest) =>
-      request<AnswerResponse>(`/battles/${battleId}/answer`, {
+    generateQuestions: (body: GenerateQuestionsRequest) =>
+      request<GenerateQuestionsResponse>("/battles/generate-questions", {
         method: "POST",
         json: body,
       }),
-    abandon: (battleId: string) =>
-      request<Battle>(`/battles/${battleId}/abandon`, { method: "POST" }),
-    summary: (battleId: string) =>
-      request<BattleSummary>(`/battles/${battleId}/summary`),
+    validateAnswer: (body: ValidateAnswerRequest) =>
+      request<ValidateAnswerResponse>("/battles/validate-answer", {
+        method: "POST",
+        json: body,
+      }),
   },
 
   skills: {

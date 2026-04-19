@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 
 import { loadThemeManifest } from "./theme";
-import type { Theme, ThemeManifest, ThemeMonster, ThemeSegment } from "./types";
+import type { Theme, ThemeAvatar, ThemeManifest, ThemeMonster, ThemeSegment } from "./types";
+import { DEFAULT_AVATAR_CHARACTER, type AvatarCharacterId } from "@/store/useUserStore";
 import { useThemeStore } from "@/store/useThemeStore";
 
 /**
@@ -60,4 +61,37 @@ export function monsterForLevel(
   if (regulars.length === 0) return pool[0];
   const offsetWithinSegment = orderIndex - segment.range[0];
   return regulars[offsetWithinSegment % regulars.length];
+}
+
+/**
+ * Resolve the avatar entry for the given character id against the manifest's
+ * avatars[]. Manifests list avatars in the canonical order boy/girl/satyr
+ * (see public/themes/README.md); we match by `id` first and fall back to the
+ * first avatar.
+ */
+export function avatarForCharacter(
+  manifest: ThemeManifest | null,
+  characterId: AvatarCharacterId = DEFAULT_AVATAR_CHARACTER,
+): ThemeAvatar | null {
+  if (!manifest) return null;
+  return manifest.avatars.find((a) => a.id === characterId) ?? manifest.avatars[0] ?? null;
+}
+
+/**
+ * Path to the battle-scene background for a given level. Resolution order:
+ *   1. The segment's own `battle_bg` (per-region art).
+ *   2. The manifest-level `battle_bg` fallback.
+ *   3. `background/battles/battle_hell.png` as the last resort.
+ */
+export function battleBgForLevel(
+  manifest: ThemeManifest | null,
+  orderIndex: number,
+): string | null {
+  if (!manifest) return null;
+  const segment = segmentForLevel(manifest, orderIndex);
+  return (
+    segment?.battle_bg ??
+    manifest.battle_bg ??
+    `/themes/${manifest.theme_id}/background/battles/battle_hell.png`
+  );
 }

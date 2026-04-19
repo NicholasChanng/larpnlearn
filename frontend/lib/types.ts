@@ -129,6 +129,7 @@ export interface ThemeSegment {
   display_name?: string;
   bg_image: string;
   bg_gradient?: string;
+  battle_bg?: string;
   music: string;
   music_tone?: string;
 }
@@ -153,6 +154,7 @@ export interface ThemeAvatar {
   name?: string;
   emoji?: string;
   sprite: string;
+  sprite_gif?: string;
   attack_anim: string;
   attack_sound?: string;
   grunt?: string;
@@ -162,6 +164,7 @@ export interface ThemeManifest {
   theme_id: Theme;
   display_name: string;
   narrative?: string;
+  battle_bg?: string;
   segments: ThemeSegment[];
   monsters: ThemeMonster[];
   avatars: ThemeAvatar[];
@@ -284,4 +287,78 @@ export interface LevelDetailResponse {
   level: Level;
   lecture: Lecture;
   monster: MonsterConfig;
+}
+
+// ---------- Battle MVP API (post-PR #1) ----------
+
+export type QuizQuestionType = "mcq" | "voice";
+
+export interface QuizQuestionMetadata {
+  id: number;
+  question_type: QuizQuestionType;
+  content: string;
+  answer_choices: string[] | null;
+  explanation_for_answer_choices: string[] | null;
+  index_of_correct_answer: number | null;
+  response_requirements: string[] | null;
+  topic: string | null;
+}
+
+export interface GenerateQuestionsRequest {
+  lecture_ids: string[];
+  num_of_questions: number;
+  difficulty: number;
+}
+
+export interface GenerateQuestionsMetadata {
+  total_elapsed_ms: number;
+  retrieval_elapsed_ms: number;
+  llm_elapsed_ms: number;
+  retrieved_docs: number;
+  context_chars: number;
+  timeout_s: number;
+  llm_calls: number;
+}
+
+export interface GenerateQuestionsResponse {
+  question_data: QuizQuestionMetadata[];
+  num_of_questions: number;
+  metadata: GenerateQuestionsMetadata | null;
+}
+
+export interface ValidateAnswerRequest {
+  user_response?: string | null;
+  audio_blob_b64?: string | null;
+  question_metadata: QuizQuestionMetadata;
+}
+
+export interface ValidateAnswerResponse {
+  feedback: string;
+  correct: boolean;
+  transcript: string | null;
+}
+
+/**
+ * Adapt a backend QuizQuestionMetadata into the frontend's Question shape so
+ * existing battle UI code (speech bubble, MCQ grid, etc.) keeps working.
+ */
+export function quizToQuestion(meta: QuizQuestionMetadata): Question {
+  const type: QuestionType = meta.question_type === "voice" ? "spoken" : "mcq";
+  const correctText =
+    meta.question_type === "mcq" &&
+    meta.index_of_correct_answer != null &&
+    meta.answer_choices
+      ? meta.answer_choices[meta.index_of_correct_answer] ?? ""
+      : "";
+  return {
+    id: String(meta.id),
+    type,
+    difficulty: "medium",
+    prompt: meta.content,
+    options: meta.answer_choices ?? null,
+    correct_answer: correctText,
+    rubric: meta.response_requirements?.join("\n") ?? null,
+    concepts_tested: meta.topic ? [meta.topic] : [],
+    source_lecture_id: "",
+  };
 }
