@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button";
 import { audio } from "@/lib/audio";
 import type { Level, Question, ThemeManifest, ThemeMonster } from "@/lib/types";
 import {
-    avatarForCharacter,
-    battleBgForLevel,
-    monsterForLevel,
-    segmentForLevel,
+  avatarForCharacter,
+  battleBgForLevel,
+  monsterForLevel,
+  segmentForLevel,
 } from "@/lib/useTheme";
 import type { BattlePhase } from "@/store/useBattleStore";
 import { useUserStore } from "@/store/useUserStore";
@@ -30,7 +30,10 @@ interface BattleSceneProps {
   userHpMax: number;
   monsterHp: number;
   monsterHpMax: number;
-  onSubmit: (answer: string, audioBlobB64?: string | null) => Promise<void> | void;
+  onSubmit: (
+    answer: string,
+    audioBlobB64?: string | null,
+  ) => Promise<void> | void;
   onAdvance: () => void;
   phase: BattlePhase;
   feedback: string | null;
@@ -211,7 +214,7 @@ export function BattleScene({
 
         <div
           className="z-10 flex w-[min(42vw,36rem)] max-w-[36rem] flex-col items-start gap-3"
-          style={{ transform: "translateY(-100px)" }}
+          style={{ transform: "translate(200px, -125px)" }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-2 w-full">
@@ -238,7 +241,7 @@ export function BattleScene({
 
         <div
           className="z-10 flex w-[min(42vw,36rem)] max-w-[36rem] flex-col items-end gap-3"
-          style={{ transform: "translateY(-100px)" }}
+          style={{ transform: "translate(-200px, -125px)" }}
         >
           <div className="mb-2 w-full">
             <SpeechBubble text={bubbleText} from="right" className="w-full" />
@@ -279,7 +282,8 @@ export function BattleScene({
             exit={{ opacity: 0 }}
             className="absolute inset-0 z-30 flex items-center justify-center"
             style={{
-              background: "repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px, transparent 1px, transparent 3px), rgba(0,0,0,0.88)",
+              background:
+                "repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px, transparent 1px, transparent 3px), rgba(0,0,0,0.88)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -290,34 +294,52 @@ export function BattleScene({
               className="relative text-center"
               style={{
                 imageRendering: "pixelated",
-                border: phase === "won"
-                  ? "4px solid #facc15"
-                  : "4px solid #ef4444",
-                boxShadow: phase === "won"
-                  ? "0 0 0 4px #000, 0 0 0 8px #facc15, 0 0 32px 8px #facc1588, inset 0 0 40px rgba(0,0,0,0.8)"
-                  : "0 0 0 4px #000, 0 0 0 8px #ef4444, 0 0 32px 8px #ef444488, inset 0 0 40px rgba(0,0,0,0.8)",
-                background: phase === "won"
-                  ? "linear-gradient(180deg, #1a1200 0%, #000 100%)"
-                  : "linear-gradient(180deg, #1a0000 0%, #000 100%)",
+                border:
+                  phase === "won" ? "4px solid #facc15" : "4px solid #ef4444",
+                boxShadow:
+                  phase === "won"
+                    ? "0 0 0 4px #000, 0 0 0 8px #facc15, 0 0 32px 8px #facc1588, inset 0 0 40px rgba(0,0,0,0.8)"
+                    : "0 0 0 4px #000, 0 0 0 8px #ef4444, 0 0 32px 8px #ef444488, inset 0 0 40px rgba(0,0,0,0.8)",
+                background:
+                  phase === "won"
+                    ? "linear-gradient(180deg, #1a1200 0%, #000 100%)"
+                    : "linear-gradient(180deg, #1a0000 0%, #000 100%)",
                 padding: "2.5rem 3rem",
                 minWidth: 340,
               }}
             >
               {/* Corner pixel decorations */}
-              {[["top-0 left-0","border-t-4 border-l-4"],["top-0 right-0","border-t-4 border-r-4"],["bottom-0 left-0","border-b-4 border-l-4"],["bottom-0 right-0","border-b-4 border-r-4"]].map(([pos, border]) => (
-                <div key={pos} className={`absolute ${pos} w-4 h-4 ${border}`} style={{ borderColor: phase === "won" ? "#facc15" : "#ef4444", margin: "-4px" }} />
+              {[
+                ["top-0 left-0", "border-t-4 border-l-4"],
+                ["top-0 right-0", "border-t-4 border-r-4"],
+                ["bottom-0 left-0", "border-b-4 border-l-4"],
+                ["bottom-0 right-0", "border-b-4 border-r-4"],
+              ].map(([pos, border]) => (
+                <div
+                  key={pos}
+                  className={`absolute ${pos} w-4 h-4 ${border}`}
+                  style={{
+                    borderColor: phase === "won" ? "#facc15" : "#ef4444",
+                    margin: "-4px",
+                  }}
+                />
               ))}
 
               {/* Title */}
               <motion.div
                 animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ repeat: Infinity, duration: 0.9, ease: "steps(1)" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 0.9,
+                  ease: "steps(1)",
+                }}
                 className="font-pixel text-5xl tracking-widest drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
                 style={{
                   color: phase === "won" ? "#facc15" : "#ef4444",
-                  textShadow: phase === "won"
-                    ? "0 0 20px #facc15, 3px 3px 0 #92400e"
-                    : "0 0 20px #ef4444, 3px 3px 0 #7f1d1d",
+                  textShadow:
+                    phase === "won"
+                      ? "0 0 20px #facc15, 3px 3px 0 #92400e"
+                      : "0 0 20px #ef4444, 3px 3px 0 #7f1d1d",
                   letterSpacing: "0.15em",
                 }}
               >
@@ -325,23 +347,45 @@ export function BattleScene({
               </motion.div>
 
               {/* Stars / pixels row */}
-              <div className="mt-3 font-pixel text-base tracking-[0.5em]" style={{ color: phase === "won" ? "#fde68a" : "#fca5a5" }}>
+              <div
+                className="mt-3 font-pixel text-base tracking-[0.5em]"
+                style={{ color: phase === "won" ? "#fde68a" : "#fca5a5" }}
+              >
                 {"★ ★ ★"}
               </div>
 
               {/* Feedback */}
               <div
                 className="mt-4 font-pixel text-xs leading-relaxed tracking-wide"
-                style={{ color: "#d1d5db", maxWidth: 320, textShadow: "1px 1px 0 #000" }}
+                style={{
+                  color: "#d1d5db",
+                  maxWidth: 320,
+                  textShadow: "1px 1px 0 #000",
+                }}
               >
                 {feedback}
               </div>
 
               {/* Divider */}
               <div className="my-5 flex items-center gap-2">
-                <div className="flex-1 h-px" style={{ background: phase === "won" ? "#facc1566" : "#ef444466" }} />
-                <div className="font-pixel text-xs" style={{ color: phase === "won" ? "#facc15" : "#ef4444" }}>✦</div>
-                <div className="flex-1 h-px" style={{ background: phase === "won" ? "#facc1566" : "#ef444466" }} />
+                <div
+                  className="flex-1 h-px"
+                  style={{
+                    background: phase === "won" ? "#facc1566" : "#ef444466",
+                  }}
+                />
+                <div
+                  className="font-pixel text-xs"
+                  style={{ color: phase === "won" ? "#facc15" : "#ef4444" }}
+                >
+                  ✦
+                </div>
+                <div
+                  className="flex-1 h-px"
+                  style={{
+                    background: phase === "won" ? "#facc1566" : "#ef444466",
+                  }}
+                />
               </div>
 
               {/* Retro pixel button */}
@@ -354,9 +398,10 @@ export function BattleScene({
                   background: phase === "won" ? "#facc15" : "#ef4444",
                   color: "#000",
                   border: "none",
-                  boxShadow: phase === "won"
-                    ? "4px 4px 0 #92400e, inset -2px -2px 0 #b45309"
-                    : "4px 4px 0 #7f1d1d, inset -2px -2px 0 #b91c1c",
+                  boxShadow:
+                    phase === "won"
+                      ? "4px 4px 0 #92400e, inset -2px -2px 0 #b45309"
+                      : "4px 4px 0 #7f1d1d, inset -2px -2px 0 #b91c1c",
                   padding: "0.6rem 1.8rem",
                   cursor: "pointer",
                   imageRendering: "pixelated",
@@ -368,9 +413,16 @@ export function BattleScene({
               {/* Press any key hint */}
               <motion.div
                 animate={{ opacity: [1, 0, 1] }}
-                transition={{ repeat: Infinity, duration: 1.4, ease: "steps(1)" }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.4,
+                  ease: "steps(1)",
+                }}
                 className="mt-4 font-pixel text-xs"
-                style={{ color: phase === "won" ? "#facc1588" : "#ef444488", letterSpacing: "0.1em" }}
+                style={{
+                  color: phase === "won" ? "#facc1588" : "#ef444488",
+                  letterSpacing: "0.1em",
+                }}
               >
                 [ INSERT COIN ]
               </motion.div>
@@ -440,7 +492,9 @@ function AnswerBubble({
                 onTranscript={(t) => setAnswer(t)}
               />
               <span className="self-center text-xs text-slate-500">
-                {hasAudio ? "Audio ready — Attack to send." : "…or type it out."}
+                {hasAudio
+                  ? "Audio ready — Attack to send."
+                  : "…or type it out."}
               </span>
             </div>
           )}
