@@ -34,7 +34,7 @@ export function LevelNode({
         ? "MIDTERM"
         : `L${level.order_index}`;
 
-  const size = isExam ? "h-24 w-24" : "h-20 w-20";
+  const size = isExam ? "h-28 w-56" : "h-24 w-48";
   const borderColor =
     level.state === "completed"
       ? "border-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.7)]"

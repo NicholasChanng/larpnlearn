@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { BattleScene } from "@/components/battle/BattleScene";
+import { Spinner } from "@/components/ui/Spinner";
 import { CloudLoadingOverlay } from "@/components/world/CloudLoadingOverlay";
 import { api } from "@/lib/api";
 import {
@@ -181,7 +182,8 @@ export default function BattlePage({ params }: { params: { id: string } }) {
       )}
       {isLoading && <div className="fixed inset-0 z-40 bg-black" />}
       <CloudLoadingOverlay loading={isLoading}>
-        <div className="text-lg font-semibold text-slate-700">
+        <div className="flex items-center gap-3 text-3xl font-bold text-slate-700">
+          <Spinner size={28} />
           Preparing battle…
         </div>
       </CloudLoadingOverlay>

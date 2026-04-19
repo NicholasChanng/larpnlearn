@@ -4,6 +4,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/Spinner";
 import type {
   SkillDagNode,
   SkillInsightResponse,
@@ -56,7 +57,10 @@ export function SkillDetailPanel({
 
       <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4 text-sm">
         {!entry || entry.status === "loading" ? (
-          <p className="text-muted-foreground">Loading insight…</p>
+          <p className="flex items-center gap-2 text-muted-foreground">
+            <Spinner size={14} />
+            Loading insight…
+          </p>
         ) : entry.status === "error" ? (
           <div className="space-y-2">
             <p className="text-destructive">Couldn't load insight.</p>

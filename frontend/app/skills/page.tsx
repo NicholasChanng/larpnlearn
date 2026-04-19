@@ -14,6 +14,7 @@ import "reactflow/dist/style.css";
 import { StatsWidget } from "@/components/layout/StatsWidget";
 import { SkillDetailPanel } from "@/components/skills/SkillDetailPanel";
 import { SkillNode } from "@/components/skills/SkillNode";
+import { Spinner } from "@/components/ui/Spinner";
 import { CloudLoadingOverlay } from "@/components/world/CloudLoadingOverlay";
 import { api } from "@/lib/api";
 import { layoutSkillGraph } from "@/lib/skillGraphLayout";
@@ -185,7 +186,7 @@ export default function SkillsPage() {
               elementsSelectable
             >
               <Background gap={24} />
-              <MiniMap pannable zoomable className="!bg-background" />
+              <MiniMap pannable zoomable position="top-left" className="!bg-background" />
               <Controls showInteractive={false} />
             </ReactFlow>
           </div>
@@ -222,8 +223,9 @@ export default function SkillsPage() {
           )}
         </div>
       </section>
-      <CloudLoadingOverlay loading={status === "loading" || !world}>
-        <div className="text-lg font-semibold text-slate-700">
+      <CloudLoadingOverlay loading={status === "loading" || status === "idle"}>
+        <div className="flex items-center gap-3 text-3xl font-bold text-slate-700">
+          <Spinner size={28} />
           Building your skill graph…
         </div>
       </CloudLoadingOverlay>
