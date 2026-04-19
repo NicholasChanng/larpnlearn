@@ -11,6 +11,8 @@ interface LevelNodeProps {
   isCurrent: boolean;
   avatarEmoji: string;
   avatarSprite?: string | null;
+  monsterSprite?: string | null;
+  monsterEmoji?: string;
 }
 
 /**
@@ -22,6 +24,8 @@ export function LevelNode({
   isCurrent,
   avatarEmoji,
   avatarSprite,
+  monsterSprite,
+  monsterEmoji,
 }: LevelNodeProps) {
   const disabled = level.state === "locked";
   const isExam = level.is_exam;
@@ -92,11 +96,22 @@ export function LevelNode({
           bgColor,
         )}
       >
-        {level.state === "locked" && (
+        {level.state === "locked" ? (
           <span className="text-2xl drop-shadow-lg" style={{ filter: "grayscale(1) brightness(0.5)" }}>
             🔒
           </span>
-        )}
+        ) : monsterSprite ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={monsterSprite}
+            alt=""
+            aria-hidden
+            className="h-full w-full object-contain"
+            style={{ imageRendering: "pixelated" }}
+          />
+        ) : monsterEmoji ? (
+          <span className="text-2xl drop-shadow-lg">{monsterEmoji}</span>
+        ) : null}
       </div>
 
       <div className="mt-2 rounded bg-black/60 px-2 py-0.5 text-[10px] font-bold tracking-wider text-yellow-100 backdrop-blur">

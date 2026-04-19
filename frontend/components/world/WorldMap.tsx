@@ -7,7 +7,7 @@ import { CloudTransition } from "./CloudTransition";
 import { LevelNode } from "./LevelNode";
 import { SegmentBanner } from "./SegmentBanner";
 import { audio } from "@/lib/audio";
-import { avatarForCharacter, segmentForLevel } from "@/lib/useTheme";
+import { avatarForCharacter, monsterForLevel, segmentForLevel } from "@/lib/useTheme";
 import { cn } from "@/lib/utils";
 import type { Level, ThemeManifest, ThemeSegment } from "@/lib/types";
 import { useUserStore } from "@/store/useUserStore";
@@ -36,7 +36,7 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
   const avatarCharacter = useUserStore((s) => s.avatarCharacter);
   const avatar = avatarForCharacter(manifest, avatarCharacter);
   const avatarEmoji = avatar?.emoji ?? "🧍";
-  const avatarSprite = avatar?.sprite ?? null;
+  const avatarSprite = avatar?.sprite_idle ?? avatar?.sprite ?? null;
 
   const grouped = useMemo(() => groupLevelsBySegment(levels, manifest), [levels, manifest]);
 
@@ -161,6 +161,7 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
           <div className="flex flex-1 items-end justify-around gap-10 px-6 pb-20 pt-40">
             {items.map((level, i) => {
               const isCurrent = level.id === currentLevelId;
+              const monster = monsterForLevel(manifest, level.order_index, level.is_exam);
               return (
                 <div
                   key={level.id}
@@ -171,6 +172,8 @@ export function WorldMap({ levels, manifest, currentLevelId }: WorldMapProps) {
                     isCurrent={isCurrent}
                     avatarEmoji={avatarEmoji}
                     avatarSprite={avatarSprite}
+                    monsterSprite={monster?.sprite_path ?? null}
+                    monsterEmoji={monster?.emoji}
                   />
                 </div>
               );
