@@ -22,6 +22,8 @@ from ...ai.validation_agent import validate_voice_answer
 from ...ai.whisper import transcribe
 from ...config import settings
 from ...models import (
+    CompleteBattleRequest,
+    CompleteBattleResponse,
     GenerateQuestionsMetadata,
     GenerateQuestionsRequest,
     GenerateQuestionsResponse,
@@ -29,6 +31,7 @@ from ...models import (
     ValidateAnswerRequest,
     ValidateAnswerResponse,
 )
+from ...mock_data import apply_battle_outcome, demo_progress, demo_world
 
 router = APIRouter(prefix="/battles", tags=["battles"])
 logger = logging.getLogger("uvicorn.error")
@@ -47,6 +50,25 @@ class _GeneratedQuestion(BaseModel):
 
 class _GeneratedQuestionBatch(BaseModel):
     question_data: list[_GeneratedQuestion]
+
+
+@router.post("/complete", response_model=CompleteBattleResponse)
+def complete_battle(body: CompleteBattleRequest) -> CompleteBattleResponse:
+    try:
+        points_awarded = apply_battle_outcome(level_id=body.level_id, outcome=body.outcome)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+    progress = demo_progress()
+    world = demo_world()
+    return CompleteBattleResponse(
+        points_awarded=points_awarded,
+        total_points=progress.points,
+        streak=progress.streak,
+        lives=progress.lives,
+        avatar=progress.avatar,
+        current_level_id=world.current_level_id,
+    )
 
 
 async def _invoke_generation_batch(

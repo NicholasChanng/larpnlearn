@@ -252,6 +252,20 @@ class ProgressResponse(BaseModel):
     recent_battles: list[Battle] = Field(default_factory=list)
 
 
+class CompleteBattleRequest(BaseModel):
+    level_id: UUID
+    outcome: BattleOutcome
+
+
+class CompleteBattleResponse(BaseModel):
+    points_awarded: int
+    total_points: int
+    streak: int
+    lives: int
+    avatar: AvatarConfig
+    current_level_id: UUID | None
+
+
 class VisualizeRequest(BaseModel):
     concept_id: str | None = None
 

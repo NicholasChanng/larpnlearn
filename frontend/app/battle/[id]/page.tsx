@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BattleScene } from "@/components/battle/BattleScene";
 import { Spinner } from "@/components/ui/Spinner";
@@ -17,6 +17,7 @@ import {
 import { useThemeManifest } from "@/lib/useTheme";
 import { useBattleStore, currentQuestion } from "@/store/useBattleStore";
 import { useThemeStore } from "@/store/useThemeStore";
+import { useUserStore } from "@/store/useUserStore";
 
 const DEMO_COURSE_ID = "cs188-sp2024";
 const DIFFICULTY = 5;
@@ -37,8 +38,10 @@ function computeNumQuestions(userHp: number, monsterHp: number): number {
 export default function BattlePage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const store = useBattleStore();
+  const setProgress = useUserStore((s) => s.setProgress);
   const setTheme = useThemeStore((s) => s.setTheme);
   const manifest = useThemeManifest();
+  const finalizePromiseRef = useRef<Promise<void> | null>(null);
 
   const [level, setLevel] = useState<Level | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -46,6 +49,7 @@ export default function BattlePage({ params }: { params: { id: string } }) {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      finalizePromiseRef.current = null;
       store.setLoading();
       try {
         const [levelDetail, world] = await Promise.all([
@@ -134,7 +138,46 @@ export default function BattlePage({ params }: { params: { id: string } }) {
     store.advance();
   }, [store]);
 
-  const handleExit = () => router.push("/world");
+  const finalizeBattle = useCallback(() => {
+    if (!level) return Promise.resolve();
+    if (store.phase !== "won" && store.phase !== "lost") return Promise.resolve();
+    if (finalizePromiseRef.current) return finalizePromiseRef.current;
+
+    const outcome = store.phase === "won" ? "win" : "lose";
+    finalizePromiseRef.current = api.battles
+      .complete({
+        level_id: level.id,
+        outcome,
+      })
+      .then((resp) => {
+        setProgress({
+          points: resp.total_points,
+          streak: resp.streak,
+          lives: resp.lives,
+          avatar: resp.avatar,
+        });
+      });
+
+    return finalizePromiseRef.current;
+  }, [level, setProgress, store.phase]);
+
+  useEffect(() => {
+    if (store.phase !== "won" && store.phase !== "lost") return;
+    void finalizeBattle().catch((err) => {
+      console.error("[battle complete] failed:", err);
+    });
+  }, [finalizeBattle, store.phase]);
+
+  const handleExit = useCallback(async () => {
+    if (store.phase === "won" || store.phase === "lost") {
+      try {
+        await finalizeBattle();
+      } catch (err) {
+        console.error("[battle complete] failed before exit:", err);
+      }
+    }
+    router.push("/world");
+  }, [finalizeBattle, router, store.phase]);
 
   if (loadError) {
     return (

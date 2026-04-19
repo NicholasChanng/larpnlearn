@@ -278,6 +278,20 @@ export interface ProgressResponse {
   recent_battles: Battle[];
 }
 
+export interface CompleteBattleRequest {
+  level_id: string;
+  outcome: BattleOutcome;
+}
+
+export interface CompleteBattleResponse {
+  points_awarded: number;
+  total_points: number;
+  streak: number;
+  lives: number;
+  avatar: AvatarConfig;
+  current_level_id: string | null;
+}
+
 export interface VisualizeResponse {
   svg_or_image_url: string | null;
   explanation: string;

@@ -9,6 +9,7 @@ from uuid import UUID
 
 from .enums import (
     BattleOutcome,
+    BattleType,
     Difficulty,
     ExamType,
     LevelState,
@@ -16,6 +17,7 @@ from .enums import (
     SkillState,
     Theme,
 )
+from .game.points import compute_points
 from .models import (
     AnswerResponse,
     AvatarConfig,
@@ -45,24 +47,29 @@ DEMO_BATTLE_ID = UUID("22222222-2222-2222-2222-222222222222")
 DEMO_QUESTION_ID = UUID("33333333-3333-3333-3333-333333333333")
 
 DEMO_COURSE_ID = "cs188-sp2024"
+_RUNTIME_USER: User | None = None
+_RUNTIME_LEVELS: list[Level] | None = None
 
 
 def demo_user() -> User:
-    return User(
-        id=DEMO_USER_ID,
-        email="demo@aristotle.app",
-        display_name="Demo Student",
-        avatar_config=AvatarConfig(
-            base_character="hero",
-            unlocked_items=["hero", "scholar"],
-            equipped_items={"body": "hero"},
-        ),
-        total_points=420,
-        current_streak=3,
-        last_streak_update=datetime.now(timezone.utc),
-        lives_remaining=3,
-        created_at=datetime.now(timezone.utc),
-    )
+    global _RUNTIME_USER
+    if _RUNTIME_USER is None:
+        _RUNTIME_USER = User(
+            id=DEMO_USER_ID,
+            email="demo@aristotle.app",
+            display_name="Demo Student",
+            avatar_config=AvatarConfig(
+                base_character="hero",
+                unlocked_items=["hero", "scholar"],
+                equipped_items={"body": "hero"},
+            ),
+            total_points=420,
+            current_streak=3,
+            last_streak_update=datetime.now(timezone.utc),
+            lives_remaining=3,
+            created_at=datetime.now(timezone.utc),
+        )
+    return _RUNTIME_USER
 
 
 def demo_course() -> Course:
@@ -146,44 +153,87 @@ def demo_segments() -> list[ThemeSegment]:
 
 
 def demo_levels() -> list[Level]:
-    # Midterm at order 8, final at order 16 per the Odyssey theme segments.
-    levels: list[Level] = []
-    for i, lid in enumerate(DEMO_LEVEL_IDS, start=1):
-        is_midterm = i == 8
-        is_final = i == 16 if len(DEMO_LEVEL_IDS) >= 16 else i == len(DEMO_LEVEL_IDS)
-        is_exam = is_midterm or is_final
-        if i <= 3:
-            state = LevelState.COMPLETED
-        elif i == 4:
-            state = LevelState.AVAILABLE
-        else:
-            state = LevelState.LOCKED
-        segment = next(s for s in demo_segments() if s.range[0] <= i <= s.range[1])
-        levels.append(
-            Level(
-                id=lid,
-                lecture_id=f"lec_{i:02d}" if not is_exam else ("lec_midterm_01" if is_midterm else "lec_final"),
-                course_id=DEMO_COURSE_ID,
-                order_index=i,
-                state=state,
-                theme_segment=segment.id,
-                monster=demo_monster_for_order(i, is_exam=is_exam, is_final=is_final),
-                is_exam=is_exam,
-                exam_type=(ExamType.MIDTERM if is_midterm else ExamType.FINAL if is_final else None),
+    global _RUNTIME_LEVELS
+    if _RUNTIME_LEVELS is None:
+        # Midterm at order 8, final at order 16 per the Odyssey theme segments.
+        levels: list[Level] = []
+        for i, lid in enumerate(DEMO_LEVEL_IDS, start=1):
+            is_midterm = i == 8
+            is_final = i == 16 if len(DEMO_LEVEL_IDS) >= 16 else i == len(DEMO_LEVEL_IDS)
+            is_exam = is_midterm or is_final
+            if i <= 3:
+                state = LevelState.COMPLETED
+            elif i == 4:
+                state = LevelState.AVAILABLE
+            else:
+                state = LevelState.LOCKED
+            segment = next(s for s in demo_segments() if s.range[0] <= i <= s.range[1])
+            levels.append(
+                Level(
+                    id=lid,
+                    lecture_id=f"lec_{i:02d}" if not is_exam else ("lec_midterm_01" if is_midterm else "lec_final"),
+                    course_id=DEMO_COURSE_ID,
+                    order_index=i,
+                    state=state,
+                    theme_segment=segment.id,
+                    monster=demo_monster_for_order(i, is_exam=is_exam, is_final=is_final),
+                    is_exam=is_exam,
+                    exam_type=(ExamType.MIDTERM if is_midterm else ExamType.FINAL if is_final else None),
+                )
             )
-        )
-    return levels
+        _RUNTIME_LEVELS = levels
+    return _RUNTIME_LEVELS
 
 
 def demo_world() -> WorldResponse:
-    # Place current at index 3 so Olympus is completed and Athens is unlocked.
+    levels = demo_levels()
+    ordered = sorted(levels, key=lambda lvl: lvl.order_index)
+    current_level_id = next((lvl.id for lvl in ordered if lvl.state == LevelState.AVAILABLE), None)
     return WorldResponse(
         course_id=DEMO_COURSE_ID,
         theme=Theme.GREEK,
-        levels=demo_levels(),
-        current_level_id=DEMO_LEVEL_IDS[3],
+        levels=levels,
+        current_level_id=current_level_id,
         segments=demo_segments(),
     )
+
+
+def _battle_type_for_level(level: Level) -> BattleType:
+    if level.exam_type == ExamType.MIDTERM:
+        return BattleType.MIDTERM
+    if level.exam_type == ExamType.FINAL:
+        return BattleType.FINAL
+    return BattleType.REGULAR
+
+
+def apply_battle_outcome(level_id: UUID, outcome: BattleOutcome) -> int:
+    levels = demo_levels()
+    level = next((lvl for lvl in levels if lvl.id == level_id), None)
+    if level is None:
+        raise ValueError(f"Unknown level id: {level_id}")
+
+    user = demo_user()
+    points_awarded = 0
+
+    if outcome == BattleOutcome.WIN:
+        points_awarded = compute_points(
+            outcome=BattleOutcome.WIN,
+            battle_type=_battle_type_for_level(level),
+            streak=user.current_streak,
+        )
+        user.total_points += points_awarded
+        level.state = LevelState.COMPLETED
+
+        ordered = sorted(levels, key=lambda lvl: lvl.order_index)
+        idx = next((i for i, lvl in enumerate(ordered) if lvl.id == level_id), None)
+        if idx is not None and idx + 1 < len(ordered):
+            next_level = ordered[idx + 1]
+            if next_level.state == LevelState.LOCKED:
+                next_level.state = LevelState.AVAILABLE
+    elif outcome == BattleOutcome.LOSE:
+        user.lives_remaining = max(0, user.lives_remaining - 1)
+
+    return points_awarded
 
 
 def demo_lectures() -> list[Lecture]:

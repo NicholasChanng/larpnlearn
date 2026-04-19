@@ -7,6 +7,8 @@
 
 import type {
   AvatarConfig,
+  CompleteBattleRequest,
+  CompleteBattleResponse,
   Course,
   GenerateQuestionsRequest,
   GenerateQuestionsResponse,
@@ -85,6 +87,11 @@ export const api = {
       }),
     validateAnswer: (body: ValidateAnswerRequest) =>
       request<ValidateAnswerResponse>("/battles/validate-answer", {
+        method: "POST",
+        json: body,
+      }),
+    complete: (body: CompleteBattleRequest) =>
+      request<CompleteBattleResponse>("/battles/complete", {
         method: "POST",
         json: body,
       }),
