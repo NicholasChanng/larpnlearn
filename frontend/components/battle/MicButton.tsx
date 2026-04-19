@@ -25,11 +25,13 @@ export function MicButton({ onTranscript, onAudio }: MicButtonProps) {
       mr.onstop = async () => {
         stream.getTracks().forEach((t) => t.stop());
         const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        console.log("[MicButton] recording stopped, blob size:", blob.size, "bytes, type:", blob.type);
         const buf = await blob.arrayBuffer();
         const bytes = new Uint8Array(buf);
         let binary = "";
         for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
         const b64 = btoa(binary);
+        console.log("[MicButton] base64 encoded, length:", b64.length, "chars (~", Math.round(b64.length / 1024), "KB)");
         onAudio?.(b64);
         onTranscript?.(`[audio recorded — ${Math.round(b64.length / 1024)} KB]`);
       };

@@ -541,7 +541,7 @@ async def validate_answer(body: ValidateAnswerRequest) -> ValidateAnswerResponse
         return ValidateAnswerResponse(feedback=feedback, correct=is_correct, transcript=transcript)
 
     try:
-        logger.info("validate_answer:voice_llm_invoke")
+        logger.info("validate_answer:voice_llm_invoke transcript_preview=%r", transcript[:80])
         feedback, correct = await validate_voice_answer(transcript, metadata)
     except RuntimeError as exc:
         logger.exception("validate_answer:voice_runtime_error")
@@ -557,6 +557,12 @@ async def validate_answer(body: ValidateAnswerRequest) -> ValidateAnswerResponse
         raise HTTPException(
             status_code=502,
             detail=f"OpenAI API error ({exc.status_code}): {exc.message}",
+        ) from exc
+    except Exception as exc:
+        logger.exception("validate_answer:voice_unexpected_error type=%s", type(exc).__name__)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unexpected error during voice validation: {type(exc).__name__}: {exc}",
         ) from exc
     logger.info("validate_answer:voice_done correct=%s", correct)
     return ValidateAnswerResponse(feedback=feedback, correct=correct, transcript=transcript)
