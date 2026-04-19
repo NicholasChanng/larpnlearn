@@ -171,7 +171,7 @@ def _build_fallback_graph_from_lectures(
     edges: list[SkillDagEdge] = []
 
     node_by_id: dict[str, SkillDagNode] = {}
-    ordered_node_ids: list[str] = []
+    lecture_to_node_ids: dict[str, list[str]] = {}
 
     sorted_payloads = sorted(lecture_payloads, key=lambda p: p.get("order_index", 10_000))
 
@@ -189,22 +189,23 @@ def _build_fallback_graph_from_lectures(
                 topics = [title]
 
         topics = topics[:4]
-        lecture_level = max(0, int(payload.get("order_index", 1)) - 1)
+        lecture_base_level = max(0, int(payload.get("order_index", 1)) - 1) * 2
+        lecture_node_ids: list[str] = []
 
-        for topic in topics:
+        for topic_idx, topic in enumerate(topics):
             node_id = _slugify(topic)
+            topic_level = lecture_base_level + (0 if topic_idx == 0 else 1)
             if node_id not in node_by_id:
                 status = "mastered" if normalized_lecture_id in mastered_lecture_ids else "locked"
                 mastery_signals = [f"completed_{normalized_lecture_id}"] if status == "mastered" else []
                 node_by_id[node_id] = SkillDagNode(
                     id=node_id,
                     label=topic,
-                    level=lecture_level,
+                    level=topic_level,
                     status=status,
                     lecture_refs=[normalized_lecture_id],
                     mastery_signals=mastery_signals,
                 )
-                ordered_node_ids.append(node_id)
             else:
                 existing = node_by_id[node_id]
                 if normalized_lecture_id not in existing.lecture_refs:
@@ -212,28 +213,68 @@ def _build_fallback_graph_from_lectures(
                 if normalized_lecture_id in mastered_lecture_ids and existing.status != "mastered":
                     existing.status = "mastered"
                     existing.mastery_signals.append(f"completed_{normalized_lecture_id}")
-                existing.level = min(existing.level, lecture_level)
+                existing.level = min(existing.level, topic_level)
+
+            lecture_node_ids.append(node_id)
+
+        lecture_to_node_ids[normalized_lecture_id] = lecture_node_ids
+
+    lecture_ids_in_order = [
+        _normalize_lecture_id(payload.get("lecture_id", ""))
+        for payload in sorted_payloads
+        if payload.get("lecture_id")
+    ]
 
     seen_edges: set[tuple[str, str]] = set()
-    for idx in range(len(ordered_node_ids) - 1):
-        source = ordered_node_ids[idx]
-        target = ordered_node_ids[idx + 1]
+
+    def _add_edge(source: str, target: str, rationale: str) -> None:
         if source == target:
-            continue
+            return
         pair = (source, target)
         if pair in seen_edges:
-            continue
+            return
+        if source not in node_by_id or target not in node_by_id:
+            return
         if node_by_id[source].level >= node_by_id[target].level:
             node_by_id[target].level = node_by_id[source].level + 1
         seen_edges.add(pair)
         edges.append(
             SkillDagEdge(
-                id=f"e_fb_{idx}_{source}_{target}",
+                id=f"e_fb_{len(edges)}_{source}_{target}",
                 source=source,
                 target=target,
-                rationale="Progresses to the next lecture concept",
+                rationale=rationale,
             )
         )
+
+    for lecture_id in lecture_ids_in_order:
+        lecture_nodes = lecture_to_node_ids.get(lecture_id, [])
+        if len(lecture_nodes) <= 1:
+            continue
+
+        anchor = lecture_nodes[0]
+        for branch_node in lecture_nodes[1:]:
+            _add_edge(anchor, branch_node, "Sub-concept branch from lecture foundation")
+
+    for idx in range(len(lecture_ids_in_order) - 1):
+        curr_lecture_nodes = lecture_to_node_ids.get(lecture_ids_in_order[idx], [])
+        next_lecture_nodes = lecture_to_node_ids.get(lecture_ids_in_order[idx + 1], [])
+
+        if not curr_lecture_nodes or not next_lecture_nodes:
+            continue
+
+        _add_edge(
+            curr_lecture_nodes[0],
+            next_lecture_nodes[0],
+            "Core prerequisite progression",
+        )
+
+        for branch_idx in range(1, min(len(curr_lecture_nodes), len(next_lecture_nodes))):
+            _add_edge(
+                curr_lecture_nodes[branch_idx],
+                next_lecture_nodes[branch_idx],
+                "Parallel branch progression",
+            )
 
     nodes = list(node_by_id.values())
     nodes.sort(key=lambda n: (n.level, n.label.lower()))
