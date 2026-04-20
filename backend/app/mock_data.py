@@ -161,9 +161,9 @@ def demo_levels() -> list[Level]:
             is_midterm = i == 8
             is_final = i == 16 if len(DEMO_LEVEL_IDS) >= 16 else i == len(DEMO_LEVEL_IDS)
             is_exam = is_midterm or is_final
-            if i <= 3:
+            if i <= 6:
                 state = LevelState.COMPLETED
-            elif i == 4:
+            elif i == 7:
                 state = LevelState.AVAILABLE
             else:
                 state = LevelState.LOCKED

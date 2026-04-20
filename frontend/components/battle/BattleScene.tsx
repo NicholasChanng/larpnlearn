@@ -214,7 +214,7 @@ export function BattleScene({
 
         <div
           className="z-10 flex w-[min(42vw,36rem)] max-w-[36rem] flex-col items-start gap-3"
-          style={{ transform: "translate(200px, -125px)" }}
+          style={{ transform: "translateY(-150px)" }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="mb-2 w-full">
@@ -241,7 +241,7 @@ export function BattleScene({
 
         <div
           className="z-10 flex w-[min(42vw,36rem)] max-w-[36rem] flex-col items-end gap-3"
-          style={{ transform: "translate(-200px, -125px)" }}
+          style={{ transform: "translateY(-150px)" }}
         >
           <div className="mb-2 w-full">
             <SpeechBubble text={bubbleText} from="right" className="w-full" />
@@ -331,7 +331,7 @@ export function BattleScene({
                 transition={{
                   repeat: Infinity,
                   duration: 0.9,
-                  ease: "steps(1)",
+                  ease: "easeOut",
                 }}
                 className="font-pixel text-5xl tracking-widest drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
                 style={{
@@ -416,7 +416,7 @@ export function BattleScene({
                 transition={{
                   repeat: Infinity,
                   duration: 1.4,
-                  ease: "steps(1)",
+                  ease: "easeOut",
                 }}
                 className="mt-4 font-pixel text-xs"
                 style={{
