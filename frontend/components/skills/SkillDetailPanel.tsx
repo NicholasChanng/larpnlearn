@@ -42,7 +42,7 @@ export function SkillDetailPanel({
     insight?.visualization?.type === "mermaid" && insight.visualization.content;
 
   return (
-    <aside className="flex h-full w-full flex-col border-l border-border bg-background/95 backdrop-blur">
+    <aside className="flex w-full flex-col border-l border-border bg-background/95 backdrop-blur">
       <header className="flex items-start justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
@@ -55,7 +55,7 @@ export function SkillDetailPanel({
         </Button>
       </header>
 
-      <div className="flex-1 space-y-5 overflow-y-auto px-5 py-4 text-sm">
+      <div className="space-y-5 px-5 py-4 text-sm">
         {!entry || entry.status === "loading" ? (
           <p className="flex items-center gap-2 text-muted-foreground">
             <Spinner size={14} />

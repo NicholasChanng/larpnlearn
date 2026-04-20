@@ -217,44 +217,48 @@ export function BattleScene({
           style={{ transform: "translateY(-150px)" }}
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="mb-2 w-full">
-            <AnswerBubble
-              question={question}
-              answer={answer}
-              setAnswer={setAnswer}
-              onAudio={setAudioBlobB64}
-              hasAudio={!!audioBlobB64}
-              onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              disabled={phase !== "asking"}
+          <div className="relative">
+            <div className="absolute bottom-full left-1/2 mb-4 w-[24rem] max-w-[42vw] -translate-x-1/2">
+              <AnswerBubble
+                question={question}
+                answer={answer}
+                setAnswer={setAnswer}
+                onAudio={setAudioBlobB64}
+                hasAudio={!!audioBlobB64}
+                onSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                disabled={phase !== "asking"}
+              />
+            </div>
+            <CharacterSprite
+              emoji={avatar?.emoji ?? "🧍"}
+              spriteSrc={avatar?.sprite_idle ?? avatar?.sprite}
+              facing="right"
+              size="lg"
+              trigger={userTrigger}
+              label={avatar?.name}
             />
           </div>
-          <CharacterSprite
-            emoji={avatar?.emoji ?? "🧍"}
-            spriteSrc={avatar?.sprite_idle ?? avatar?.sprite}
-            facing="right"
-            size="lg"
-            trigger={userTrigger}
-            label={avatar?.name}
-          />
         </div>
 
         <div
           className="z-10 flex w-[min(42vw,36rem)] max-w-[36rem] flex-col items-end gap-3"
           style={{ transform: "translateY(-150px)" }}
         >
-          <div className="mb-2 w-full">
-            <SpeechBubble text={bubbleText} from="right" className="w-full" />
+          <div className="relative">
+            <div className="absolute bottom-full left-1/2 mb-4 w-[24rem] max-w-[42vw] -translate-x-1/2">
+              <SpeechBubble text={bubbleText} from="right" className="w-full" />
+            </div>
+            <CharacterSprite
+              emoji={monster?.emoji ?? "👾"}
+              spriteSrc={monster?.sprite_path}
+              facing="left"
+              size={level.is_exam ? "boss" : "lg"}
+              trigger={monsterTrigger}
+              damageEffect={monster?.damage_effect}
+              label={monster?.name}
+            />
           </div>
-          <CharacterSprite
-            emoji={monster?.emoji ?? "👾"}
-            spriteSrc={monster?.sprite_path}
-            facing="left"
-            size={level.is_exam ? "boss" : "lg"}
-            trigger={monsterTrigger}
-            damageEffect={monster?.damage_effect}
-            label={monster?.name}
-          />
         </div>
       </div>
 
@@ -331,7 +335,7 @@ export function BattleScene({
                 transition={{
                   repeat: Infinity,
                   duration: 0.9,
-                  ease: "easeOut",
+                  ease: "linear",
                 }}
                 className="font-pixel text-5xl tracking-widest drop-shadow-[4px_4px_0_rgba(0,0,0,1)]"
                 style={{
@@ -416,7 +420,7 @@ export function BattleScene({
                 transition={{
                   repeat: Infinity,
                   duration: 1.4,
-                  ease: "easeOut",
+                  ease: "steps(1)",
                 }}
                 className="mt-4 font-pixel text-xs"
                 style={{
@@ -459,7 +463,7 @@ function AnswerBubble({
     <motion.div
       initial={{ opacity: 0, y: 10, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      className="relative ml-6 w-full rounded-2xl border-4 border-black bg-white px-5 py-4 text-slate-900 shadow-2xl"
+      className="relative w-full rounded-2xl border-4 border-black bg-white px-5 py-4 text-slate-900 shadow-2xl"
     >
       {question.type === "mcq" && question.options ? (
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -469,7 +473,7 @@ function AnswerBubble({
               variant={answer === opt ? "default" : "outline"}
               onClick={() => setAnswer(opt)}
               disabled={disabled}
-              className="h-auto justify-start whitespace-normal py-2 text-left font-pixel text-xs"
+              className="h-auto justify-start whitespace-normal py-2 text-left font-pixel text-xs text-slate-900 hover:bg-primary hover:text-primary-foreground"
             >
               {opt}
             </Button>
@@ -514,10 +518,10 @@ function AnswerBubble({
         </Button>
       </div>
 
-      <div className="absolute top-full left-8 h-0 w-0 border-x-[18px] border-t-[22px] border-x-transparent border-t-black" />
+      <div className="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-[18px] border-t-[22px] border-x-transparent border-t-black" />
       <div
-        className="absolute top-full left-11 h-0 w-0 border-x-[12px] border-t-[16px] border-x-transparent border-t-white"
-        style={{ transform: "translateY(-3px)" }}
+        className="absolute top-full left-1/2 h-0 w-0 border-x-[12px] border-t-[16px] border-x-transparent border-t-white"
+        style={{ transform: "translate(-50%, -3px)" }}
       />
     </motion.div>
   );

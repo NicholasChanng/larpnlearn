@@ -141,7 +141,7 @@ export default function SkillsPage() {
   return (
     <main className="flex min-h-screen flex-col bg-background">
       <StatsWidget />
-      <section className="flex flex-1 flex-col overflow-hidden">
+      <section className="flex flex-col">
         <div className="flex items-baseline justify-between px-6 py-4">
           <h1 className="text-2xl font-bold">Skills Graph</h1>
           {status === "ready" && graph && (
@@ -151,8 +151,8 @@ export default function SkillsPage() {
           )}
         </div>
 
-        <div className="relative flex flex-1 overflow-hidden border-t border-border">
-          <div className="relative flex-1">
+        <div className="relative flex items-start border-t border-border">
+          <div className="relative sticky top-0 h-[calc(100vh-80px)] flex-1">
             {status === "error" && (
               <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-background/80 px-6 text-center">
                 <p className="text-sm text-destructive">
@@ -197,13 +197,13 @@ export default function SkillsPage() {
                 role="separator"
                 aria-orientation="vertical"
                 onMouseDown={startResize}
-                className="group relative w-1 shrink-0 cursor-col-resize bg-border hover:bg-primary/60"
+                className="group sticky top-0 h-[calc(100vh-80px)] w-1 shrink-0 cursor-col-resize bg-border hover:bg-primary/60"
                 title="Drag to resize"
               >
                 <div className="absolute inset-y-0 -left-1 -right-1" />
               </div>
               <div
-                className="h-full shrink-0"
+                className="shrink-0"
                 style={{ width: `${panelWidth}px` }}
               >
                 <SkillDetailPanel
