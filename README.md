@@ -1,6 +1,6 @@
 # Larp N Learn
 
-Winner of the Game Award at HackPrinceton Spring 2026. 
+Winner of the Best Game Award at HackPrinceton Spring 2026. 
 
 Projects that successfully create interactive, exciting, and innovative games through a variety of methods and forms. Examples include Player v. Player games or individual games.
 
