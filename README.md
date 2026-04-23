@@ -12,6 +12,7 @@ Demo: https://aristotle-hazel.vercel.app/
 
 <img width="1611" height="1104" alt="image" src="https://github.com/user-attachments/assets/00c3bce5-5733-41d4-995c-d8a746782ebc" />
 
+
 Full spec: [aristotle_srs.md](aristotle_srs.md).
 
 ## Repo layout
